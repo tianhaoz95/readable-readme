@@ -1,9 +1,10 @@
-# JavaScript Action Template
+# Readable Readme
 
-This template offers an easy way to get started writing a JavaScript action with TypeScript compile time support, unit testing with Jest and using the GitHub Actions Toolkit.
+## Development
 
-## Getting Started
+### Run unit tests
 
-See the walkthrough located [here](https://github.com/actions/toolkit/blob/master/docs/javascript-action.md).
-
-In addition to walking your through how to create an action, it also provides strategies for versioning, releasing and referencing your actions.
+```bash
+source ./script/setupTest.sh    # Mimic GitHub actions environment
+npm test                        # Run unit tests
+```
