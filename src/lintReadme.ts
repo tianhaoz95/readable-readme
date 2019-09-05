@@ -6,6 +6,7 @@ async function lintReadme() {
     const myInput = core.getInput("myInput");
     core.debug(`Hello ${myInput}`);
     const WorkspaceDir = util.getGitHubWorkspace();
+    // TODO(tianhaoz95): add file listing
   } catch (error) {
     core.setFailed(error.message);
   }

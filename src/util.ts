@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export function getGitHubWorkspace() {
   const workspaceDir = process.env.GITHUB_WORKSPACE;
   if (!workspaceDir) {
@@ -6,4 +8,8 @@ export function getGitHubWorkspace() {
   } else {
     return workspaceDir;
   }
+}
+
+export function listFiles(rootDir: string) {
+  return null;
 }
