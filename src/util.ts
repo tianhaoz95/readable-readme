@@ -1,4 +1,5 @@
-import fs from 'fs';
+import filewtf from "filewtf";
+import fs from "fs";
 
 export function getGitHubWorkspace() {
   const workspaceDir = process.env.GITHUB_WORKSPACE;
@@ -11,5 +12,15 @@ export function getGitHubWorkspace() {
 }
 
 export function listFiles(rootDir: string) {
-  return null;
+  const fileList = filewtf.walkthrough(rootDir);
+  return fileList;
+}
+
+export function readFileContent(filename: string) {
+  const fileContent = fs.readFileSync(filename, "utf8");
+  return fileContent;
+}
+
+export function isReadmeFilename(filename: string) {
+  return false;
 }

@@ -5,8 +5,15 @@ async function lintReadme() {
   try {
     const myInput = core.getInput("myInput");
     core.debug(`Hello ${myInput}`);
-    const WorkspaceDir = util.getGitHubWorkspace();
-    // TODO(tianhaoz95): add file listing
+    const workspaceDir = util.getGitHubWorkspace();
+    const workspaceFiles = util.listFiles(workspaceDir);
+    const readmeFilesContent = {};
+    for (const workspaceFile of workspaceFiles) {
+      if (util.isReadmeFilename(workspaceFile)) {
+        const readmeFileContent = util.readFileContent(workspaceFile);
+        readmeFilesContent[workspaceFile] = readmeFileContent;
+      }
+    }
   } catch (error) {
     core.setFailed(error.message);
   }
