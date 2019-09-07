@@ -22,5 +22,7 @@ export function readFileContent(filename: string) {
 }
 
 export function isReadmeFilename(filename: string) {
-  return false;
+  const matcher = new RegExp("^.*\.(md|markdown)$");
+  const match = matcher.test(filename);
+  return match;
 }

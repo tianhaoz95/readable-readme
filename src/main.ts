@@ -1,3 +1,3 @@
-import lintReadme from "./lintReadme";
+import lint from "./lint";
 
-lintReadme();
+lint();

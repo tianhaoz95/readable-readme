@@ -42,4 +42,25 @@ describe("Utility test suite", () => {
     const fileContent = util.readFileContent(targetFilename);
     expect(fileContent).toContain("Readable Readme");
   });
+
+  it("test markdown filename extension matcher basic", () => {
+    expect(util.isReadmeFilename("test.markdown")).toBe(true);
+    expect(util.isReadmeFilename("test.md")).toBe(true);
+    expect(util.isReadmeFilename("test.js")).toBe(false);
+    expect(util.isReadmeFilename("test.jsx")).toBe(false);
+    expect(util.isReadmeFilename("test.cpp")).toBe(false);
+    expect(util.isReadmeFilename("test.cc")).toBe(false);
+    expect(util.isReadmeFilename("test.ts")).toBe(false);
+    expect(util.isReadmeFilename("test.css")).toBe(false);
+    expect(util.isReadmeFilename("test.html")).toBe(false);
+    expect(util.isReadmeFilename("test.json")).toBe(false);
+  });
+
+  it("test markdown filename extension matcher complex", () => {
+    expect(util.isReadmeFilename("test.example.markdown")).toBe(true);
+    expect(util.isReadmeFilename("test.example.md")).toBe(true);
+    expect(util.isReadmeFilename("test.example.md.js")).toBe(false);
+    expect(util.isReadmeFilename("test.example.markdown.ts")).toBe(false);
+    expect(util.isReadmeFilename("test.example.markdown.json")).toBe(false);
+  });
 });
