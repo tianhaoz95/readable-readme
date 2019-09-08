@@ -1,5 +1,6 @@
 import filewtf from "filewtf";
 import fs from "fs";
+import path from "path";
 
 export function getGitHubWorkspace() {
   const workspaceDir = process.env.GITHUB_WORKSPACE;
@@ -25,4 +26,10 @@ export function isReadmeFilename(filename: string) {
   const matcher = new RegExp("^.*\.(md|markdown)$");
   const match = matcher.test(filename);
   return match;
+}
+
+export function loadTemplate(template: string) {
+  const filename = path.join(path.resolve(__dirname), "../template/" + template + ".md");
+  const templateContent = fs.readFileSync(filename, "utf8");
+  return templateContent;
 }

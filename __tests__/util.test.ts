@@ -63,4 +63,14 @@ describe("Utility test suite", () => {
     expect(util.isReadmeFilename("test.example.markdown.ts")).toBe(false);
     expect(util.isReadmeFilename("test.example.markdown.json")).toBe(false);
   });
+
+  it("test template loader run without crashing", () => {
+    expect(() => {
+      util.loadTemplate("title");
+    }).not.toThrow();
+  });
+
+  it("test template loader basic", () => {
+    expect(util.loadTemplate("title")).toContain("{{filename}}");
+  });
 });

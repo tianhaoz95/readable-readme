@@ -15,6 +15,7 @@ function lint() {
         const readmeFileContent = util.readFileContent(workspaceFile);
         const reportEntry = {
           en: null,
+          filename: workspaceFile,
         };
         reportEntry.en = en(readmeFileContent);
         reportsMetadata.push(reportEntry);
@@ -22,9 +23,8 @@ function lint() {
     }
     let finalReport = "final report";
     for (const reportMetadata of reportsMetadata) {
-      finalReport += report.composeSuggestsToParagraph(reportMetadata.en);
+      finalReport += report.composeReportMetadataToParagraph(reportMetadata);
     }
-    core.debug(finalReport);
   } catch (error) {
     core.setFailed(error.message);
   }
