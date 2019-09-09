@@ -12,6 +12,16 @@ export function getGitHubWorkspace() {
   }
 }
 
+export function getGitHubRepo() {
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (!repo) {
+    const errMsg = "Cannot find GITHUB_REPOSITORY in environment";
+    throw errMsg;
+  } else {
+    return repo;
+  }
+}
+
 export function listFiles(rootDir: string) {
   const fileList = filewtf.walkthrough(rootDir);
   return fileList;

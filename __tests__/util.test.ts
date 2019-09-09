@@ -10,6 +10,16 @@ describe("Utility test suite", () => {
     expect(util.getGitHubWorkspace()).toContain("/readable-readme");
   });
 
+  it("test repo getter no crash", () => {
+    expect(() => {
+      util.getGitHubRepo();
+    }).not.toThrow();
+  });
+
+  it("test repo getter without specific owner checking", () => {
+    expect(util.getGitHubRepo()).toContain("/readable-readme");
+  });
+
   it("test file getter", () => {
     const currentDir = path.resolve(__dirname);
     expect(util.listFiles(currentDir)).toContain(currentDir + "/util.test.ts");
