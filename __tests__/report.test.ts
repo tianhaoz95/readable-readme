@@ -41,5 +41,7 @@ describe("Report test suite", () => {
     });
     expect(reportContent).toContain("test rocks!");
     expect(reportContent).toContain("ahhh I am hungry...");
+    expect(reportContent).toContain("index: 10, offset: 5");
+    expect(reportContent).toContain("index: 20, offset: 3");
   });
 });
