@@ -22,9 +22,9 @@ export function getGitHubRepo() {
   }
 }
 
-// TODO(tianhaoz95): add github owner getter using repo getter and tests.
+// TODO(tianhaoz95): add github owner getter using repo getter and tests /WIP.
 
-// TODO(tianhaoz95): add github repo name getter using repo getter and tests.
+// TODO(tianhaoz95): add github repo name getter using repo getter and tests /WIP.
 
 export function listFiles(rootDir: string) {
   const fileList = filewtf.walkthrough(rootDir);
