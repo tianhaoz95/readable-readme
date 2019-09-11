@@ -2,6 +2,8 @@
 
 ## Development
 
+<!-- TODO(tianhaoz95): add lint manual -->
+
 ### Run unit tests
 
 ```bash
