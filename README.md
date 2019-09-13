@@ -10,3 +10,9 @@ npm test                        # Run unit tests
 ```
 
 <!-- TODO(tianhaoz95): add build doc -->
+
+### Build lib
+
+```bash
+npm run build
+```
