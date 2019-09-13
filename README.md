@@ -15,3 +15,9 @@ The `readable-readme` project aim to build a GitHub action that checks the reada
 source ./script/setupTest.sh    # Mimic GitHub actions environment
 npm test                        # Run unit tests
 ```
+
+### Build lib
+
+```bash
+npm run build
+```
