@@ -21,3 +21,7 @@ npm test                        # Run unit tests
 ```bash
 npm run build
 ```
+
+## Roadmap
+
+* [v1](./docs/v1-design-doc.md)
