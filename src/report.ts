@@ -23,3 +23,9 @@ export function composeReportMetadataToParagraph(reportMetadata) {
   }
   return finalReport;
 }
+
+export function getTeportIssueTitle(): string {
+  // TODO(tianhaoz95): make this function use the various
+  // ientifiers, timestamp and commit sha.
+  return "placeholder titile";
+}
