@@ -22,7 +22,19 @@ export function getGitHubRepo() {
   }
 }
 
+export function validateGitHubRepo(repo: string) {
+  const matcher = new RegExp("^([A-Za-z]|[0-9]|_)+/([A-Za-z]|[0-9]|_)+$");
+  const match = matcher.test(repo);
+  return match;
+}
+
 // TODO(tianhaoz95): add github owner getter using repo getter and tests /WIP.
+export function getGitHubRepoOwner() {
+  const repo = getGitHubRepo();
+  const scopes = repo.split("/");
+  const repoOwner = scopes[0];
+  return repoOwner;
+}
 
 // TODO(tianhaoz95): add github repo name getter using repo getter and tests /WIP.
 

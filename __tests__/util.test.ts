@@ -83,4 +83,13 @@ describe("Utility test suite", () => {
   it("test template loader basic", () => {
     expect(util.loadTemplate("title")).toContain("{{filename}}");
   });
+
+  it("test repo validator run no crash", () => {
+    expect(() => {
+      util.validateGitHubRepo("tianhaoz95/readable-readme");
+    }).not.toThrow();
+    expect(() => {
+      util.validateGitHubRepo("what the hell is this?");
+    }).not.toThrow();
+  });
 });
