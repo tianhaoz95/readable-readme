@@ -23,3 +23,5 @@ export function composeReportMetadataToParagraph(reportMetadata) {
   }
   return finalReport;
 }
+
+// TODO(tianhaoz95): add issue report title generator
