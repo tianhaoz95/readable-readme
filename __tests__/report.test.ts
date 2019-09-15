@@ -1,7 +1,7 @@
 import * as report from "../src/report";
 
 describe("Report test suite", () => {
-  it("generate report without crashing", () => {
+  it("generate report no crash", () => {
     expect(() => {
       report.composeReportMetadataToParagraph({
         en: [
@@ -43,5 +43,11 @@ describe("Report test suite", () => {
     expect(reportContent).toContain("ahhh I am hungry...");
     expect(reportContent).toContain("index: 10, offset: 5");
     expect(reportContent).toContain("index: 20, offset: 3");
+  });
+
+  it("get report issue title no crash", () => {
+    expect(() => {
+      report.getTeportIssueTitle();
+    }).not.toThrow();
   });
 });
