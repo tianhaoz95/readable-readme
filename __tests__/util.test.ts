@@ -74,7 +74,7 @@ describe("Utility test suite", () => {
     expect(util.isReadmeFilename("test.example.markdown.json")).toBe(false);
   });
 
-  it("test template loader run without crashing", () => {
+  it("test template loader no crash", () => {
     expect(() => {
       util.loadTemplate("title");
     }).not.toThrow();
@@ -84,7 +84,7 @@ describe("Utility test suite", () => {
     expect(util.loadTemplate("title")).toContain("{{filename}}");
   });
 
-  it("test repo validator run no crash", () => {
+  it("test repo validator no crash", () => {
     expect(() => {
       util.validateGitHubRepo("tianhaoz95/readable-readme");
     }).not.toThrow();
@@ -99,5 +99,46 @@ describe("Utility test suite", () => {
     expect(util.validateGitHubRepo("tianhaoz95/readable-readme/README.md")).toBe(false);
     expect(util.validateGitHubRepo("/readable-readme")).toBe(false);
     expect(util.validateGitHubRepo("readable-readme/")).toBe(false);
+  });
+
+  it("test owner parser no crash", () => {
+    expect(() => {
+      util.parseGitHubRepoOwner("tianhaoz95/readable-readme");
+    }).not.toThrow();
+  });
+
+  it("test owner parser functional basic", () => {
+    expect(util.parseGitHubRepoOwner("tianhaoz95/readable-readme")).toBe("tianhaoz95");
+    expect(util.parseGitHubRepoOwner("jacksonz/readable-readme")).toBe("jacksonz");
+  });
+
+  it("test owner getter no crash", () => {
+    expect(() => {
+      util.getGitHubRepoOwner();
+    }).not.toThrow();
+  });
+
+  it("test owner getter functional basic", () => {
+    expect(util.getGitHubRepoOwner()).toBe("tianhaoz95");
+  });
+
+  it("test parse repo id no crash", () => {
+    expect(() => {
+      util.parseGitHubRepoId("tianhaoz95/readable-readme");
+    }).not.toThrow();
+  });
+
+  it("test parse repo id functional", () => {
+    expect(util.parseGitHubRepoId("tianhaoz95/readable-readme")).toBe("readable-readme");
+  });
+
+  it("test get repo id no crash", () => {
+    expect(() => {
+      util.getGitHubRepoId();
+    }).not.toThrow();
+  });
+
+  it("test get repo id functional", () => {
+    expect(util.getGitHubRepoId()).toBe("readable-readme");
   });
 });

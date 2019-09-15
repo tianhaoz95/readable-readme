@@ -18,6 +18,10 @@ export function getGitHubRepo() {
     const errMsg = "Cannot find GITHUB_REPOSITORY in environment";
     throw errMsg;
   } else {
+    if (!validateGitHubRepo(repo)) {
+      const errMsg = "Repository " + repo + " is not valid";
+      throw errMsg;
+    }
     return repo;
   }
 }
@@ -28,15 +32,33 @@ export function validateGitHubRepo(repo: string) {
   return match;
 }
 
-// TODO(tianhaoz95): add github owner getter using repo getter and tests /WIP.
-export function getGitHubRepoOwner() {
-  const repo = getGitHubRepo();
+// TODO(tianhaoz95): this function requires the input
+// repo to be valid which is not great. Change the
+// validator to throw error by itself for better
+// reuseability.
+export function parseGitHubRepoOwner(repo: string) {
   const scopes = repo.split("/");
   const repoOwner = scopes[0];
   return repoOwner;
 }
 
-// TODO(tianhaoz95): add github repo name getter using repo getter and tests /WIP.
+export function getGitHubRepoOwner() {
+  const repo = getGitHubRepo();
+  const repoOwner = parseGitHubRepoOwner(repo);
+  return repoOwner;
+}
+
+export function parseGitHubRepoId(repo: string) {
+  const scopes = repo.split("/");
+  const repoOwner = scopes[1];
+  return repoOwner;
+}
+
+export function getGitHubRepoId() {
+  const repo = getGitHubRepo();
+  const repoId = parseGitHubRepoId(repo);
+  return repoId;
+}
 
 export function listFiles(rootDir: string) {
   const fileList = filewtf.walkthrough(rootDir);
