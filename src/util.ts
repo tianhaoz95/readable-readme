@@ -23,7 +23,7 @@ export function getGitHubRepo() {
 }
 
 export function validateGitHubRepo(repo: string) {
-  const matcher = new RegExp("^([A-Za-z]|[0-9]|_)+/([A-Za-z]|[0-9]|_)+$");
+  const matcher = new RegExp("^[^/]+/[^/]+$");
   const match = matcher.test(repo);
   return match;
 }

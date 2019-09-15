@@ -92,4 +92,12 @@ describe("Utility test suite", () => {
       util.validateGitHubRepo("what the hell is this?");
     }).not.toThrow();
   });
+
+  it("test repo validator basic", () => {
+    expect(util.validateGitHubRepo("tianhaoz95/readable-readme")).toBe(true);
+    expect(util.validateGitHubRepo("tianhaoz95-readable-readme")).toBe(false);
+    expect(util.validateGitHubRepo("tianhaoz95/readable-readme/README.md")).toBe(false);
+    expect(util.validateGitHubRepo("/readable-readme")).toBe(false);
+    expect(util.validateGitHubRepo("readable-readme/")).toBe(false);
+  });
 });
