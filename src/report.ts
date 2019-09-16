@@ -59,4 +59,3 @@ export function getSnippet(
     rightContext,
   };
 }
-// TODO(tianhaoz95): add more tests for edge cases
