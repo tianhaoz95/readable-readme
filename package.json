@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "jest && tslint 'src/**/*.ts' '__tests__/**/*.ts'",
     "lint": "tslint 'src/**/*.ts' '__tests__/**/*.ts' --fix",
-    "docs": "typedoc --out ./docs/api ./src"
+    "docs": "typedoc --readme ./src/README.md --out ./docs/api ./src"
   },
   "repository": {
     "type": "git",

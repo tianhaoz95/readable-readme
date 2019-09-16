@@ -1,6 +1,10 @@
 import mustache from "mustache";
 import * as util from "./util";
 
+/**
+ * Composer to convert report metadata into human-readable report
+ * @param reportMetadata The metadata for generating the report
+ */
 export function composeReportMetadataToParagraph(reportMetadata) {
   let finalReport = "";
   const reportTitleTemplate = util.loadTemplate("title");
@@ -24,6 +28,9 @@ export function composeReportMetadataToParagraph(reportMetadata) {
   return finalReport;
 }
 
+/**
+ * Composer for the report title
+ */
 export function getTeportIssueTitle(): string {
   // TODO(tianhaoz95): make this function use the various
   // ientifiers, timestamp and commit sha.
@@ -53,9 +60,13 @@ export function getSnippet(
   const rightContext = fullText.substring(index + offset, endIndex);
   const fullSnippet = leftContext + highlight + rightContext;
   return {
+    /** The full snippet from the concat of all the rest */
     fullSnippet,
+    /** The highlight of the suggestion target */
     highlight,
+    /** The context text to the left of the hightlight */
     leftContext,
+    /** The context text to the right of the hightlight */
     rightContext,
   };
 }
