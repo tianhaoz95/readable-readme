@@ -25,3 +25,7 @@ npm run build
 ## Roadmap
 
 * [v1](./docs/v1-design-doc.md)
+
+## API Docs
+
+Check the [auto-generated docs](./docs/api/index.html).
