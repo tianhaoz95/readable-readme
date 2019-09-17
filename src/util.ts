@@ -51,15 +51,15 @@ export function validateGitHubRepo(repo: string) {
 
 /**
  * This function parses the GitHub repo owner from the repo name
- * 
+ *
  * ## Example
- * 
+ *
  * ```ts
  * parseGitHubRepoOwner("tianhaoz95/readable-readme")
  * ```
- * 
+ *
  * The above code will give "tianhaoz95" as it is the owner's ID.
- * 
+ *
  * @param repo the GitHub repo output from [[getGitHubRepo]]
  */
 export function parseGitHubRepoOwner(repo: string) {
@@ -86,15 +86,15 @@ export function getGitHubRepoOwner() {
 
 /**
  * This function parses the GitHub repo owner from the repo name
- * 
+ *
  * ## Example
- * 
+ *
  * ```ts
  * parseGitHubRepoId("tianhaoz95/readable-readme")
  * ```
- * 
+ *
  * The above code will give "readable-readme" as it is the repo's ID.
- * 
+ *
  * @param repo the GitHub repo output from [[getGitHubRepo]]
  */
 export function parseGitHubRepoId(repo: string) {
