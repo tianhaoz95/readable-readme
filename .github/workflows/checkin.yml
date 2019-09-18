@@ -10,11 +10,14 @@ jobs:
     - name: "npm ci"
       run: npm ci
 
-    - name: "npm run build"
+    - name: "build ts"
       run: npm run build
 
-    - name: "npm run test"
+    - name: "unit test"
       run: npm run test
+    
+    - name: "integration test"
+      run: node ./lib/main.js
 
     - name: "check for uncommitted changes"
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
