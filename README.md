@@ -1,5 +1,7 @@
 # Readable Readme
 
+[![Actions Status](https://github.com/tianhaoz95/readable-readme/workflows/PR%20Checks/badge.svg)](https://github.com/tianhaoz95/readable-readme/actions)
+
 <!-- TODO(tianhaoz95): add project description -->
 > If README is not readable, nothing else will be.
 
