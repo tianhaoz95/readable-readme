@@ -1,6 +1,7 @@
 # Readable Readme
 
 [![Actions Status](https://github.com/tianhaoz95/readable-readme/workflows/PR%20Checks/badge.svg)](https://github.com/tianhaoz95/readable-readme/actions)
+[![TypeScript](https://badges.frapsoft.com/typescript/awesome/typescript.png?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
 <!-- TODO(tianhaoz95): add project description -->
 > If README is not readable, nothing else will be.
