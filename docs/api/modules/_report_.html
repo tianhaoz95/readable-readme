@@ -73,9 +73,11 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_report_.html#compilesnippet" class="tsd-kind-icon">compile<wbr>Snippet</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_report_.html#composereportmetadatatoparagraph" class="tsd-kind-icon">compose<wbr>Report<wbr>Metadata<wbr>ToParagraph</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_report_.html#getsnippet" class="tsd-kind-icon">get<wbr>Snippet</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_report_.html#getteportissuetitle" class="tsd-kind-icon">get<wbr>Teport<wbr>Issue<wbr>Title</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_report_.html#rendersnippet" class="tsd-kind-icon">render<wbr>Snippet</a></li>
 							</ul>
 						</section>
 					</div>
@@ -83,6 +85,55 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="compilesnippet" class="tsd-anchor"></a>
+					<h3>compile<wbr>Snippet</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">compile<wbr>Snippet<span class="tsd-signature-symbol">(</span>leftContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, rightContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, highlight<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, template<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/c2b8096/src/report.ts#L81">report.ts:81</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This function compiles the snippet using a template</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>leftContext: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The context to the left of the highlight</p>
+									</div>
+								</li>
+								<li>
+									<h5>rightContext: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The context to the right of the highlight</p>
+									</div>
+								</li>
+								<li>
+									<h5>highlight: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The highlighted text</p>
+									</div>
+								</li>
+								<li>
+									<h5>template: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the snippet template to be used</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="composereportmetadatatoparagraph" class="tsd-anchor"></a>
 					<h3>compose<wbr>Report<wbr>Metadata<wbr>ToParagraph</h3>
@@ -93,7 +144,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/5c4b309/src/report.ts#L8">report.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/c2b8096/src/report.ts#L8">report.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -124,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/5c4b309/src/report.ts#L49">report.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/c2b8096/src/report.ts#L49">report.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -209,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/5c4b309/src/report.ts#L34">report.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/c2b8096/src/report.ts#L34">report.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -218,6 +269,63 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="rendersnippet" class="tsd-anchor"></a>
+					<h3>render<wbr>Snippet</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Snippet<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, range<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fullText<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, template<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tianhaoz95/readable-readme/blob/c2b8096/src/report.ts#L109">report.ts:109</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This function gets the snippet using <a href="_report_.html#getsnippet">getSnippet</a> and
+									renders it to a certain template.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The starting index of the suggestion highlight</p>
+									</div>
+								</li>
+								<li>
+									<h5>offset: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The offset of the suggestion highlight</p>
+									</div>
+								</li>
+								<li>
+									<h5>range: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The range of the context</p>
+									</div>
+								</li>
+								<li>
+									<h5>fullText: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The full text to get snippet from</p>
+									</div>
+								</li>
+								<li>
+									<h5>template: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ID of the snippet template to be used</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The rendered snippet</p>
 						</li>
 					</ul>
 				</section>
@@ -252,6 +360,9 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_report_.html#compilesnippet" class="tsd-kind-icon">compile<wbr>Snippet</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_report_.html#composereportmetadatatoparagraph" class="tsd-kind-icon">compose<wbr>Report<wbr>Metadata<wbr>ToParagraph</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
@@ -259,6 +370,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_report_.html#getteportissuetitle" class="tsd-kind-icon">get<wbr>Teport<wbr>Issue<wbr>Title</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_report_.html#rendersnippet" class="tsd-kind-icon">render<wbr>Snippet</a>
 					</li>
 				</ul>
 			</nav>

@@ -81,4 +81,39 @@ describe("Report test suite", () => {
       rightContext: " and hope it works lol!",
     });
   });
+
+  it("snippet compiler no crash", () => {
+    expect(() => {
+      report.compileSnippet(
+        "left context",
+        "right context",
+        "highlight",
+        "plainTextSnippet",
+      );
+    }).not.toThrow();
+  });
+
+  it("snippet compiler basic", () => {
+    expect(
+      report.compileSnippet(
+        "left context",
+        "right context",
+        "highlight",
+        "plainTextSnippet",
+      )).toBe("left context**highlight**right context");
+  });
+
+  it("snippet renderer no crash", () => {
+    const testText = "This is a test and hope it works lol!";
+    expect(() => {
+      report.renderSnippet(10, 4, 4, testText, "plainTextSnippet");
+    }).not.toThrow();
+  });
+
+  it("snippet renderer basic", () => {
+    const testText = "This is a test and hope it works lol!";
+    expect(
+      report.renderSnippet(5, 2, 100, testText, "plainTextSnippet"),
+    ).toBe("This **is** a test and hope it works lol!");
+  });
 });
