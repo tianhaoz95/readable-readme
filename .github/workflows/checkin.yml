@@ -18,6 +18,8 @@ jobs:
     
     - name: "integration test"
       run: node ./lib/main.js
+      env:
+        TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
 
     - name: "check for uncommitted changes"
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
