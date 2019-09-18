@@ -16,10 +16,18 @@ export function composeReportMetadataToParagraph(reportMetadata) {
     const suggestionContent = suggestion.suggestion;
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
+    const fullText = reportMetadata.fileContent;
+    const snippetContent = renderSnippet(
+      suggestionIndex,
+      suggestionOffset,
+      10,
+      fullText,
+      "plainTextSnippet",
+    );
     const suggestionRenderContent = {
       index: suggestionIndex,
       offset: suggestionOffset,
-      snippet: "Not implemented yet",
+      snippet: snippetContent,
       suggestion: suggestionContent,
     };
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);

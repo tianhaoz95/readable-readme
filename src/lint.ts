@@ -1,13 +1,14 @@
 import * as core from "@actions/core";
 import en from "./en";
+import * as octo from "./octo";
 import * as report from "./report";
 import * as util from "./util";
 
-function lint() {
+export function lintWorkspace() {
   try {
     const verbose = core.getInput("verbose");
     core.debug(`Verbose level: ${verbose}`);
-    const workspaceDir = util.getGitHubWorkspace();
+    const workspaceDir = util.getGitHubWorkspace() + "/src";
     const workspaceFiles = util.listFiles(workspaceDir);
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
@@ -15,6 +16,7 @@ function lint() {
         const readmeFileContent = util.readFileContent(workspaceFile);
         const reportEntry = {
           en: null,
+          fileContent: readmeFileContent,
           filename: workspaceFile,
         };
         reportEntry.en = en(readmeFileContent);
@@ -25,9 +27,10 @@ function lint() {
     for (const reportMetadata of reportsMetadata) {
       finalReport += report.composeReportMetadataToParagraph(reportMetadata);
     }
+    const reportTitle = report.getTeportIssueTitle();
+    octo.postGitHubIssue(reportTitle, finalReport);
   } catch (error) {
+    // TODO(tianhaoz95): move this to the upper level main function
     core.setFailed(error.message);
   }
 }
-
-export default lint;

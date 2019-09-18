@@ -2,8 +2,16 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as util from "./util";
 
-const token = core.getInput("token");
-const octokit = new github.GitHub(token);
+function getOctokit() {
+  let token = core.getInput("token");
+  if (process.env.TEST_GITHUB_TOKEN) {
+    token = process.env.TEST_GITHUB_TOKEN;
+  }
+  const kit = new github.GitHub(token);
+  return kit;
+}
+
+export const octokit = getOctokit();
 
 export async function postGitHubIssue(title: string, body: string) {
   const repoOwner = util.getGitHubRepoOwner();

@@ -8,6 +8,7 @@ describe("Report test suite", () => {
           "test suggestion 1",
           "test suggestion 2",
         ],
+        fileContent: "test full context",
         filename: "test filename",
       });
     }).not.toThrow();
@@ -16,6 +17,7 @@ describe("Report test suite", () => {
   it("generate report title basic", () => {
     const reportContent = report.composeReportMetadataToParagraph({
       en: [],
+      fileContent: "test full context",
       filename: "test filename",
     });
     expect(reportContent).toContain("test filename");
@@ -37,6 +39,7 @@ describe("Report test suite", () => {
           suggestion: "ahhh I am hungry...",
         },
       ],
+      fileContent: "test full context",
       filename: "test filename",
     });
     expect(reportContent).toContain("test rocks!");

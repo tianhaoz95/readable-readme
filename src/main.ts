@@ -1,11 +1,11 @@
-import lint from "./lint";
+import * as lint from "./lint";
 
 /**
  * This is the only entry point to the action workflow
  * under the hood it calls [[lint]].
  */
 function main() {
-  lint();
+  lint.lintWorkspace();
 }
 
 main();

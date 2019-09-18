@@ -1,9 +1,9 @@
-import lint from "../src/lint";
+import * as lint from "../src/lint";
 
 describe("Lint test suite", () => {
   it("test lint execute without crashing", () => {
     expect(() => {
-      lint();
+      lint.lintWorkspace();
     }).not.toThrow();
   });
 });
