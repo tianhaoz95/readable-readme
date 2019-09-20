@@ -1,5 +1,6 @@
 import mustache from "mustache";
 import * as util from "./util";
+import * as core from "@actions/core";
 
 /**
  * Composer to convert report metadata into human-readable report
@@ -13,7 +14,8 @@ export function composeReportMetadataToParagraph(reportMetadata) {
   const reportTitle = mustache.render(reportTitleTemplate, {filename});
   finalReport += reportTitle;
   for (const suggestion of reportMetadata.en) {
-    const suggestionContent = suggestion.suggestion;
+    core.debug(JSON.stringify(suggestion));
+    const suggestionContent = suggestion.reason;
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
     const fullText = reportMetadata.fileContent;
@@ -30,6 +32,7 @@ export function composeReportMetadataToParagraph(reportMetadata) {
       snippet: snippetContent,
       suggestion: suggestionContent,
     };
+    core.debug(JSON.stringify(suggestionRenderContent));
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);
     finalReport += suggestionEntryContent;
   }
@@ -101,6 +104,7 @@ export function compileSnippet(
       rightContext,
     },
   );
+  core.debug("Compiled snippet: " + compiledSnippet);
   return compiledSnippet;
 }
 
@@ -122,6 +126,7 @@ export function renderSnippet(
   template: string,
 ): string {
   const snippetMetadata = getSnippet(index, offset, range, fullText);
+  core.debug("snippet metadata: " + JSON.stringify(snippetMetadata));
   const snippetText = compileSnippet(
     snippetMetadata.leftContext,
     snippetMetadata.rightContext,

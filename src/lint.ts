@@ -13,7 +13,8 @@ export function lintWorkspace() {
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
-        const readmeFileContent = util.readFileContent(workspaceFile);
+        const rawReadmeFileContent = util.readFileContent(workspaceFile);
+        const readmeFileContent = util.sanitizeText(rawReadmeFileContent);
         const reportEntry = {
           en: null,
           fileContent: readmeFileContent,
@@ -25,7 +26,9 @@ export function lintWorkspace() {
     }
     let finalReport = "final report";
     for (const reportMetadata of reportsMetadata) {
-      finalReport += report.composeReportMetadataToParagraph(reportMetadata);
+      const reportEntry = report.composeReportMetadataToParagraph(reportMetadata);
+      finalReport += "\n\n";
+      finalReport += reportEntry;
     }
     const reportTitle = report.getTeportIssueTitle();
     octo.postGitHubIssue(reportTitle, finalReport);

@@ -154,3 +154,12 @@ export function loadTemplate(template: string) {
   const templateContent = fs.readFileSync(filename, "utf8");
   return templateContent;
 }
+
+/**
+ * This function sanitizes unwanted characters out of text
+ */
+export function sanitizeText(rawText) {
+  /** Clean out unicode */
+  const sanitizedText = rawText.replace(/[^\x20-\x7E]/g, '');
+  return sanitizedText;
+}
