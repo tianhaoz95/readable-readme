@@ -13,8 +13,7 @@ export function lintWorkspace() {
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
-        const rawReadmeFileContent = util.readFileContent(workspaceFile);
-        const readmeFileContent = util.sanitizeText(rawReadmeFileContent);
+        const readmeFileContent = util.readFileContent(workspaceFile);
         const reportEntry = {
           en: null,
           fileContent: readmeFileContent,
