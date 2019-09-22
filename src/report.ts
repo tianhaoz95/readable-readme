@@ -1,6 +1,6 @@
+import * as core from "@actions/core";
 import mustache from "mustache";
 import * as util from "./util";
-import * as core from "@actions/core";
 
 /**
  * Composer to convert report metadata into human-readable report

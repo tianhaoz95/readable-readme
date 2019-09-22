@@ -160,6 +160,6 @@ export function loadTemplate(template: string) {
  */
 export function sanitizeText(rawText) {
   /** Clean out unicode */
-  const sanitizedText = rawText.replace(/[^\x20-\x7E]/g, '');
+  const sanitizedText = rawText.replace(/[^\x20-\x7E]/g, "");
   return sanitizedText;
 }

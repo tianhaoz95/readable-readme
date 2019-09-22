@@ -31,12 +31,12 @@ describe("Report test suite", () => {
         {
           index: 10,
           offset: 5,
-          suggestion: "test rocks!",
+          reason: "test rocks!",
         },
         {
           index: 20,
           offset: 3,
-          suggestion: "ahhh I am hungry...",
+          reason: "ahhh I am hungry...",
         },
       ],
       fileContent: "test full context",
@@ -44,8 +44,8 @@ describe("Report test suite", () => {
     });
     expect(reportContent).toContain("test rocks!");
     expect(reportContent).toContain("ahhh I am hungry...");
-    expect(reportContent).toContain("index: 10, offset: 5");
-    expect(reportContent).toContain("index: 20, offset: 3");
+    expect(reportContent).toContain("@ index: 10 & offset: 5");
+    expect(reportContent).toContain("@ index: 20 & offset: 3");
   });
 
   it("get report issue title no crash", () => {
