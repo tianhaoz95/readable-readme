@@ -14,7 +14,6 @@ export function composeReportMetadataToParagraph(reportMetadata) {
   const reportTitle = mustache.render(reportTitleTemplate, {filename});
   finalReport += reportTitle;
   for (const suggestion of reportMetadata.en) {
-    core.debug(JSON.stringify(suggestion));
     const suggestionContent = suggestion.reason;
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
@@ -32,7 +31,6 @@ export function composeReportMetadataToParagraph(reportMetadata) {
       snippet: snippetContent,
       suggestion: suggestionContent,
     };
-    core.debug(JSON.stringify(suggestionRenderContent));
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);
     finalReport += suggestionEntryContent;
   }
@@ -96,15 +94,16 @@ export function compileSnippet(
   template: string,
 ): string {
   const templateContent = util.loadTemplate(template);
-  const compiledSnippet = mustache.render(
-    templateContent,
-    {
-      highlight,
-      leftContext,
-      rightContext,
-    },
+  const compiledSnippet = util.sanitizeMarkdown(
+    mustache.render(
+      templateContent,
+      {
+        highlight,
+        leftContext,
+        rightContext,
+      },
+    ),
   );
-  core.debug("Compiled snippet: " + compiledSnippet);
   return compiledSnippet;
 }
 
@@ -126,7 +125,6 @@ export function renderSnippet(
   template: string,
 ): string {
   const snippetMetadata = getSnippet(index, offset, range, fullText);
-  core.debug("snippet metadata: " + JSON.stringify(snippetMetadata));
   const snippetText = compileSnippet(
     snippetMetadata.leftContext,
     snippetMetadata.rightContext,

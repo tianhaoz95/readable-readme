@@ -119,4 +119,11 @@ describe("Report test suite", () => {
       report.renderSnippet(5, 2, 100, testText, "plainTextSnippet"),
     ).toBe("This **is** a test and hope it works lol!");
   });
+
+  it("snippet renderer tick marks", () => {
+    const testText = "This is a `test` and hope it works lol!";
+    expect(
+      report.renderSnippet(5, 2, 100, testText, "plainTextSnippet"),
+    ).toBe("This **is** a `test` and hope it works lol!");
+  });
 });

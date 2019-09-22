@@ -2,7 +2,7 @@
  * Tests for utility helpers
  */
 
-import path from "path";
+import * as path from "path";
 import * as util from "../src/util";
 
 describe("Utility test suite", () => {
@@ -140,5 +140,11 @@ describe("Utility test suite", () => {
 
   it("test get repo id functional", () => {
     expect(util.getGitHubRepoId()).toBe("readable-readme");
+  });
+
+  it("test sanitize raw markdown tick mark", () => {
+    const wrongMarkdown = "This **is** a &#x60;test&#x60; and hope it works lol!";
+    const correctMarkdown = "This **is** a `test` and hope it works lol!";
+    expect(util.sanitizeMarkdown(wrongMarkdown)).toBe(correctMarkdown);
   });
 });

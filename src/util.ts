@@ -158,8 +158,8 @@ export function loadTemplate(template: string) {
 /**
  * This function sanitizes unwanted characters out of text
  */
-export function sanitizeText(rawText) {
+export function sanitizeMarkdown(rawText) {
   /** Clean out unicode */
-  const sanitizedText = rawText.replace(/[^\x20-\x7E]/g, "");
-  return sanitizedText;
+  const sanitizedMarkdown = rawText.replace(/&#x60;/gi, "`");
+  return sanitizedMarkdown;
 }
