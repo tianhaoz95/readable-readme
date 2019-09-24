@@ -21,7 +21,7 @@ export function composeReportMetadataToParagraph(reportMetadata) {
     const snippetContent = renderSnippet(
       suggestionIndex,
       suggestionOffset,
-      10,
+      35,
       fullText,
       "plainTextSnippet",
     );
@@ -33,6 +33,7 @@ export function composeReportMetadataToParagraph(reportMetadata) {
     };
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);
     finalReport += suggestionEntryContent;
+    finalReport += "\n\n";
   }
   return finalReport;
 }
