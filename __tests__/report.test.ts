@@ -44,8 +44,31 @@ describe("Report test suite", () => {
     });
     expect(reportContent).toContain("test rocks!");
     expect(reportContent).toContain("ahhh I am hungry...");
-    expect(reportContent).toContain("@ index: 10 & offset: 5");
-    expect(reportContent).toContain("@ index: 20 & offset: 3");
+    expect(reportContent).toContain("@ index:10 & offset:5");
+    expect(reportContent).toContain("@ index:20 & offset:3");
+  });
+
+  it("generate report with collapsable entries", () => {
+    const reportContent = report.composeReportMetadataToParagraph({
+      en: [
+        {
+          index: 10,
+          offset: 5,
+          reason: "test rocks!",
+        },
+        {
+          index: 20,
+          offset: 3,
+          reason: "ahhh I am hungry...",
+        },
+      ],
+      fileContent: "test full context",
+      filename: "test filename",
+    });
+    expect(reportContent).toContain("<details>");
+    expect(reportContent).toContain("</details>");
+    expect(reportContent).toContain("<summary>");
+    expect(reportContent).toContain("</summary>");
   });
 
   it("get report issue title no crash", () => {
@@ -104,6 +127,26 @@ describe("Report test suite", () => {
         "highlight",
         "plainTextSnippet",
       )).toBe("left context**highlight**right context");
+  });
+
+  it("snippet compiler tick mark", () => {
+    expect(
+      report.compileSnippet(
+        "left `context`",
+        "right `context`",
+        "highlight",
+        "plainTextSnippet",
+      )).toBe("left `context`**highlight**right `context`");
+  });
+
+  it("snippet compiler less than", () => {
+    expect(
+      report.compileSnippet(
+        "left <context",
+        "right <context",
+        "highlight",
+        "plainTextSnippet",
+      )).toBe("left <context**highlight**right <context");
   });
 
   it("snippet renderer no crash", () => {
