@@ -4,6 +4,7 @@ import * as octo from "../src/octo";
 const GitHubEndpoint: string = "https://api.github.com";
 const AuthScope: string = "/app/installations/2/access_tokens";
 const IssueScope: string = "/repos/tianhaoz95/readable-readme/issues";
+const FirstIssueScope: string = "/repos/tianhaoz95/readable-readme/issues/1";
 
 nock.disableNetConnect();
 
@@ -43,7 +44,29 @@ describe("octo test suite", () => {
     await octo.postGitHubIssue("test title", "test body");
   });
 
-  test("octo issue exist helper no crash", () => {
+  test("octo issue updater basic", async () => {
+    nock(GitHubEndpoint)
+      .post(AuthScope)
+      .reply(200, { token: "test" });
+    nock(GitHubEndpoint)
+      .get(IssueScope).reply(200, [
+        {
+          number: 1,
+          title: "test title",
+        },
+      ]);
+    nock(GitHubEndpoint)
+      .patch(FirstIssueScope, (body: any): boolean => {
+        expect(body).toMatchObject({
+          body: "test body",
+          title: "test title",
+        });
+        return true;
+      }).reply(200);
+    await octo.postGitHubIssue("test title", "test body");
+  });
+
+  test("octo issue matcher helper no crash", () => {
     nock(GitHubEndpoint)
       .post(AuthScope)
       .reply(200, { token: "test" });
@@ -59,7 +82,7 @@ describe("octo test suite", () => {
     )).resolves.toBeDefined();
   });
 
-  test("octo issue exist helper match", () => {
+  test("octo issue matcher helper match", () => {
     nock(GitHubEndpoint)
       .post(AuthScope)
       .reply(200, { token: "test" });
@@ -78,7 +101,7 @@ describe("octo test suite", () => {
     });
   });
 
-  test("octo issue exist helper no match", () => {
+  test("octo issue matcher helper no match", () => {
     nock(GitHubEndpoint)
       .post(AuthScope)
       .reply(200, { token: "test" });

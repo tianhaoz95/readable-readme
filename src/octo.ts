@@ -48,12 +48,12 @@ export async function postGitHubIssue(title: string, body: string) {
   if (issueMatch.found) {
     core.debug("issue exist, updating existing issue...");
     await octokit.issues.update({
-      issue_number: issueMatch.issueNumber,
       body,
+      issue_number: issueMatch.issueNumber,
       owner: repoOwner,
       repo: repoId,
       title,
-    })
+    });
   } else {
     core.debug("issue not exist, creating new issue...");
     await octokit.issues.create({
