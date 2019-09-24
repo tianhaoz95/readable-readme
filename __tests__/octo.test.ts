@@ -17,6 +17,8 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
+      .get(IssueScope).reply(200, []);
+    nock(GitHubEndpoint)
       .post(IssueScope).reply(200);
     return expect(octo.postGitHubIssue(
       "test title",
@@ -28,6 +30,8 @@ describe("octo test suite", () => {
     nock(GitHubEndpoint)
       .post(AuthScope)
       .reply(200, { token: "test" });
+    nock(GitHubEndpoint)
+      .get(IssueScope).reply(200, []);
     nock(GitHubEndpoint)
       .post(IssueScope, (body: any): boolean => {
         expect(body).toMatchObject({
@@ -45,13 +49,51 @@ describe("octo test suite", () => {
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
       .get(IssueScope).reply(200, [
-        { title: "test title 1" },
-        { title: "test title 2" },
+        { title: "test title 1", number: 0 },
+        { title: "test title 2", number: 1 },
       ]);
-    return expect(octo.issueTitleExist(
+    return expect(octo.matchIssueTitle(
       "test title 1",
       "readable-readme",
       "tianhaoz95",
     )).resolves.toBeDefined();
+  });
+
+  test("octo issue exist helper match", () => {
+    nock(GitHubEndpoint)
+      .post(AuthScope)
+      .reply(200, { token: "test" });
+    nock(GitHubEndpoint)
+      .get(IssueScope).reply(200, [
+        { title: "test title 1", number: 0 },
+        { title: "test title 2", number: 1 },
+      ]);
+    return expect(octo.matchIssueTitle(
+      "test title 1",
+      "readable-readme",
+      "tianhaoz95",
+    )).resolves.toEqual({
+      found: true,
+      issueNumber: 0,
+    });
+  });
+
+  test("octo issue exist helper no match", () => {
+    nock(GitHubEndpoint)
+      .post(AuthScope)
+      .reply(200, { token: "test" });
+    nock(GitHubEndpoint)
+      .get(IssueScope).reply(200, [
+        { title: "test title 1", number: 0 },
+        { title: "test title 2", number: 1 },
+      ]);
+    return expect(octo.matchIssueTitle(
+      "test title no match",
+      "readable-readme",
+      "tianhaoz95",
+    )).resolves.toEqual({
+      found: false,
+      issueNumber: -1,
+    });
   });
 });
