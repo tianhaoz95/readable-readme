@@ -13,6 +13,24 @@ function getOctokit() {
 
 export const octokit = getOctokit();
 
+export async function issueTitleExist(
+  title: string,
+  repo: string,
+  owner: string,
+): Promise<boolean> {
+  const allIssues = await octokit.issues.listForRepo({
+    owner,
+    repo,
+  });
+  for (const issue of allIssues) {
+    const issueTitle = issue.title;
+    if (title === issueTitle) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export async function postGitHubIssue(title: string, body: string) {
   const repoOwner = util.getGitHubRepoOwner();
   const repoId = util.getGitHubRepoId();
@@ -22,4 +40,5 @@ export async function postGitHubIssue(title: string, body: string) {
     repo: repoId,
     title,
   });
+  return "OK";
 }
