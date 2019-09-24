@@ -8,7 +8,7 @@ export function lintWorkspace() {
   try {
     const verbose = core.getInput("verbose");
     core.debug(`Verbose level: ${verbose}`);
-    const workspaceDir = util.getGitHubWorkspace() + "/src";
+    const workspaceDir = util.getGitHubWorkspace() + "/horrible";
     const workspaceFiles = util.listFiles(workspaceDir);
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
@@ -28,6 +28,7 @@ export function lintWorkspace() {
       const reportEntry = report.composeReportMetadataToParagraph(reportMetadata);
       finalReport += "\n\n";
       finalReport += reportEntry;
+      finalReport += "\n\n";
     }
     const reportTitle = report.getTeportIssueTitle();
     octo.postGitHubIssue(reportTitle, finalReport);

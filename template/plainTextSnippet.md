@@ -1,1 +1,1 @@
-{{leftContext}}**{{highlight}}**{{rightContext}}
+{{{leftContext}}}**{{{highlight}}}**{{{rightContext}}}

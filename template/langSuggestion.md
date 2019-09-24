@@ -1,6 +1,11 @@
+<details>
+  <summary>Suggestion for snippet @ index:{{{index}}} & offset:{{{offset}}}</summary>
 
-Suggestion for snippet @ index: {{index}} & offset: {{offset}}:
+...
 
-{{snippet}}
+{{{snippet}}}
 
-> suggestion: {{suggestion}}
+...
+</details>
+
+> suggestion: {{{suggestion}}}
