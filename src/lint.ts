@@ -4,7 +4,7 @@ import * as octo from "./octo";
 import * as report from "./report";
 import * as util from "./util";
 
-export function lintWorkspace() {
+export async function lintWorkspace() {
   try {
     const verbose = core.getInput("verbose");
     core.debug(`Verbose level: ${verbose}`);
@@ -31,9 +31,11 @@ export function lintWorkspace() {
       finalReport += "\n\n";
     }
     const reportTitle = report.getTeportIssueTitle();
-    octo.postGitHubIssue(reportTitle, finalReport);
+    await octo.postGitHubIssue(reportTitle, finalReport);
+    return "OK";
   } catch (error) {
     // TODO(tianhaoz95): move this to the upper level main function
+    core.error(JSON.stringify(error));
     core.setFailed(error.message);
   }
 }
