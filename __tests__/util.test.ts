@@ -171,4 +171,10 @@ describe("Utility test suite", () => {
   it("test repo branch ref matcher block non branch ref", () => {
     expect(util.isBranchRef("i/am/not/a/branch")).toBe(false);
   });
+
+  it("test pr ref matcher no crash", () => {
+    expect(() => {
+      util.isPullRequestRef("refs/pull/103/merge");
+    }).not.toThrow();
+  });
 });
