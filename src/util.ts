@@ -125,8 +125,12 @@ export function getGitHubRef(): string {
     const errMsg = "GITHUB_REF not set";
     throw errMsg;
   } else {
-    // TODO(tianhaoz95): add reference validation
-    return ref;
+    if (isBranchRef(ref)) {
+      return ref;
+    } else {
+      const unknownRef = "unknown ref";
+      return unknownRef;
+    }
   }
 }
 
