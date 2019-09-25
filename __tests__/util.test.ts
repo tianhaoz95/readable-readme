@@ -155,7 +155,8 @@ describe("Utility test suite", () => {
   });
 
   it("test repo ref getter gets master", () => {
-    expect(util.getGitHubRef()).toBe("refs/heads/master");
+    const matcher = new RegExp("^refs/(heads|pull/[0-9]+)/[master|merge]");
+    expect(util.getGitHubRef()).toMatch(matcher);
   });
 
   it("test repo branch ref matcher no crash", () => {
