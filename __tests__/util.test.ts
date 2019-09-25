@@ -147,4 +147,10 @@ describe("Utility test suite", () => {
     const correctMarkdown = "This **is** a `test` and hope it works lol!";
     expect(util.sanitizeMarkdown(wrongMarkdown)).toBe(correctMarkdown);
   });
+
+  it("test repo ref getter no crash", () => {
+    expect(() => {
+      util.getGitHubRef();
+    }).not.toThrow();
+  });
 });

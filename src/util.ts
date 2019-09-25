@@ -116,6 +116,21 @@ export function getGitHubRepoId() {
 }
 
 /**
+ * This function get the current repo reference from
+ * the environment variables.
+ */
+export function getGitHubRef(): string {
+  const ref = process.env.GITHUB_REF;
+  if (!ref) {
+    const errMsg = "GITHUB_REF not set";
+    throw errMsg;
+  } else {
+    // TODO(tianhaoz95): add reference validation
+    return ref;
+  }
+}
+
+/**
  * This function lists all the items in the
  * target root directory recurrsively.
  * @param rootDir the root directory to be walked
