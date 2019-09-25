@@ -129,9 +129,9 @@ export function getGitHubRef(): string {
     if (isBranchRef(ref)) {
       return ref;
     } else {
-      const unknownRef = "unknown ref";
-      core.debug(ref + " not recognized, returning " + unknownRef);
-      return unknownRef;
+      // const unknownRef = "unknown ref";
+      // core.debug(ref + " not recognized, returning " + unknownRef);
+      return ref;
     }
   }
 }
@@ -141,7 +141,17 @@ export function getGitHubRef(): string {
  * referring to a branch.
  */
 export function isBranchRef(ref: string): boolean {
-  const matcher = new RegExp("^[^/]+/[^/]+/[^/]+$");
+  const matcher = new RegExp("^refs/heads/");
+  const match = matcher.test(ref);
+  return match;
+}
+
+/**
+ * This function checks if a GiHub reference is
+ * referring to a pull request.
+ */
+export function isPullRequest(ref: string): boolean {
+  const matcher = new RegExp("^refs/pull/[0-9]+");
   const match = matcher.test(ref);
   return match;
 }
