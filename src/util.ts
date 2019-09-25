@@ -129,9 +129,9 @@ export function getGitHubRef(): string {
     if (isBranchRef(ref)) {
       return ref;
     } else {
-      const unknownRef = "unknown ref";
-      core.debug(ref + " not recognized, returning " + unknownRef);
-      return unknownRef;
+      // const unknownRef = "unknown ref";
+      // core.debug(ref + " not recognized, returning " + unknownRef);
+      return ref;
     }
   }
 }
