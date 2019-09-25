@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import filewtf from "filewtf";
 import fs from "fs";
 import path from "path";
@@ -113,6 +114,48 @@ export function getGitHubRepoId() {
   const repo = getGitHubRepo();
   const repoId = parseGitHubRepoId(repo);
   return repoId;
+}
+
+/**
+ * This function get the current repo reference from
+ * the environment variables.
+ */
+export function getGitHubRef(): string {
+  const ref = process.env.GITHUB_REF;
+  if (!ref) {
+    const errMsg = "GITHUB_REF not set";
+    throw errMsg;
+  } else {
+    if (isBranchRef(ref)) {
+      return ref;
+    } else if (isPullRequestRef(ref)) {
+      return ref;
+    } else {
+      // const unknownRef = "unknown ref";
+      // core.debug(ref + " not recognized, returning " + unknownRef);
+      return ref;
+    }
+  }
+}
+
+/**
+ * This function checks if a GitHub reference is
+ * referring to a branch.
+ */
+export function isBranchRef(ref: string): boolean {
+  const matcher = new RegExp("^refs/heads/");
+  const match = matcher.test(ref);
+  return match;
+}
+
+/**
+ * This function checks if a GiHub reference is
+ * referring to a pull request.
+ */
+export function isPullRequestRef(ref: string): boolean {
+  const matcher = new RegExp("^refs/pull/[0-9]+");
+  const match = matcher.test(ref);
+  return match;
 }
 
 /**

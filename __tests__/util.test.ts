@@ -147,4 +147,51 @@ describe("Utility test suite", () => {
     const correctMarkdown = "This **is** a `test` and hope it works lol!";
     expect(util.sanitizeMarkdown(wrongMarkdown)).toBe(correctMarkdown);
   });
+
+  it("test repo ref getter no crash", () => {
+    expect(() => {
+      util.getGitHubRef();
+    }).not.toThrow();
+  });
+
+  it("test repo ref getter gets master", () => {
+    const matcher = new RegExp("^refs/(heads|pull/[0-9]+)/");
+    expect(util.getGitHubRef()).toMatch(matcher);
+  });
+
+  it("test repo branch ref matcher no crash", () => {
+    expect(() => {
+      util.isBranchRef("refs/heads/master");
+    }).not.toThrow();
+  });
+
+  it("test repo branch ref matcher recognize branch ref", () => {
+    expect(util.isBranchRef("refs/heads/master")).toBe(true);
+  });
+
+  it("test repo branch ref matcher block invalid ref", () => {
+    expect(util.isBranchRef("i/am/not/a/ref")).toBe(false);
+  });
+
+  it("test repo branch ref matcher block pr ref", () => {
+    expect(util.isBranchRef("refs/pull/103/merge")).toBe(false);
+  });
+
+  it("test pr ref matcher no crash", () => {
+    expect(() => {
+      util.isPullRequestRef("refs/pull/103/merge");
+    }).not.toThrow();
+  });
+
+  it("test pr ref matcher recognize pr ref", () => {
+    expect(util.isPullRequestRef("refs/pull/103/merge")).toBe(true);
+  });
+
+  it("test pr ref matcher block invalid ref", () => {
+    expect(util.isPullRequestRef("i/am/not/a/ref")).toBe(false);
+  });
+
+  it("test pr ref matcher block branch ref", () => {
+    expect(util.isPullRequestRef("refs/heads/master")).toBe(false);
+  });
 });
