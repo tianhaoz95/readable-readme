@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import filewtf from "filewtf";
 import fs from "fs";
 import path from "path";
@@ -129,6 +130,7 @@ export function getGitHubRef(): string {
       return ref;
     } else {
       const unknownRef = "unknown ref";
+      core.debug(ref + " not recognized, returning " + unknownRef);
       return unknownRef;
     }
   }
