@@ -128,6 +128,8 @@ export function getGitHubRef(): string {
   } else {
     if (isBranchRef(ref)) {
       return ref;
+    } else if (isPullRequestRef(ref)) {
+      return ref;
     } else {
       // const unknownRef = "unknown ref";
       // core.debug(ref + " not recognized, returning " + unknownRef);
@@ -150,7 +152,7 @@ export function isBranchRef(ref: string): boolean {
  * This function checks if a GiHub reference is
  * referring to a pull request.
  */
-export function isPullRequest(ref: string): boolean {
+export function isPullRequestRef(ref: string): boolean {
   const matcher = new RegExp("^refs/pull/[0-9]+");
   const match = matcher.test(ref);
   return match;
