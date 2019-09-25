@@ -131,6 +131,16 @@ export function getGitHubRef(): string {
 }
 
 /**
+ * This function checks if a GitHub reference is
+ * referring to a branch.
+ */
+export function isBranchRef(ref: string): boolean {
+  const matcher = new RegExp("^[^/]+/[^/]+/[^/]+$");
+  const match = matcher.test(ref);
+  return match;
+}
+
+/**
  * This function lists all the items in the
  * target root directory recurrsively.
  * @param rootDir the root directory to be walked

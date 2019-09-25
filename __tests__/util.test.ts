@@ -157,4 +157,18 @@ describe("Utility test suite", () => {
   it("test repo ref getter gets master", () => {
     expect(util.getGitHubRef()).toBe("refs/heads/master");
   });
+
+  it("test repo branch ref matcher no crash", () => {
+    expect(() => {
+      util.isBranchRef("refs/heads/master");
+    }).not.toThrow();
+  });
+
+  it("test repo branch ref matcher recognize branch ref", () => {
+    expect(util.isBranchRef("refs/heads/master")).toBe(true);
+  });
+
+  it("test repo branch ref matcher block non branch ref", () => {
+    expect(util.isBranchRef("i/am/not/a/branch")).toBe(false);
+  });
 });
