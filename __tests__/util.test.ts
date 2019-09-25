@@ -168,8 +168,8 @@ describe("Utility test suite", () => {
     expect(util.isBranchRef("refs/heads/master")).toBe(true);
   });
 
-  it("test repo branch ref matcher block non branch ref", () => {
-    expect(util.isBranchRef("i/am/not/a/branch")).toBe(false);
+  it("test repo branch ref matcher block invalid ref", () => {
+    expect(util.isBranchRef("i/am/not/a/ref")).toBe(false);
   });
 
   it("test repo branch ref matcher block pr ref", () => {
@@ -180,5 +180,17 @@ describe("Utility test suite", () => {
     expect(() => {
       util.isPullRequestRef("refs/pull/103/merge");
     }).not.toThrow();
+  });
+
+  it("test pr ref matcher recognize pr ref", () => {
+    expect(util.isPullRequestRef("refs/pull/103/merge")).toBe(true);
+  });
+
+  it("test pr ref matcher block invalid ref", () => {
+    expect(util.isPullRequestRef("i/am/not/a/ref")).toBe(false);
+  });
+
+  it("test pr ref matcher block branch ref", () => {
+    expect(util.isPullRequestRef("refs/heads/master")).toBe(false);
   });
 });
