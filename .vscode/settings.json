@@ -1,0 +1,3 @@
+{
+  "todo-tree.ripgrep.ripgrep": "node_modules/vscode-ripgrep/bin/rg"
+}
