@@ -153,4 +153,8 @@ describe("Utility test suite", () => {
       util.getGitHubRef();
     }).not.toThrow();
   });
+
+  it("test repo ref getter gets master", () => {
+    expect(util.getGitHubRef()).toBe("refs/heads/master");
+  });
 });
