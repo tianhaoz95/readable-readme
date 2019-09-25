@@ -39,7 +39,8 @@
     "ts-node": "^8.4.1",
     "tslint": "^5.19.0",
     "typedoc": "^0.15.0",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.1",
+    "vscode-ripgrep": "^1.5.7"
   },
   "jest": {
     "verbose": true
