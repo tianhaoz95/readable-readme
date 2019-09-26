@@ -5,8 +5,9 @@ import * as util from "./util";
 /**
  * Composer to convert report metadata into human-readable report
  * @param reportMetadata The metadata for generating the report
+ * @returns The readable report generated from metadata
  */
-export function composeReportMetadataToParagraph(reportMetadata) {
+export function composeReportMetadataToParagraph(reportMetadata): string {
   let finalReport = "";
   const reportTitleTemplate = util.loadTemplate("title");
   const suggestionTemplate = util.loadTemplate("langSuggestion");
@@ -40,11 +41,13 @@ export function composeReportMetadataToParagraph(reportMetadata) {
 
 /**
  * Composer for the report title
+ * @returns The title for the report issue
  */
 export function getTeportIssueTitle(): string {
-  // TODO(tianhaoz95): make this function use the various
-  // ientifiers, timestamp and commit sha.
-  return "placeholder titile";
+  const uid = util.getGitHubRef();
+  const template = util.loadTemplate("reportIssueTitle");
+  const issueTitle = mustache.render(template, { uid });
+  return issueTitle;
 }
 
 /**

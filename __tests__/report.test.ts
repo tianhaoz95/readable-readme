@@ -77,6 +77,12 @@ describe("Report test suite", () => {
     }).not.toThrow();
   });
 
+  it("get issue title basic", () => {
+    const issueTitle = report.getTeportIssueTitle();
+    expect(issueTitle).toContain("Report for");
+    expect(issueTitle).toContain("refs/");
+  });
+
   it("snippet getter no crash", () => {
     expect(() => {
       const testText = "This is a test and hope it works lol!";
