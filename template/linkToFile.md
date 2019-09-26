@@ -1,0 +1,1 @@
+[go to file](https://github.com/{{{owner}}}/{{{repo}}}/blob/{{{ref}}}/{{{path}}})
