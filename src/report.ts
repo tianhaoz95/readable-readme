@@ -8,12 +8,10 @@ import * as util from "./util";
  * @returns The readable report generated from metadata
  */
 export function composeReportMetadataToParagraph(reportMetadata): string {
-  let finalReport = "";
-  const reportTitleTemplate = util.loadTemplate("title");
+  let reportContent = "";
+  const reportTitleTemplate = util.loadTemplate("langReport");
   const suggestionTemplate = util.loadTemplate("langSuggestion");
   const filename = reportMetadata.filename;
-  const reportTitle = mustache.render(reportTitleTemplate, {filename});
-  finalReport += reportTitle;
   for (const suggestion of reportMetadata.en) {
     const suggestionContent = suggestion.reason;
     const suggestionIndex = suggestion.index;
@@ -33,9 +31,13 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
       suggestion: suggestionContent,
     };
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);
-    finalReport += suggestionEntryContent;
-    finalReport += "\n\n";
+    reportContent += suggestionEntryContent;
+    reportContent += "\n\n";
   }
+  const finalReport = mustache.render(reportTitleTemplate, {
+    content: reportContent,
+    filename,
+  });
   return finalReport;
 }
 

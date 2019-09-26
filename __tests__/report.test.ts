@@ -22,7 +22,6 @@ describe("Report test suite", () => {
     });
     expect(reportContent).toContain("test filename");
     expect(reportContent).toContain("English Language Report");
-    expect(reportContent).toContain("write-good");
   });
 
   it("generate report lang entry", () => {
