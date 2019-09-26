@@ -76,12 +76,12 @@ describe("Utility test suite", () => {
 
   it("test template loader no crash", () => {
     expect(() => {
-      util.loadTemplate("title");
+      util.loadTemplate("langReport");
     }).not.toThrow();
   });
 
   it("test template loader basic", () => {
-    expect(util.loadTemplate("title")).toContain("{{filename}}");
+    expect(util.loadTemplate("langReport")).toContain("{{filename}}");
   });
 
   it("test repo validator no crash", () => {
