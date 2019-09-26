@@ -203,6 +203,7 @@ export function loadTemplate(template: string) {
  */
 export function sanitizeMarkdown(rawText) {
   /** Clean out unicode */
-  const sanitizedMarkdown = rawText.replace(/&#x60;/gi, "`");
+  let sanitizedMarkdown = rawText.replace(/&#x60;/gi, "`");
+  sanitizedMarkdown = sanitizedMarkdown.replace(/\n/gi, "");
   return sanitizedMarkdown;
 }

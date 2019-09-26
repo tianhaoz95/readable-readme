@@ -10,6 +10,7 @@ import * as util from "./util";
 export function composeReportMetadataToParagraph(reportMetadata): string {
   let reportContent = "";
   const reportTemplate = util.loadTemplate("langReport");
+  const fileLinkTemplate = util.loadTemplate("linkToFile");
   const suggestionTemplate = util.loadTemplate("langSuggestion");
   const filename = reportMetadata.filename;
   const owner = util.getGitHubRepoOwner();
@@ -30,10 +31,6 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     const suggestionRenderContent = {
       index: suggestionIndex,
       offset: suggestionOffset,
-      owner,
-      path: relativePath,
-      ref: "master", /** TODO(tianhao95): get this programmatically */
-      repo,
       snippet: snippetContent,
       suggestion: suggestionContent,
     };
@@ -41,12 +38,16 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     reportContent += suggestionEntryContent;
     reportContent += "\n\n";
   }
-  const finalReport = mustache.render(reportTemplate, {
-    content: reportContent,
-    filename,
+  const link = mustache.render(fileLinkTemplate, {
+    owner,
     path: relativePath,
     ref: "master", /** TODO(tianhao95): get this programmatically */
     repo,
+  });
+  const finalReport = mustache.render(reportTemplate, {
+    content: reportContent,
+    filename: relativePath,
+    link,
   });
   return finalReport;
 }
