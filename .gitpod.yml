@@ -20,8 +20,7 @@ vscode:
   extensions:
     - ms-vscode.vscode-typescript-tslint-plugin@1.2.2:Jw3ra3MlKUzHrWQODXxjUw==
     - ms-vscode.vscode-typescript-next@3.7.20190924:277xLzyEUzKJyDy3Lek84g==
-    - Gruntfuggly.todo-tree@0.0.153:IYuRoxNVNzKxZbIvZSYtyg==
-    - joelday.docthis@0.7.1:OOpm9cdbc8T5+PL4o+MM3Q==
     - mikey.vscode-fileheader@0.0.2:HcJskKjAtcOS7n+3OPtHvQ==
     - TzachOvadia.todo-list@1.5.1:XJ2b+0IBJLGO2zsgaKXNqg==
-    - stevencl.addDocComments@0.0.8:nAtiGHQxuajQtjaa1j/MNg==
+    - kevinkyang.auto-comment-blocks@1.0.1:pNOhuU1hQbN6l84Rky73aw==
+    - jabacchetta.vscode-essentials@1.3.1:e4wHCCeQXj7NoM0j5IcNLg==
