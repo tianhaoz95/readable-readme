@@ -131,9 +131,9 @@ export function getGitHubRef(): string {
     } else if (isPullRequestRef(ref)) {
       return ref;
     } else {
-      // const unknownRef = "unknown ref";
-      // core.debug(ref + " not recognized, returning " + unknownRef);
-      return ref;
+      const unknownRef = "unknown ref";
+      core.debug(ref + " not recognized, returning " + unknownRef);
+      return unknownRef;
     }
   }
 }
