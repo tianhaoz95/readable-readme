@@ -44,6 +44,9 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
   const finalReport = mustache.render(reportTemplate, {
     content: reportContent,
     filename,
+    path: relativePath,
+    ref: "master", /** TODO(tianhao95): get this programmatically */
+    repo,
   });
   return finalReport;
 }
