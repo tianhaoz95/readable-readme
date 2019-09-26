@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import micromatch from "micromatch";
 import en from "./en";
 import * as octo from "./octo";
 import * as report from "./report";
@@ -8,11 +9,13 @@ export async function lintWorkspace() {
   try {
     const verbose = core.getInput("verbose");
     core.debug(`Verbose level: ${verbose}`);
-    const workspaceDir = util.getGitHubWorkspace() + "/horrible";
-    const workspaceFiles = util.listFiles(workspaceDir);
+    const workspaceDir = util.getGitHubWorkspace();
+    const rawWorkspaceFiles = util.listFiles(workspaceDir);
+    const workspaceFiles = micromatch(rawWorkspaceFiles, ["!**/node_modules/**"]);
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
+        core.debug("Scanning " + workspaceFile + "...");
         const readmeFileContent = util.readFileContent(workspaceFile);
         const reportEntry = {
           en: null,
