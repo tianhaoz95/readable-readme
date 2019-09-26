@@ -9,9 +9,12 @@ import * as util from "./util";
  */
 export function composeReportMetadataToParagraph(reportMetadata): string {
   let reportContent = "";
-  const reportTitleTemplate = util.loadTemplate("langReport");
+  const reportTemplate = util.loadTemplate("langReport");
   const suggestionTemplate = util.loadTemplate("langSuggestion");
   const filename = reportMetadata.filename;
+  const owner = util.getGitHubRepoOwner();
+  const repo = util.getGitHubRepoId();
+  const relativePath = reportMetadata.relativePath;
   for (const suggestion of reportMetadata.en) {
     const suggestionContent = suggestion.reason;
     const suggestionIndex = suggestion.index;
@@ -27,6 +30,10 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     const suggestionRenderContent = {
       index: suggestionIndex,
       offset: suggestionOffset,
+      owner,
+      path: relativePath,
+      ref: "master", /** TODO(tianhao95): get this programmatically */
+      repo,
       snippet: snippetContent,
       suggestion: suggestionContent,
     };
@@ -34,7 +41,7 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     reportContent += suggestionEntryContent;
     reportContent += "\n\n";
   }
-  const finalReport = mustache.render(reportTitleTemplate, {
+  const finalReport = mustache.render(reportTemplate, {
     content: reportContent,
     filename,
   });
