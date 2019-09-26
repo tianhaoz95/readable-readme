@@ -159,6 +159,23 @@ export function isPullRequestRef(ref: string): boolean {
 }
 
 /**
+ * This function parses the ref used for file link url
+ * from the GitHub reference.
+ */
+export function parseFileLinkRef(ref: string): string {
+  if (isBranchRef(ref)) {
+    const fileRef = ref.replace(/refs\/heads\//gi, "");
+    return fileRef;
+  } else if (isPullRequestRef(ref)) {
+    const fileRef = "not supported";
+    return fileRef;
+  } else {
+    const fileRef = "not supported";
+    return fileRef;
+  }
+}
+
+/**
  * This function lists all the items in the
  * target root directory recurrsively.
  * @param rootDir the root directory to be walked
