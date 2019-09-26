@@ -19,8 +19,9 @@ describe("Report test suite", () => {
       en: [],
       fileContent: "test full context",
       filename: "test filename",
+      relativePath: "test relative path",
     });
-    expect(reportContent).toContain("test filename");
+    expect(reportContent).toContain("test relative path");
     expect(reportContent).toContain("English Language Report");
   });
 
