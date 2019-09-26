@@ -194,4 +194,22 @@ describe("Utility test suite", () => {
   it("test pr ref matcher block branch ref", () => {
     expect(util.isPullRequestRef("refs/heads/master")).toBe(false);
   });
+
+  it("test file ref parser no crash", () => {
+    expect(() => {
+      util.parseFileLinkRef("refs/heads/master");
+    }).not.toThrow();
+  });
+
+  it("test file ref parser parse branch", () => {
+    expect(util.parseFileLinkRef("refs/heads/master")).toBe("master");
+  });
+
+  it("test file ref parser block pr", () => {
+    expect(util.parseFileLinkRef("refs/pull/103/merge")).toBe("not supported");
+  });
+
+  it("test file ref parser block invalid ref", () => {
+    expect(util.parseFileLinkRef("i/am/not/a/ref")).toBe("not supported");
+  });
 });
