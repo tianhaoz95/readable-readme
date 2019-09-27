@@ -17,7 +17,7 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
   const repo = util.getGitHubRepoId();
   const relativePath = reportMetadata.relativePath;
   for (const suggestion of reportMetadata.en) {
-    const suggestionContent = suggestion.reason;
+    const suggestionContent = util.sanitizeReason(suggestion.reason);
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
     const fullText = reportMetadata.fileContent;

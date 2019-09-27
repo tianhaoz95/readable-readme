@@ -212,4 +212,14 @@ describe("Utility test suite", () => {
   it("test file ref parser block invalid ref", () => {
     expect(util.parseFileLinkRef("i/am/not/a/ref")).toBe("not supported");
   });
+
+  it("test reason sanitizer no crash", () => {
+    expect(() => {
+      util.sanitizeReason("this test\nhas newline");
+    }).not.toThrow();
+  });
+
+  it("test reason sanitizer replaces newline", () => {
+    expect(util.sanitizeReason("this test\nhas newline")).toBe("this test has newline");
+  });
 });

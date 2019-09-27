@@ -230,6 +230,6 @@ export function sanitizeMarkdown(rawText) {
  */
 export function sanitizeReason(rawReason: string): string {
   let sanitizedReason = rawReason;
-  sanitizedReason = sanitizedReason.replace(/\n/ig, "");
+  sanitizedReason = sanitizedReason.replace(/\n/ig, " ");
   return sanitizedReason;
 }
