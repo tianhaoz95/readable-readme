@@ -1,6 +1,6 @@
 <details>
   <summary>
-    English Language Report for <code>{{{filename}}}</code>
+    Report for <code>{{{filename}}}</code>
   </summary>
 
 <br/>

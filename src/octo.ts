@@ -24,7 +24,7 @@ export async function matchIssueTitle(
   });
   for (const issue of allIssues.data) {
     const issueTitle = issue.title;
-    if (title === issueTitle) {
+    if (title === issueTitle && issue.state === "open") {
       return {
         found: true,
         issueNumber: issue.number,

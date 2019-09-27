@@ -29,7 +29,7 @@ export async function lintWorkspace() {
         reportsMetadata.push(reportEntry);
       }
     }
-    let finalReport = "final report";
+    let finalReport = "";
     for (const reportMetadata of reportsMetadata) {
       const reportEntry = report.composeReportMetadataToParagraph(reportMetadata);
       // TODO(tianhaoz95): let the compose take the responsibility of decisiding
