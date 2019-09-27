@@ -120,4 +120,6 @@ describe("octo test suite", () => {
       issueNumber: -1,
     });
   });
+
+  // TODO(tianhaoz95): add test for closed issues
 });
