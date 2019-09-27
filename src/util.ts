@@ -224,3 +224,12 @@ export function sanitizeMarkdown(rawText) {
   sanitizedMarkdown = sanitizedMarkdown.replace(/\n/gi, "");
   return sanitizedMarkdown;
 }
+
+/**
+ * This function sanitizes the reason output
+ */
+export function sanitizeReason(rawReason: string): string {
+  let sanitizedReason = rawReason;
+  sanitizedReason = sanitizedReason.replace(/\n/ig, " ");
+  return sanitizedReason;
+}

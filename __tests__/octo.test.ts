@@ -52,6 +52,7 @@ describe("octo test suite", () => {
       .get(IssueScope).reply(200, [
         {
           number: 1,
+          state: "open",
           title: "test title",
         },
       ]);
@@ -72,8 +73,8 @@ describe("octo test suite", () => {
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
       .get(IssueScope).reply(200, [
-        { title: "test title 1", number: 0 },
-        { title: "test title 2", number: 1 },
+        { title: "test title 1", number: 0, state: "open" },
+        { title: "test title 2", number: 1, state: "open" },
       ]);
     return expect(octo.matchIssueTitle(
       "test title 1",
@@ -88,8 +89,8 @@ describe("octo test suite", () => {
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
       .get(IssueScope).reply(200, [
-        { title: "test title 1", number: 0 },
-        { title: "test title 2", number: 1 },
+        { title: "test title 1", number: 0, state: "open" },
+        { title: "test title 2", number: 1, state: "open" },
       ]);
     return expect(octo.matchIssueTitle(
       "test title 1",
@@ -107,8 +108,8 @@ describe("octo test suite", () => {
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
       .get(IssueScope).reply(200, [
-        { title: "test title 1", number: 0 },
-        { title: "test title 2", number: 1 },
+        { title: "test title 1", number: 0, state: "open" },
+        { title: "test title 2", number: 1, state: "open" },
       ]);
     return expect(octo.matchIssueTitle(
       "test title no match",
@@ -119,4 +120,6 @@ describe("octo test suite", () => {
       issueNumber: -1,
     });
   });
+
+  // TODO(tianhaoz95): add test for closed issues
 });

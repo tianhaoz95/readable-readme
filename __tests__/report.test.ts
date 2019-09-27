@@ -5,11 +5,20 @@ describe("Report test suite", () => {
     expect(() => {
       report.composeReportMetadataToParagraph({
         en: [
-          "test suggestion 1",
-          "test suggestion 2",
+          {
+            index: 10,
+            offset: 5,
+            reason: "test rocks!",
+          },
+          {
+            index: 20,
+            offset: 3,
+            reason: "ahhh I am hungry...",
+          },
         ],
         fileContent: "test full context",
         filename: "test filename",
+        relativePath: "test relative path",
       });
     }).not.toThrow();
   });
@@ -22,7 +31,7 @@ describe("Report test suite", () => {
       relativePath: "test relative path",
     });
     expect(reportContent).toContain("test relative path");
-    expect(reportContent).toContain("English Language Report");
+    expect(reportContent).toContain("Report for");
   });
 
   it("generate report lang entry", () => {
