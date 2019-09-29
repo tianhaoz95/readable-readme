@@ -195,6 +195,28 @@ describe("Utility test suite", () => {
     expect(util.isPullRequestRef("refs/heads/master")).toBe(false);
   });
 
+  it("test tag ref matcher no crash", () => {
+    expect(() => {
+      util.isTagRef("refs/tags/v1.0-alpha");
+    }).not.toThrow();
+  });
+
+  it("test tag ref matcher accept tags ref", () => {
+    expect(util.isTagRef("refs/tags/v1.0-alpha")).toBe(true);
+  });
+
+  it("test tag ref matcher blocks invalid ref", () => {
+    expect(util.isTagRef("i/am/not/a/ref")).toBe(false);
+  });
+
+  it("test tag ref matcher blocks branch ref", () => {
+    expect(util.isTagRef("refs/heads/master")).toBe(false);
+  });
+
+  it("test tag ref matcher blocks pr ref", () => {
+    expect(util.isTagRef("refs/pull/103/merge")).toBe(false);
+  });
+
   it("test file ref parser no crash", () => {
     expect(() => {
       util.parseFileLinkRef("refs/heads/master");
