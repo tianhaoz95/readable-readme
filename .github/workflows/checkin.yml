@@ -20,6 +20,11 @@ jobs:
       run: node ./lib/main.js
       env:
         TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+    
+    - name: Readable Readme
+      uses: tianhaoz95/readable-readme@v0.1-alpha
+      with:
+        token: ${{ secrets.TEST_GITHUB_TOKEN }}
 
     - name: "check for uncommitted changes"
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
