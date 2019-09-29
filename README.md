@@ -33,4 +33,4 @@ npm run build
 
 ## API Docs
 
-Check the [auto-generated docs](./docs/api/index.html).
+Check the [auto-generated docs](http://tianhaoz.com/readable-readme/docs/api/index.html).
