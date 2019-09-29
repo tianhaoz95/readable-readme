@@ -10,9 +10,6 @@ jobs:
     - name: "npm ci"
       run: npm ci
 
-    - name: "build ts"
-      run: npm run build
-
     - name: "unit test"
       run: npm run test
     
