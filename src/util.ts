@@ -130,6 +130,8 @@ export function getGitHubRef(): string {
       return ref;
     } else if (isPullRequestRef(ref)) {
       return ref;
+    } else if (isTagRef(ref)) {
+      return ref;
     } else {
       const unknownRef = "unknown ref";
       core.debug(ref + " not recognized, returning " + unknownRef);
@@ -154,6 +156,17 @@ export function isBranchRef(ref: string): boolean {
  */
 export function isPullRequestRef(ref: string): boolean {
   const matcher = new RegExp("^refs/pull/[0-9]+");
+  const match = matcher.test(ref);
+  return match;
+}
+
+/**
+ * This function validates if a GitHub reference is
+ * a tag.
+ * @param ref The GitHub reference to be validated
+ */
+export function isTagRef(ref: string): boolean {
+  const matcher = new RegExp("^refs/tags/");
   const match = matcher.test(ref);
   return match;
 }
