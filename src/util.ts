@@ -266,7 +266,7 @@ export function getReadmeIgnoreList(filename: string): string[] {
   // TODO(tianhaoz95): add test for this.
   const ignoreContent: string = readFileContent(filename);
   const ignoreList: string[] = ignoreContent.split("\n");
-  let sanitizedIgnoreList: string[] = [];
+  const sanitizedIgnoreList: string[] = [];
   for (const ignoreEntry of ignoreList) {
     if (ignoreEntry.length > 0) {
       sanitizedIgnoreList.push(ignoreEntry);
