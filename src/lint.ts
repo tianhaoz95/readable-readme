@@ -9,16 +9,14 @@ import * as util from "./util";
 export async function lintWorkspace() {
   try {
     const verbose = core.getInput("verbose");
-    core.debug(`Verbose level: ${verbose}`);
+    util.rrlog(`Verbose level: ${verbose}`);
     const workspaceDir = util.getGitHubWorkspace();
-    const rawWorkspaceFiles = util.listFiles(workspaceDir);
-    const workspaceFiles = micromatch(rawWorkspaceFiles, ["!**/node_modules/**"]);
+    const workspaceFiles: string[] = util.getLintFileList(workspaceDir);
     const reportsMetadata = new Array();
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
         const readmeFileContent = util.readFileContent(workspaceFile);
         const relativePath = path.relative(workspaceDir, workspaceFile);
-        core.debug("Scanning " + workspaceFile + ", relative path: " + relativePath + "...");
         const reportEntry = {
           en: null,
           fileContent: readmeFileContent,
@@ -41,7 +39,7 @@ export async function lintWorkspace() {
         finalReport += reportEntry;
         finalReport += "\n\n";
       } else {
-        core.debug("Skipping because no suggestion is generated");
+        util.rrlog("Skipping because no suggestion is generated");
       }
     }
     const reportTitle = report.getTeportIssueTitle();

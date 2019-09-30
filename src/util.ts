@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import filewtf from "filewtf";
 import fs from "fs";
+import micromatch from "micromatch";
 import path from "path";
 
 /**
@@ -134,7 +135,7 @@ export function getGitHubRef(): string {
       return ref;
     } else {
       const unknownRef = "unknown ref";
-      core.debug(ref + " not recognized, returning " + unknownRef);
+      rrlog(ref + " not recognized, returning " + unknownRef);
       return unknownRef;
     }
   }
@@ -202,7 +203,7 @@ export function listFiles(rootDir: string) {
  * This function reads the content of a file.
  * @param filename the filename of the file to be read
  */
-export function readFileContent(filename: string) {
+export function readFileContent(filename: string): string {
   const fileContent = fs.readFileSync(filename, "utf8");
   return fileContent;
 }
@@ -245,4 +246,46 @@ export function sanitizeReason(rawReason: string): string {
   let sanitizedReason = rawReason;
   sanitizedReason = sanitizedReason.replace(/\n/ig, " ");
   return sanitizedReason;
+}
+
+/**
+ * This function is used to log information for debugging
+ */
+export function rrlog(logMsg: string): void {
+  const logFlag = process.env.RRLOG;
+  if (logFlag && logFlag === "true") {
+    core.debug(logMsg);
+  }
+}
+
+/**
+ * This function reads the readme ignore file and convert it
+ * to a list that can be used by the matcher.
+ */
+export function getReadmeIgnoreList(filename: string): string[] {
+  // TODO(tianhaoz95): add test for this.
+  const ignoreContent: string = readFileContent(filename);
+  const ignoreList: string[] = ignoreContent.split("\n");
+  let sanitizedIgnoreList: string[] = [];
+  for (const ignoreEntry of ignoreList) {
+    if (ignoreEntry.length > 0) {
+      sanitizedIgnoreList.push(ignoreEntry);
+    }
+  }
+  rrlog("Ignored list: " + JSON.stringify(sanitizedIgnoreList));
+  return sanitizedIgnoreList;
+}
+
+/**
+ * This function returns the files to be linted after stripping
+ * off the ignored files.
+ * @param worksapceDir The dir to find ignore and readme files
+ */
+export function getLintFileList(workspaceDir: string): string[] {
+  // TODO(tianhaoz95): add test for this.
+  const readmeIgnoreFilename = path.join(workspaceDir, "/.readmeignore");
+  const ignoreList = getReadmeIgnoreList(readmeIgnoreFilename);
+  const rawWorkspaceFiles = listFiles(workspaceDir);
+  const workspaceFiles = micromatch(rawWorkspaceFiles, ignoreList);
+  return workspaceFiles;
 }

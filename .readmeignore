@@ -1,0 +1,4 @@
+!**/node_modules/**/*
+!**/horrible/**/*
+!/node_modules/**/*
+!**/node_modules/nock/.github/**/*
