@@ -13,8 +13,10 @@ export async function lintWorkspace() {
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles: string[] = util.getLintFileList(workspaceDir);
     const reportsMetadata = new Array();
+    util.rrlog(`Start scanning the workspace ${workspaceDir}`);
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
+        util.rrlog(`Analyzing file ${workspaceFile}`);
         const readmeFileContent = util.readFileContent(workspaceFile);
         const relativePath = path.relative(workspaceDir, workspaceFile);
         const reportEntry = {
@@ -24,6 +26,7 @@ export async function lintWorkspace() {
           relativePath,
         };
         reportEntry.en = en(readmeFileContent);
+        util.rrlog(`report Entry is: ${reportEntry}`);
         reportsMetadata.push(reportEntry);
       }
     }
@@ -39,7 +42,7 @@ export async function lintWorkspace() {
         finalReport += reportEntry;
         finalReport += "\n\n";
       } else {
-        util.rrlog("Skipping because no suggestion is generated");
+        util.rrlog(`Skipping ${reportMetadata.filename} because no suggestion is generated`);
       }
     }
     const reportTitle = report.getTeportIssueTitle();
