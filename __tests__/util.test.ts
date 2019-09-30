@@ -244,4 +244,31 @@ describe("Utility test suite", () => {
   it("test reason sanitizer replaces newline", () => {
     expect(util.sanitizeReason("this test\nhas newline")).toBe("this test has newline");
   });
+
+  it("test rrlog no crash", () => {
+    expect(() => {
+      util.rrlog("test log");
+    }).not.toThrow();
+  });
+
+  it("test get readme ignore no crash", () => {
+    const worksapceDir = util.getGitHubWorkspace();
+    const readmeIgnoreFilename = path.join(worksapceDir, "/horrible/.readmeignore");
+    expect(() => {
+      util.getReadmeIgnoreList(readmeIgnoreFilename);
+    }).not.toThrow();
+  });
+
+  it("test get readme ignore has correct content", () => {
+    const worksapceDir = util.getGitHubWorkspace();
+    const readmeIgnoreFilename = path.join(worksapceDir, "/horrible/.readmeignore");
+    expect(util.getReadmeIgnoreList(readmeIgnoreFilename)).toContain("**/ignore/**/*.md");
+  });
+
+  it("test file list getter no crash", () => {
+    const worksapceDir = path.join(util.getGitHubWorkspace(), "/horrible");
+    expect(() => {
+      util.getLintFileList(worksapceDir);
+    }).not.toThrow();
+  });
 });

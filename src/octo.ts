@@ -46,7 +46,7 @@ export async function postGitHubIssue(title: string, body: string) {
     repoOwner,
   );
   if (issueMatch.found) {
-    core.debug("issue exist, updating existing issue...");
+    util.rrlog("issue exist, updating existing issue...");
     await octokit.issues.update({
       body,
       issue_number: issueMatch.issueNumber,
@@ -55,7 +55,7 @@ export async function postGitHubIssue(title: string, body: string) {
       title,
     });
   } else {
-    core.debug("issue not exist, creating new issue...");
+    util.rrlog("issue not exist, creating new issue...");
     await octokit.issues.create({
       body,
       owner: repoOwner,
