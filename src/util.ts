@@ -285,7 +285,15 @@ export function getLintFileList(workspaceDir: string): string[] {
   // TODO(tianhaoz95): add test for this.
   const readmeIgnoreFilename = path.join(workspaceDir, "/.readmeignore");
   const ignoreList = getReadmeIgnoreList(readmeIgnoreFilename);
+  rrlog("ignore list found: " + JSON.stringify(ignoreList));
   const rawWorkspaceFiles = listFiles(workspaceDir);
+  rrlog("rawWorkspaceFiles size: " + rawWorkspaceFiles.length.toString());
+  if (ignoreList.length === 0) {
+    // match with empty ignorelist will return empty list, so just return
+    rrlog("ignorelist is empty, proceed with all markdown files");
+    return rawWorkspaceFiles;
+  }
   const workspaceFiles = micromatch(rawWorkspaceFiles, ignoreList);
+  rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
   return workspaceFiles;
 }
