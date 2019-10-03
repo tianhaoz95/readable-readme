@@ -16,6 +16,10 @@ github:
     addBadge: true
 # add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: false
+tasks:
+- command: |
+    npm install
+    source ./script/setupTest.sh
 vscode:
   extensions:
     - ms-vscode.vscode-typescript-tslint-plugin@1.2.2:Jw3ra3MlKUzHrWQODXxjUw==
