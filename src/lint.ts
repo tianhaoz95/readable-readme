@@ -8,12 +8,12 @@ import * as util from "./util";
 
 export async function lintWorkspace() {
   try {
-    const verbose = core.getInput("verbose");
-    util.rrlog(`Verbose level: ${verbose}`);
+    const verbose = core.getInput("verbose") ? core.getInput("verbose") : "default";
+    util.rrlog(`verbose level: ${verbose}`);
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles: string[] = util.getLintFileList(workspaceDir);
     const reportsMetadata = new Array();
-    util.rrlog(`Start scanning the workspace ${workspaceDir}`);
+    util.rrlog(`start scanning the workspace ${workspaceDir} (${workspaceFiles.length} files in total)`);
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
         util.rrlog(`Analyzing file ${workspaceFile}`);
@@ -26,7 +26,7 @@ export async function lintWorkspace() {
           relativePath,
         };
         reportEntry.en = en(readmeFileContent);
-        util.rrlog(`report Entry is: ${reportEntry}`);
+        util.rrlog(`report entry is: ${reportEntry}`);
         reportsMetadata.push(reportEntry);
       }
     }
