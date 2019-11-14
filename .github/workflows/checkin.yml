@@ -1,32 +1,22 @@
-name: "PR Checks"
+name: PR Checks
 on: [pull_request, push]
-
 jobs:
   check_pr:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-
-    - name: "npm ci"
+    - name: enable ci environment
       run: npm ci
-
-    - name: "unit test"
+    - name: run unit tests
       run: npm run test
-    
-    - name: "integration test"
+    - name: run integration test
       run: node ./lib/main.js
       env:
         TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-    
-    - name: Readable Readme
+    - name: battle field test
       uses: tianhaoz95/readable-readme@v0.1.7-alpha
       with:
         token: ${{ secrets.TEST_GITHUB_TOKEN }}
-
-    - name: "check for uncommitted changes"
-      # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
+    - name: check for build lagging
       run: |
-        git diff --exit-code --stat -- . ':!node_modules' \
-        || (echo "##[error] found changed files after build. please 'npm run build && npm run format'" \
-                 "and check in all changes" \
-            && exit 1)
+        git diff --exit-code --stat -- . ':!node_modules' || (echo "##[error] found changed files after build. please 'npm run build && npm run format' and check in all changes" && exit 1)
