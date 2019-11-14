@@ -19,7 +19,7 @@ jobs:
         TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
     
     - name: Readable Readme
-      uses: tianhaoz95/readable-readme@v0.1.2-alpha
+      uses: tianhaoz95/readable-readme@v0.1.7-alpha
       with:
         token: ${{ secrets.TEST_GITHUB_TOKEN }}
 
