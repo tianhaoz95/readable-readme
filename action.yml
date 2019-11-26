@@ -2,11 +2,8 @@ name: 'Readable Readme'
 description: 'Get started with Node actions'
 author: 'GitHub'
 inputs:
-  myInput:
-    description: 'Input to use'
-    default: 'world'
   token:
-    description: 'The token of the GitHub identity that report should be posted from'
+    description: 'The token of the GitHub identity that report should be posted from.'
 runs:
   using: 'node12'
   main: 'lib/main.js'
