@@ -7,8 +7,8 @@ class SerializerComponent extends utils_1.AbstractComponent {
         return this.constructor['PRIORITY'];
     }
 }
-SerializerComponent.PRIORITY = 0;
 exports.SerializerComponent = SerializerComponent;
+SerializerComponent.PRIORITY = 0;
 class ReflectionSerializerComponent extends SerializerComponent {
     constructor() {
         super(...arguments);

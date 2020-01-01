@@ -32,8 +32,8 @@ export declare abstract class AbstractComponent<O extends ComponentHost> extends
     protected initialize(): void;
     protected bubble(name: Event | EventMap | string, ...args: any[]): this;
     getOptionDeclarations(): DeclarationOption[];
-    readonly application: Application;
-    readonly owner: O;
+    get application(): Application;
+    get owner(): O;
 }
 export declare abstract class ChildableComponent<O extends ComponentHost, C extends Component> extends AbstractComponent<O> {
     private _componentChildren?;

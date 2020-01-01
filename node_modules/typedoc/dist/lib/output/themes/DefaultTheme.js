@@ -303,6 +303,7 @@ class DefaultTheme extends theme_1.Theme {
         return str.replace(/(\w)([A-Z])/g, (m, m1, m2) => m1 + '-' + m2).toLowerCase();
     }
 }
+exports.DefaultTheme = DefaultTheme;
 DefaultTheme.MAPPINGS = [{
         kind: [index_1.ReflectionKind.Class],
         isLeaf: false,
@@ -325,5 +326,4 @@ DefaultTheme.MAPPINGS = [{
         template: 'reflection.hbs'
     }];
 DefaultTheme.URL_PREFIX = /^(http|ftp)s?:\/\//;
-exports.DefaultTheme = DefaultTheme;
 //# sourceMappingURL=DefaultTheme.js.map

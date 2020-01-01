@@ -40,7 +40,7 @@ class ReferenceType extends abstract_1.Type {
         return name + typeArgs;
     }
 }
+exports.ReferenceType = ReferenceType;
 ReferenceType.SYMBOL_ID_RESOLVED = -1;
 ReferenceType.SYMBOL_ID_RESOLVE_BY_NAME = -2;
-exports.ReferenceType = ReferenceType;
 //# sourceMappingURL=reference.js.map

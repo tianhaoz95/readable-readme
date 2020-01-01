@@ -13,5 +13,5 @@ export declare class CliApplication extends Application {
     version: boolean;
     help: boolean;
     protected bootstrap(options?: Object): OptionsReadResult;
-    readonly isCLI: boolean;
+    get isCLI(): boolean;
 }

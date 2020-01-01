@@ -62,9 +62,9 @@ class ComponentEvent extends events_1.Event {
         this.component = component;
     }
 }
+exports.ComponentEvent = ComponentEvent;
 ComponentEvent.ADDED = 'componentAdded';
 ComponentEvent.REMOVED = 'componentRemoved';
-exports.ComponentEvent = ComponentEvent;
 exports.DUMMY_APPLICATION_OWNER = Symbol();
 class AbstractComponent extends events_1.EventDispatcher {
     constructor(owner) {

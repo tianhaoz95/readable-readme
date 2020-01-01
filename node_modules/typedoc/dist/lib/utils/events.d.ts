@@ -11,15 +11,15 @@ export declare class Event {
     constructor(name: string);
     stopPropagation(): void;
     preventDefault(): void;
-    readonly name: string;
-    readonly isPropagationStopped: boolean;
-    readonly isDefaultPrevented: boolean;
+    get name(): string;
+    get isPropagationStopped(): boolean;
+    get isDefaultPrevented(): boolean;
 }
 export declare class EventDispatcher {
     private _events?;
     private _listeningTo?;
     private _listeners?;
-    private readonly _listenId;
+    private get _listenId();
     private _savedListenId?;
     on(eventMap: EventMap, context?: any): any;
     on(eventMap: EventMap, callback?: EventCallback, context?: any, priority?: number): any;
