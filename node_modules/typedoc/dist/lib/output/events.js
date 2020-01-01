@@ -19,14 +19,14 @@ class RendererEvent extends events_1.Event {
         return event;
     }
 }
+exports.RendererEvent = RendererEvent;
 RendererEvent.BEGIN = 'beginRender';
 RendererEvent.END = 'endRender';
-exports.RendererEvent = RendererEvent;
 class PageEvent extends events_1.Event {
 }
+exports.PageEvent = PageEvent;
 PageEvent.BEGIN = 'beginPage';
 PageEvent.END = 'endPage';
-exports.PageEvent = PageEvent;
 class MarkdownEvent extends events_1.Event {
     constructor(name, originalText, parsedText) {
         super(name);
@@ -34,6 +34,6 @@ class MarkdownEvent extends events_1.Event {
         this.parsedText = parsedText;
     }
 }
-MarkdownEvent.PARSE = 'parseMarkdown';
 exports.MarkdownEvent = MarkdownEvent;
+MarkdownEvent.PARSE = 'parseMarkdown';
 //# sourceMappingURL=events.js.map

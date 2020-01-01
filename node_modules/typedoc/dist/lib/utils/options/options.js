@@ -34,8 +34,8 @@ class DiscoverEvent extends events_1.Event {
         this.errors.push(Util.format.apply(this, arguments));
     }
 }
-DiscoverEvent.DISCOVER = 'optionsDiscover';
 exports.DiscoverEvent = DiscoverEvent;
+DiscoverEvent.DISCOVER = 'optionsDiscover';
 let Options = class Options extends component_1.ChildableComponent {
     initialize() {
         this.declarations = {};

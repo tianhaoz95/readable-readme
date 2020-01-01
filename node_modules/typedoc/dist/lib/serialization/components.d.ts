@@ -5,7 +5,7 @@ export declare abstract class SerializerComponent<T> extends AbstractComponent<S
     static PRIORITY: number;
     abstract serializeGroup(instance: unknown): boolean;
     abstract serializeGroupSymbol: any;
-    readonly priority: number;
+    get priority(): number;
     abstract supports(item: unknown): boolean;
     abstract toObject(item: T, obj?: any): any;
 }

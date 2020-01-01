@@ -18,8 +18,8 @@ export declare class Application extends ChildableComponent<Application, Abstrac
     static VERSION: string;
     constructor(options?: Object);
     protected bootstrap(options?: Object): OptionsReadResult;
-    readonly application: Application;
-    readonly isCLI: boolean;
+    get application(): Application;
+    get isCLI(): boolean;
     getTypeScriptPath(): string;
     getTypeScriptVersion(): string;
     convert(src: string[]): ProjectReflection | undefined;
