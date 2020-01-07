@@ -162,6 +162,18 @@ export function isPullRequestRef(ref: string): boolean {
 }
 
 /**
+ * This function parses the pull request number from
+ * the entire reference. For example, it should parse
+ * pull request number 234 form reference refs/pull/234.
+ * @param ref The reference of the repository
+ */
+export function parsePullRequestNumber(ref: string): number {
+  const scopes = ref.split("/");
+  const pullNumber = scopes[2];
+  return parseInt(pullNumber);
+}
+
+/**
  * This function validates if a GitHub reference is
  * a tag.
  * @param ref The GitHub reference to be validated

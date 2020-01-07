@@ -46,7 +46,7 @@ export async function lintWorkspace() {
       }
     }
     const reportTitle = report.getTeportIssueTitle();
-    await octo.postGitHubIssue(reportTitle, finalReport);
+    await octo.postResultToGitHub(reportTitle, finalReport);
     return "OK";
   } catch (error) {
     // TODO(tianhaoz95): move this to the upper level main function
