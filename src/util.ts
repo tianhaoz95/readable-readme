@@ -309,3 +309,8 @@ export function getLintFileList(workspaceDir: string): string[] {
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
   return workspaceFiles;
 }
+
+export function index2lineNumber(content: string, index: number): number {
+  return 0; 
+}
+
