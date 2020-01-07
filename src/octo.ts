@@ -37,6 +37,33 @@ export async function matchIssueTitle(
   };
 }
 
+export async function postResultToGitHub(title: string, body: string) {
+  const repoRef: string = util.getGitHubRef();
+  if (util.isBranchRef(repoRef)) {
+    return await postGitHubIssue(title, body);
+  } else if (util.isPullRequestRef(repoRef)) {
+    const content: string = "Title: " + title + "\n\n" + body;
+    return await postGitHubPullRequestComment(content);
+  } else if (util.isTagRef(repoRef)) {
+    return await postGitHubIssue(title, body);
+  } else {
+    util.rrlog("Unknown ref found: " + repoRef);
+  }
+}
+
+export async function postGitHubPullRequestComment(content: string) {
+  const repoOwner = util.getGitHubRepoOwner();
+  const repoId = util.getGitHubRepoId();
+  const pullRequestNumber = util.parsePullRequestNumber(util.getGitHubRef());
+  await octokit.issues.createComment({
+    body: content,
+    issue_number: pullRequestNumber,
+    owner: repoOwner,
+    repo: repoId,
+  });
+  return "OK";
+}
+
 export async function postGitHubIssue(title: string, body: string) {
   const repoOwner = util.getGitHubRepoOwner();
   const repoId = util.getGitHubRepoId();
