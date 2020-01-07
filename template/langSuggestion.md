@@ -1,2 +1,2 @@
-  Suggestion: {{{suggestion}}}
-  > @ index:{{{index}}} & offset:{{{offset}}}
+<br/> Suggestion: {{{suggestion}}}
+<br/> @ index:{{{index}}} & offset:{{{offset}}}
