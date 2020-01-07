@@ -1,8 +1,9 @@
 name: Guardians of the Pull Requests
 on:
-  schedule:
-    - cron: 0 2 * * *
   pull_request:
+    branches: 
+      - master
+  push:
     branches: 
       - master
 jobs:
