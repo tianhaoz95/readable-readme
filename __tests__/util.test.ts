@@ -155,7 +155,7 @@ describe("Utility test suite", () => {
   });
 
   it("test repo ref getter gets master", () => {
-    const matcher = new RegExp("^refs/(tags|heads|pull/[0-9]+)/");
+    const matcher = new RegExp("^refs/(tags|heads|pull)/");
     expect(util.getGitHubRef()).toMatch(matcher);
   });
 
