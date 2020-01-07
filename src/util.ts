@@ -170,7 +170,7 @@ export function isPullRequestRef(ref: string): boolean {
 export function parsePullRequestNumber(ref: string): number {
   const scopes = ref.split("/");
   const pullNumber = scopes[2];
-  return parseInt(pullNumber);
+  return parseInt(pullNumber, 10);
 }
 
 /**

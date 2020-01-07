@@ -38,11 +38,11 @@ export async function matchIssueTitle(
 }
 
 export async function postResultToGitHub(title: string, body: string) {
-  let repoRef: string = util.getGitHubRef();
+  const repoRef: string = util.getGitHubRef();
   if (util.isBranchRef(repoRef)) {
     await postGitHubIssue(title, body);
   } else if (util.isPullRequestRef(repoRef)) {
-    let content: string = "Title: " + title + "\n\n" + body;
+    const content: string = "Title: " + title + "\n\n" + body;
     await postGitHubPullRequestComment(content);
   } else if (util.isTagRef(repoRef)) {
     await postGitHubIssue(title, body);
@@ -56,10 +56,10 @@ export async function postGitHubPullRequestComment(content: string) {
   const repoId = util.getGitHubRepoId();
   const pullRequestNumber = util.parsePullRequestNumber(util.getGitHubRef());
   await octokit.issues.createComment({
+    body: content,
+    issue_number: pullRequestNumber,
     owner: repoOwner,
     repo: repoId,
-    issue_number: pullRequestNumber,
-    body: content,
   });
 }
 
