@@ -40,12 +40,12 @@ export async function matchIssueTitle(
 export async function postResultToGitHub(title: string, body: string) {
   const repoRef: string = util.getGitHubRef();
   if (util.isBranchRef(repoRef)) {
-    await postGitHubIssue(title, body);
+    return await postGitHubIssue(title, body);
   } else if (util.isPullRequestRef(repoRef)) {
     const content: string = "Title: " + title + "\n\n" + body;
-    await postGitHubPullRequestComment(content);
+    return await postGitHubPullRequestComment(content);
   } else if (util.isTagRef(repoRef)) {
-    await postGitHubIssue(title, body);
+    return await postGitHubIssue(title, body);
   } else {
     util.rrlog("Unknown ref found: " + repoRef);
   }
@@ -61,6 +61,7 @@ export async function postGitHubPullRequestComment(content: string) {
     owner: repoOwner,
     repo: repoId,
   });
+  return "OK";
 }
 
 export async function postGitHubIssue(title: string, body: string) {
