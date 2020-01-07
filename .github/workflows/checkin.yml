@@ -1,8 +1,15 @@
-name: PR Checks
+name: Heimdall
 on:
   push:
     branches:
-      - master
+      - "master"
+      - "feature/*"
+      - "dev/*"
+      - "fix/*"
+      - "refactor/*"
+  pull_request:
+    branches:
+      - "master"
 jobs:
   check_pr:
     runs-on: ubuntu-latest
@@ -12,14 +19,3 @@ jobs:
       run: npm ci
     - name: run unit tests
       run: npm run test
-    - name: run integration test
-      run: node ./lib/main.js
-      env:
-        TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-    - name: battle field test
-      uses: tianhaoz95/readable-readme@v0.1.7-alpha
-      with:
-        token: ${{ secrets.TEST_GITHUB_TOKEN }}
-    - name: check for build lagging
-      run: |
-        git diff --exit-code --stat -- . ':!node_modules' || (echo "##[error] found changed files after build. please 'npm run build && npm run format' and check in all changes" && exit 1)

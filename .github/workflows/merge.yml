@@ -1,0 +1,17 @@
+name: Guardians of the Pull Requests
+on:
+  schedule:
+    - cron: 0 2 * * *
+  pull_request:
+    branches: 
+      - master
+jobs:
+  end_to_end:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Run current implementation
+        uses: ./
+        with:
+          token: ${{ secrets.TEST_GITHUB_TOKEN }}
