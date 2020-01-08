@@ -276,8 +276,15 @@ export function rrlog(logMsg: string): void {
  */
 export function getReadmeIgnoreList(filename: string): string[] {
   // TODO(tianhaoz95): add test for this.
-  const ignoreContent: string = readFileContent(filename);
-  const ignoreList: string[] = ignoreContent.split("\n");
+  let ignoreContent: string = "";
+  let ignoreList: string[] = [];
+  try {
+    ignoreContent = readFileContent(filename);
+    ignoreList = ignoreContent.split("\n");
+  } catch (err) {
+    rrlog("Ignore file not found");
+    ignoreList = [];
+  }
   const sanitizedIgnoreList: string[] = [];
   for (const ignoreEntry of ignoreList) {
     if (ignoreEntry.length > 0) {
