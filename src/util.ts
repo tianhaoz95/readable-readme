@@ -1,5 +1,4 @@
 import * as core from "@actions/core";
-import filewtf from "filewtf";
 import fs from "fs";
 import micromatch from "micromatch";
 import path from "path";
@@ -207,7 +206,7 @@ export function parseFileLinkRef(ref: string): string {
  * @param rootDir the root directory to be walked
  */
 export function listFiles(rootDir: string) {
-  const fileList = filewtf.walkthrough(rootDir);
+  const fileList = traverseDir(rootDir);
   return fileList;
 }
 
