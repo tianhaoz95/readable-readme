@@ -1,5 +1,5 @@
 import * as report from "../src/report";
-import * as testUtil from "./utilities/init_env";
+import * as testUtil from "./utilities/init_env.test";
 
 describe("Report test suite", () => {
   beforeAll(() => {

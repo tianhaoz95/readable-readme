@@ -4,7 +4,7 @@
 
 import path from "path";
 import * as util from "../src/util";
-import * as testUtil from "./utilities/init_env";
+import * as testUtil from "./utilities/init_env.test";
 
 describe("Utility test suite", () => {
   beforeAll(() => {

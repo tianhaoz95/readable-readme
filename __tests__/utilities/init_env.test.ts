@@ -19,3 +19,12 @@ export function cleanTestingEnvironmentVariables() {
   process.env.GITHUB_SHA = undefined;
   process.env.RRLOG = undefined;
 }
+
+describe("helper tests", () => {
+  it("init clean no crash", () => {
+    expect(() => {
+      initTestingEnvironmentVariables();
+      cleanTestingEnvironmentVariables();
+    }).not.toThrow();
+  });
+});

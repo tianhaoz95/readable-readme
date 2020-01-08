@@ -1,6 +1,6 @@
 import nock from "nock";
 import * as octo from "../src/octo";
-import * as testUtil from "./utilities/init_env";
+import * as testUtil from "./utilities/init_env.test";
 
 const GitHubEndpoint: string = "https://api.github.com";
 const AuthScope: string = "/app/installations/2/access_tokens";
