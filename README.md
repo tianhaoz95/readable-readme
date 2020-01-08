@@ -23,6 +23,10 @@ Add the following code into your workflow:
 
 > note: the token is used to post analyze report as GitHub issues.
 
+## How does it work?
+
+![strcture diagram](./asset/structure_diagram.png)
+
 ## Contribute
 
 Any contribution is greatly appreciated. Please check out [the guide](./CONTRIBUTING.md) for more details.
