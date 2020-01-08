@@ -5,8 +5,6 @@
 
 <br/>
 
-{{{link}}}
-
 {{{content}}}
 
 </details>
