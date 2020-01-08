@@ -10,6 +10,19 @@ Too often we find a great project, but give up 5 minutes later only because we c
 
 The `readable-readme` project aim to build a GitHub action that checks the readability of `README` files and generate reports to help improve it.
 
+## Getting Started
+
+Add the following code into your workflow:
+
+```yml
+- name: Readable Readme
+  uses: tianhaoz95/readable-readme@v0.2.0-alpha
+    with:
+      token: ${{ secrets.TEST_GITHUB_TOKEN }}
+```
+
+> note: the token is used to post analyze report as GitHub issues.
+
 ## Contribute
 
 Any contribution is greatly appreciated. Please check out [the guide](./CONTRIBUTING.md) for more details.
