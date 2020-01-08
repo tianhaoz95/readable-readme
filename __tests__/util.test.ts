@@ -2,10 +2,19 @@
  * Tests for utility helpers
  */
 
-import * as path from "path";
+import path from "path";
 import * as util from "../src/util";
+import * as testUtil from "./utilities/init_env";
 
 describe("Utility test suite", () => {
+  beforeAll(() => {
+    testUtil.initTestingEnvironmentVariables();
+  });
+
+  afterAll(() => {
+    testUtil.cleanTestingEnvironmentVariables();
+  });
+
   it("test workspace getter", () => {
     expect(util.getGitHubWorkspace()).toContain("/readable-readme");
   });
@@ -28,16 +37,16 @@ describe("Utility test suite", () => {
   it("test workspace file getter shallow", () => {
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles = util.listFiles(workspaceDir);
-    expect(workspaceFiles).toContain(workspaceDir + "/README.md");
-    expect(workspaceFiles).toContain(workspaceDir + "/package.json");
-    expect(workspaceFiles).toContain(workspaceDir + "/LICENSE");
-    expect(workspaceFiles).toContain(workspaceDir + "/action.yml");
+    expect(workspaceFiles).toContain(path.join(workspaceDir + "/README.md"));
+    expect(workspaceFiles).toContain(path.join(workspaceDir + "/package.json"));
+    expect(workspaceFiles).toContain(path.join(workspaceDir + "/LICENSE"));
+    expect(workspaceFiles).toContain(path.join(workspaceDir + "/action.yml"));
   });
 
   it("test workspace file getter deep", () => {
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles = util.listFiles(workspaceDir);
-    expect(workspaceFiles).toContain(workspaceDir + "/src/README.md");
+    expect(workspaceFiles).toContain(path.join(workspaceDir + "/src/README.md"));
   });
 
   it("test file reading", () => {
@@ -270,5 +279,23 @@ describe("Utility test suite", () => {
     expect(() => {
       util.getLintFileList(worksapceDir);
     }).not.toThrow();
+  });
+
+  it ("test index 2 line number no crash", () => {
+    expect(() => {
+      util.index2lineNumber("abcde", 5);
+    }).not.toThrow();
+    expect(() => {
+      util.index2lineNumber("", 5);
+    }).not.toThrow();
+  });
+
+  it("test index 2 line number empty", () => {
+    expect(util.index2lineNumber("", 5)).toEqual(1);
+  });
+
+  it("test index 2 line number basic case", () => {
+    const content: string = "123\n123\n123";
+    expect(util.index2lineNumber(content, 5)).toEqual(2);
   });
 });

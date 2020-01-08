@@ -28,10 +28,11 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
       fullText,
       "plainTextSnippet",
     );
+    const permaLink = util.generatePermaLink(suggestion.fromLine, suggestion.toLine, relativePath);
     const suggestionRenderContent = {
       index: suggestionIndex,
       offset: suggestionOffset,
-      snippet: snippetContent,
+      snippet: permaLink,
       suggestion: suggestionContent,
     };
     const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);

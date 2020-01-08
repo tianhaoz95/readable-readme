@@ -1,5 +1,6 @@
 import nock from "nock";
 import * as octo from "../src/octo";
+import * as testUtil from "./utilities/init_env";
 
 const GitHubEndpoint: string = "https://api.github.com";
 const AuthScope: string = "/app/installations/2/access_tokens";
@@ -9,6 +10,14 @@ const FirstIssueScope: string = "/repos/tianhaoz95/readable-readme/issues/1";
 nock.disableNetConnect();
 
 describe("octo test suite", () => {
+  beforeAll(() => {
+    testUtil.initTestingEnvironmentVariables();
+  });
+
+  afterAll(() => {
+    testUtil.cleanTestingEnvironmentVariables();
+  });
+
   afterEach(() => {
     nock.cleanAll();
   });
