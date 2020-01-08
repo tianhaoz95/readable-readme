@@ -1,5 +1,5 @@
 name: 'Readable Readme'
-description: 'Get started with Node actions'
+description: 'Make Readme Readable Again!'
 author: 'GitHub'
 inputs:
   token:
