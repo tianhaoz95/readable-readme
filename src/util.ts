@@ -352,3 +352,8 @@ export function generatePermaLink(startLine: number, endLine: number, relativePa
   permaLink += endLine.toString();
   return permaLink;
 }
+
+export function fileTraversal(rootDir: string): string[] {
+  const fileList: string[] = [];
+  return fileList;
+}
