@@ -12,7 +12,6 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
   const reportTemplate = util.loadTemplate("langReport");
   const fileLinkTemplate = util.loadTemplate("linkToFile");
   const suggestionTemplate = util.loadTemplate("langSuggestion");
-  const filename = reportMetadata.filename;
   const owner = util.getGitHubRepoOwner();
   const repo = util.getGitHubRepoId();
   const relativePath = reportMetadata.relativePath;
@@ -20,14 +19,6 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     const suggestionContent = util.sanitizeReason(suggestion.reason);
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
-    const fullText = reportMetadata.fileContent;
-    const snippetContent = renderSnippet(
-      suggestionIndex,
-      suggestionOffset,
-      35,
-      fullText,
-      "plainTextSnippet",
-    );
     const permaLink = util.generatePermaLink(suggestion.fromLine, suggestion.toLine, relativePath);
     const suggestionRenderContent = {
       index: suggestionIndex,
