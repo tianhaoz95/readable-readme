@@ -16,7 +16,7 @@ Add the following code into your workflow:
 
 ```yml
 - name: Readable Readme
-  uses: tianhaoz95/readable-readme@v0.2.0-alpha
+  uses: tianhaoz95/readable-readme@v1.0.0-alpha
     with:
       token: ${{ secrets.TEST_GITHUB_TOKEN }}
 ```
