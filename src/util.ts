@@ -353,7 +353,20 @@ export function generatePermaLink(startLine: number, endLine: number, relativePa
   return permaLink;
 }
 
-export function fileTraversal(rootDir: string): string[] {
-  const fileList: string[] = [];
-  return fileList;
+export function getFilePathsRecursiveHelper(rootDir: string): string[] {
+  const entryPaths = fs.readdirSync(rootDir).map((entry) => {
+    return path.join(rootDir, entry);
+  });
+  const filePaths = entryPaths.filter((entryPath) => {
+    return fs.statSync(entryPath).isFile();
+  });
+  const dirPaths = entryPaths.filter((entryPath) => !filePaths.includes(entryPath));
+  const dirFiles = dirPaths.reduce((prev, curr) => prev.concat(getFilePathsRecursiveHelper(curr)), [] as string[]);
+  const conbinedEntries = [...filePaths, ...dirFiles];
+  return conbinedEntries;
+}
+
+export function traverseDir(rootDir: string): string[] {
+  const files = getFilePathsRecursiveHelper(rootDir);
+  return files;
 }
