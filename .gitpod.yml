@@ -17,7 +17,7 @@ github:
 # add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: false
 tasks:
-- command: source ./script/setupTest.sh
+- command: echo Welcome
 vscode:
   extensions:
     - ms-vscode.vscode-typescript-tslint-plugin@1.2.2:Jw3ra3MlKUzHrWQODXxjUw==
