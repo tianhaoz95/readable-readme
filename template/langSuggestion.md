@@ -1,3 +1,3 @@
-* Suggestion: {{{suggestion}}}
-
 {{{snippet}}}
+
+* Suggestion: {{{suggestion}}}
