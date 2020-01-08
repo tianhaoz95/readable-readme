@@ -1,5 +1,4 @@
 import * as core from "@actions/core";
-import filewtf from "filewtf";
 import fs from "fs";
 import micromatch from "micromatch";
 import path from "path";
@@ -207,7 +206,7 @@ export function parseFileLinkRef(ref: string): string {
  * @param rootDir the root directory to be walked
  */
 export function listFiles(rootDir: string) {
-  const fileList = filewtf.walkthrough(rootDir);
+  const fileList = traverseDir(rootDir);
   return fileList;
 }
 
@@ -351,4 +350,22 @@ export function generatePermaLink(startLine: number, endLine: number, relativePa
   permaLink += "-L";
   permaLink += endLine.toString();
   return permaLink;
+}
+
+export function getFilePathsRecursiveHelper(rootDir: string): string[] {
+  const entryPaths = fs.readdirSync(rootDir).map((entry) => {
+    return path.join(rootDir, entry);
+  });
+  const filePaths = entryPaths.filter((entryPath) => {
+    return fs.statSync(entryPath).isFile();
+  });
+  const dirPaths = entryPaths.filter((entryPath) => !filePaths.includes(entryPath));
+  const dirFiles = dirPaths.reduce((prev, curr) => prev.concat(getFilePathsRecursiveHelper(curr)), [] as string[]);
+  const conbinedEntries = [...filePaths, ...dirFiles];
+  return conbinedEntries;
+}
+
+export function traverseDir(rootDir: string): string[] {
+  const files = getFilePathsRecursiveHelper(rootDir);
+  return files;
 }
