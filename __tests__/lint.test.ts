@@ -1,5 +1,6 @@
 import nock from "nock";
 import * as lint from "../src/lint";
+import * as testUtil from "./utilities/init_env.test";
 
 const GitHubEndpoint: string = "https://api.github.com";
 const AuthScope: string = "/app/installations/2/access_tokens";
@@ -21,6 +22,12 @@ nock(GitHubEndpoint)
   ]);
 
 describe("Lint test suite", () => {
+  beforeAll(() => {
+    testUtil.initTestingEnvironmentVariables();
+  });
+  afterAll(() => {
+    testUtil.cleanTestingEnvironmentVariables();
+  });
   it("test lint execute without crashing", () => {
     return expect(lint.lintWorkspace()).resolves.toBe("OK");
   });

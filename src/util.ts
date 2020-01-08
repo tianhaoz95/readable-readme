@@ -309,3 +309,39 @@ export function getLintFileList(workspaceDir: string): string[] {
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
   return workspaceFiles;
 }
+
+/**
+ * This function converts a char index to a line
+ * number in the content.
+ * ## Example
+ * ```ts
+ * lineNumber = index2lineNumber("123\n123\n1234", 5)
+ * ```
+ * The code above should give 2 as the 5th char
+ * is in the second line.
+ * @param content the content of a file
+ * @param index the char index we want to convert
+ */
+export function index2lineNumber(content: string, index: number): number {
+  const firstHalfContent: string = content.slice(0, index);
+  const sentences: string[] = firstHalfContent.split("\n");
+  const sentenceCnt: number = sentences.length;
+  return sentenceCnt;
+}
+
+export function generatePermaLink(startLine: number, endLine: number, relativePath: string): string {
+  let permaLink = "";
+  const baseUrl = "https://github.com/";
+  permaLink += baseUrl;
+  const repo = getGitHubRepo();
+  permaLink += repo;
+  permaLink += "/blob/";
+  permaLink += process.env.GITHUB_SHA;
+  permaLink += "/";
+  permaLink += relativePath;
+  permaLink += "#L";
+  permaLink += startLine.toString();
+  permaLink += "-L";
+  permaLink += endLine.toString();
+  return permaLink;
+}

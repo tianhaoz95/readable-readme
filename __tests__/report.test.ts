@@ -1,19 +1,31 @@
 import * as report from "../src/report";
+import * as testUtil from "./utilities/init_env.test";
 
 describe("Report test suite", () => {
+  beforeAll(() => {
+    testUtil.initTestingEnvironmentVariables();
+  });
+
+  afterAll(() => {
+    testUtil.cleanTestingEnvironmentVariables();
+  });
   it("generate report no crash", () => {
     expect(() => {
       report.composeReportMetadataToParagraph({
         en: [
           {
+            fromLine: 1,
             index: 10,
             offset: 5,
             reason: "test rocks!",
+            toLine: 1,
           },
           {
+            fromLine: 1,
             index: 20,
             offset: 3,
             reason: "ahhh I am hungry...",
+            toLine: 1,
           },
         ],
         fileContent: "test full context",
@@ -38,14 +50,18 @@ describe("Report test suite", () => {
     const reportContent = report.composeReportMetadataToParagraph({
       en: [
         {
+          fromLine: 1,
           index: 10,
           offset: 5,
           reason: "test rocks!",
+          toLine: 1,
         },
         {
+          fromLine: 1,
           index: 20,
           offset: 3,
           reason: "ahhh I am hungry...",
+          toLine: 1,
         },
       ],
       fileContent: "test full context",
@@ -53,22 +69,24 @@ describe("Report test suite", () => {
     });
     expect(reportContent).toContain("test rocks!");
     expect(reportContent).toContain("ahhh I am hungry...");
-    expect(reportContent).toContain("@ index:10 & offset:5");
-    expect(reportContent).toContain("@ index:20 & offset:3");
   });
 
   it("generate report with collapsable entries", () => {
     const reportContent = report.composeReportMetadataToParagraph({
       en: [
         {
+          fromLine: 1,
           index: 10,
           offset: 5,
           reason: "test rocks!",
+          toLine: 1,
         },
         {
+          fromLine: 1,
           index: 20,
           offset: 3,
           reason: "ahhh I am hungry...",
+          toLine: 1,
         },
       ],
       fileContent: "test full context",
@@ -78,6 +96,24 @@ describe("Report test suite", () => {
     expect(reportContent).toContain("</details>");
     expect(reportContent).toContain("<summary>");
     expect(reportContent).toContain("</summary>");
+  });
+
+  it("get report with permalink", () => {
+    const reportContent = report.composeReportMetadataToParagraph({
+      en: [
+        {
+          fromLine: 1,
+          index: 10,
+          offset: 5,
+          reason: "test rocks! test rocks!",
+          toLine: 1,
+        },
+      ],
+      fileContent: "test full context",
+      filename: "test filename",
+      relativePath: "src/test.md",
+    });
+    expect(reportContent).toContain("https://github.com/tianhaoz95/readable-readme/blob/abc250abc/src/test.md#L1-L1");
   });
 
   it("get report issue title no crash", () => {
