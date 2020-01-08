@@ -1,8 +1,8 @@
 # Readable Readme
 
-[![Actions Status](https://github.com/tianhaoz95/readable-readme/workflows/PR%20Checks/badge.svg)](https://github.com/tianhaoz95/readable-readme/actions)
+[![Actions Status](https://github.com/tianhaoz95/readable-readme/workflows/Guardians%20of%20the%20Pull%20Requests/badge.svg)](https://github.com/tianhaoz95/readable-readme/actions)
+[![Actions Status](https://github.com/tianhaoz95/readable-readme/workflows/Heimdall/badge.svg)](https://github.com/tianhaoz95/readable-readme/actions)
 
-<!-- TODO(tianhaoz95): add project description -->
 
 > If README is not readable, nothing else will be.
 
@@ -14,10 +14,3 @@ The `readable-readme` project aim to build a GitHub action that checks the reada
 
 Any contribution is greatly appreciated. Please check out [the guide](./CONTRIBUTING.md) for more details.
 
-## Roadmap
-
-* [v0.1.x Design Doc](./docs/v1-design-doc.md)
-
-## API Docs
-
-Check the [auto-generated API docs](http://tianhaoz.com/readable-readme/docs/api/index.html).

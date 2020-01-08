@@ -41,3 +41,11 @@ npm start
 ```bash
 npm run build # The compiled code will be in ./lib
 ```
+
+## Roadmap
+
+* [v0.1.x Design Doc](./docs/v1-design-doc.md)
+
+## API Docs
+
+Check the [auto-generated API docs](http://tianhaoz.com/readable-readme/docs/api/index.html).
