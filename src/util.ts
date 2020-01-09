@@ -309,12 +309,13 @@ export function getLintFileList(workspaceDir: string): string[] {
   let ignoreList = getReadmeIgnoreList(readmeIgnoreFilename);
   rrlog("ignore list found: " + JSON.stringify(ignoreList));
   const rawWorkspaceFiles = listFiles(workspaceDir);
-  rrlog("rawWorkspaceFiles size: " + rawWorkspaceFiles.length.toString());
+  core.info("workspace file count: " + rawWorkspaceFiles.length.toString());
   if (ignoreList.length === 0) {
     // match with empty ignorelist will return empty list, so just return
-    rrlog("ignorelist is empty, proceed with all markdown files");
+    core.info("ignorelist is empty, proceed with all markdown files");
     ignoreList = ["!**/node_modules/**/*"];
   }
+  core.info("ignore file list: " + ignoreList.toString());
   const workspaceFiles = ignoreFiles(rawWorkspaceFiles, ignoreList);
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
   return workspaceFiles;
