@@ -17,8 +17,8 @@ Add the following code into your workflow:
 ```yml
 - name: Readable Readme
   uses: tianhaoz95/readable-readme@v1.0.0-alpha
-    with:
-      token: ${{ secrets.TEST_GITHUB_TOKEN }}
+  with:
+    token: ${{ secrets.TEST_GITHUB_TOKEN }}
 ```
 
 > note: the token is used to post analyze report as GitHub issues.
