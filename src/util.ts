@@ -279,7 +279,11 @@ export function getReadmeIgnoreList(filename: string): string[] {
   let ignoreList: string[] = [];
   try {
     ignoreContent = readFileContent(filename);
-    ignoreList = ignoreContent.split("\n");
+    if (ignoreContent.length <= 0 || ignoreContent === undefined) {
+      ignoreList = [];
+    } else {
+      ignoreList = ignoreContent.split("\n");
+    }
   } catch (err) {
     rrlog("Ignore file not found");
     ignoreList = [];
