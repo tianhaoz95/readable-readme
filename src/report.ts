@@ -1,3 +1,4 @@
+import * as core from "@actions/core";
 import mustache from "mustache";
 import * as util from "./util";
 
@@ -14,6 +15,7 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
   const owner = util.getGitHubRepoOwner();
   const repo = util.getGitHubRepoId();
   const relativePath = reportMetadata.relativePath;
+  core.info("Found " + reportMetadata.en.length.toString() + " issues");
   for (const suggestion of reportMetadata.en) {
     const suggestionContent = util.sanitizeReason(suggestion.reason);
     const suggestionIndex = suggestion.index;
