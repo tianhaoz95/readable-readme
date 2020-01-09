@@ -9,7 +9,7 @@
     "test": "jest && tslint 'src/**/*.ts' '__tests__/**/*.ts'",
     "lint": "tslint 'src/**/*.ts' '__tests__/**/*.ts' --fix",
     "docs": "typedoc --readme ./src/README.md --out ./docs/api ./src",
-    "start": "ts-node ./src/main.ts"
+    "start": "LOCAL_TESTING=true ts-node ./src/main.ts"
   },
   "repository": {
     "type": "git",

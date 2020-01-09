@@ -13,10 +13,10 @@ export async function lintWorkspace() {
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles: string[] = util.getLintFileList(workspaceDir);
     const reportsMetadata = new Array();
-    util.rrlog(`start scanning the workspace ${workspaceDir} (${workspaceFiles.length} files in total)`);
+    core.info(`start scanning the workspace ${workspaceDir} (${workspaceFiles.length} files in total)`);
     for (const workspaceFile of workspaceFiles) {
       if (util.isReadmeFilename(workspaceFile)) {
-        util.rrlog(`Analyzing file ${workspaceFile}`);
+        core.info(`Analyzing file ${workspaceFile}...`);
         const readmeFileContent = util.readFileContent(workspaceFile);
         const relativePath = path.relative(workspaceDir, workspaceFile);
         const reportEntry = {
