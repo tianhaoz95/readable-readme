@@ -311,9 +311,20 @@ export function getLintFileList(workspaceDir: string): string[] {
     rrlog("ignorelist is empty, proceed with all markdown files");
     return rawWorkspaceFiles;
   }
-  const workspaceFiles = micromatch(rawWorkspaceFiles, ignoreList);
+  const workspaceFiles = ignoreFiles(rawWorkspaceFiles, ignoreList);
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
   return workspaceFiles;
+}
+
+export function ignoreFiles(rawFiles: string[], ignoreList: string[]): string[] {
+  const filteredFiles: string[] = micromatch(rawFiles, ignoreList);
+  const finalFiles: string[] = [];
+  for (const filteredFile of filteredFiles) {
+    if (filteredFile.indexOf("node_modules") === -1) {
+      finalFiles.push(filteredFile);
+    }
+  }
+  return finalFiles;
 }
 
 /**

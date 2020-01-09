@@ -1,4 +1,3 @@
-import * as core from "@actions/core";
 import mustache from "mustache";
 import * as util from "./util";
 
