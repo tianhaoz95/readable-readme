@@ -48,7 +48,7 @@ export async function lintWorkspace() {
     const reportTitle = report.getTeportIssueTitle();
     const issueTemplate = util.loadTemplate("reportIssueBody");
     const composedIssue = mustache.render(issueTemplate, {
-      reportContent: issueTemplate,
+      reportContent: finalReport,
     });
     await octo.postResultToGitHub(reportTitle, composedIssue);
     return "OK";
