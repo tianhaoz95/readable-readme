@@ -306,14 +306,14 @@ export function getReadmeIgnoreList(filename: string): string[] {
 export function getLintFileList(workspaceDir: string): string[] {
   // TODO(tianhaoz95): add test for this.
   const readmeIgnoreFilename = path.join(workspaceDir, "/.readmeignore");
-  const ignoreList = getReadmeIgnoreList(readmeIgnoreFilename);
+  let ignoreList = getReadmeIgnoreList(readmeIgnoreFilename);
   rrlog("ignore list found: " + JSON.stringify(ignoreList));
   const rawWorkspaceFiles = listFiles(workspaceDir);
   rrlog("rawWorkspaceFiles size: " + rawWorkspaceFiles.length.toString());
   if (ignoreList.length === 0) {
     // match with empty ignorelist will return empty list, so just return
     rrlog("ignorelist is empty, proceed with all markdown files");
-    return rawWorkspaceFiles;
+    ignoreList = ["**/node_modules/**/*"];
   }
   const workspaceFiles = ignoreFiles(rawWorkspaceFiles, ignoreList);
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
@@ -321,10 +321,7 @@ export function getLintFileList(workspaceDir: string): string[] {
 }
 
 export function ignoreFiles(rawFiles: string[], ignoreList: string[]): string[] {
-  let filteredFiles: string[] = rawFiles;
-  if (ignoreList.length > 0) {
-    filteredFiles = micromatch(rawFiles, ignoreList, {dot: true});
-  }
+  const filteredFiles: string[] = micromatch(rawFiles, ignoreList, {dot: true});
   const finalFiles: string[] = [];
   for (const filteredFile of filteredFiles) {
     if (filteredFile.indexOf("node_modules") === -1) {
