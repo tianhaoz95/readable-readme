@@ -298,4 +298,18 @@ describe("Utility test suite", () => {
     const content: string = "123\n123\n123";
     expect(util.index2lineNumber(content, 5)).toEqual(2);
   });
+
+  it("test file ignore special cases", () => {
+    const rawList: string[] = [
+      "node_modules/README.md",
+      "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+    ];
+    const ignoreList: string[] = [
+      "!node_modules/*",
+      "!node_modules/**/*",
+    ];
+    expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
+      "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+    );
+  });
 });
