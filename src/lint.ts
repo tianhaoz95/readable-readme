@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import micromatch from "micromatch";
+import mustache from "mustache";
 import * as path from "path";
 import en from "./en";
 import * as octo from "./octo";
@@ -46,7 +46,11 @@ export async function lintWorkspace() {
       }
     }
     const reportTitle = report.getTeportIssueTitle();
-    await octo.postResultToGitHub(reportTitle, finalReport);
+    const issueTemplate = util.loadTemplate("reportIssueBody");
+    const composedIssue = mustache.render(issueTemplate, {
+      reportContent: issueTemplate,
+    });
+    await octo.postResultToGitHub(reportTitle, composedIssue);
     return "OK";
   } catch (error) {
     // TODO(tianhaoz95): move this to the upper level main function
