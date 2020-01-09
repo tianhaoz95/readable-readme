@@ -317,7 +317,7 @@ export function getLintFileList(workspaceDir: string): string[] {
 }
 
 export function ignoreFiles(rawFiles: string[], ignoreList: string[]): string[] {
-  const filteredFiles: string[] = micromatch(rawFiles, ignoreList);
+  const filteredFiles: string[] = micromatch(rawFiles, ignoreList, {dot: true});
   const finalFiles: string[] = [];
   for (const filteredFile of filteredFiles) {
     if (filteredFile.indexOf("node_modules") === -1) {

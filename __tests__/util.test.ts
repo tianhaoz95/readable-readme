@@ -303,16 +303,22 @@ describe("Utility test suite", () => {
     const rawList: string[] = [
       "node_modules/README.md",
       "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
     ];
     const ignoreList: string[] = [
       "!node_modules/*",
       "!node_modules/**/*",
+      "!dot_file/**/*",
+      "!dot_file/*",
     ];
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
       "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
     );
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
       "node_modules/README.md",
+    );
+    expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
+      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
     );
   });
 });
