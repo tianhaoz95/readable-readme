@@ -12,11 +12,12 @@ The `readable-readme` project aim to build a GitHub action that checks the reada
 
 ## Getting Started
 
-Add the following code into your workflow:
+Add the following code into your workflow steps:
 
 ```yml
+- uses: actions/checkout@v1
 - name: Readable Readme
-  uses: tianhaoz95/readable-readme@v1.0.0-alpha
+  uses: tianhaoz95/readable-readme@v1.0.4-beta
   with:
     token: ${{ secrets.TEST_GITHUB_TOKEN }}
 ```
