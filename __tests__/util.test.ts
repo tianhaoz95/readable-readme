@@ -311,5 +311,8 @@ describe("Utility test suite", () => {
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
       "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
     );
+    expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
+      "node_modules/README.md",
+    );
   });
 });
