@@ -376,8 +376,8 @@ export function getFilePathsRecursiveHelper(rootDir: string): string[] {
   });
   const dirPaths = entryPaths.filter((entryPath) => !filePaths.includes(entryPath));
   const dirFiles = dirPaths.reduce((prev, curr) => prev.concat(getFilePathsRecursiveHelper(curr)), [] as string[]);
-  const conbinedEntries = [...filePaths, ...dirFiles];
-  return conbinedEntries;
+  const combinedEntries = [...filePaths, ...dirFiles];
+  return combinedEntries;
 }
 
 export function traverseDir(rootDir: string): string[] {
