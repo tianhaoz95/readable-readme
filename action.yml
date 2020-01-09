@@ -1,6 +1,6 @@
 name: 'Readable Readme'
 description: 'Make Readme Readable Again!'
-author: 'GitHub'
+author: 'Tianhao Zhou'
 inputs:
   token:
     description: 'The token of the GitHub identity that report should be posted from.'
