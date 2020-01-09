@@ -313,7 +313,7 @@ export function getLintFileList(workspaceDir: string): string[] {
   if (ignoreList.length === 0) {
     // match with empty ignorelist will return empty list, so just return
     rrlog("ignorelist is empty, proceed with all markdown files");
-    ignoreList = ["**/node_modules/**/*"];
+    ignoreList = ["!**/node_modules/**/*"];
   }
   const workspaceFiles = ignoreFiles(rawWorkspaceFiles, ignoreList);
   rrlog("workspaceFiles size: " + workspaceFiles.length.toString());
