@@ -3,4 +3,3 @@
 !node_modules/**/*
 !node_modules/*
 !node_modules
-!node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md
