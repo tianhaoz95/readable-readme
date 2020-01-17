@@ -26,7 +26,7 @@
     "@actions/core": "^1.2.1",
     "@actions/github": "^2.0.1",
     "micromatch": "^4.0.2",
-    "mustache": "^3.2.1",
+    "mustache": "^4.0.0",
     "nock": "^11.7.2",
     "write-good": "^1.0.2"
   },
