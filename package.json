@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@actions/github": "^2.0.1",
+    "@actions/github": "^2.1.0",
     "micromatch": "^4.0.2",
     "mustache": "^4.0.0",
     "nock": "^11.7.2",
