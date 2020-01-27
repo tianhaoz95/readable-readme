@@ -3,7 +3,7 @@ import * as github from "@actions/github";
 import * as util from "./util";
 
 function getOctokit() {
-  let token = core.getInput("token");
+  let token: string = core.getInput("token");
   if (process.env.TEST_GITHUB_TOKEN) {
     token = process.env.TEST_GITHUB_TOKEN;
   }
