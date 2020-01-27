@@ -88,12 +88,12 @@ function createFix(arrowFunction, body, expr, text) {
         hasComments(closeBrace);
     return anyComments
         ? undefined
-        : (expr.kind === ts.SyntaxKind.ObjectLiteralExpression
+        : tslib_1.__spreadArrays((expr.kind === ts.SyntaxKind.ObjectLiteralExpression
             ? [
                 Lint.Replacement.appendText(expr.getStart(), "("),
                 Lint.Replacement.appendText(expr.getEnd(), ")"),
             ]
-            : []).concat([
+            : []), [
             // " {"
             Lint.Replacement.deleteFromTo(arrow.end, openBrace.end),
             // "return "

@@ -39,7 +39,7 @@ function normalizeOptions(options) {
     };
 }
 function normalize(value) {
-    return typeof value === "string" ? fillOptions(value) : tslib_1.__assign({}, defaultOptions, value);
+    return typeof value === "string" ? fillOptions(value) : tslib_1.__assign(tslib_1.__assign({}, defaultOptions), value);
 }
 /* tslint:disable:object-literal-sort-keys */
 var metadataOptionShape = {

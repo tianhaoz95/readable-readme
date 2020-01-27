@@ -15,15 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
 var tsutils = require("tsutils");
 var ts = require("typescript");
 var Lint = require("../index");
 var exclusions_1 = require("./completed-docs/exclusions");
 exports.ALL = "all";
 exports.ARGUMENT_CLASSES = "classes";
+exports.ARGUMENT_CONSTRUCTORS = "constructors";
 exports.ARGUMENT_ENUMS = "enums";
 exports.ARGUMENT_ENUM_MEMBERS = "enum-members";
 exports.ARGUMENT_FUNCTIONS = "functions";
@@ -139,23 +140,51 @@ var Rule = /** @class */ (function (_super) {
             _h),
         type: "object",
     };
+    Rule.ARGUMENT_DESCRIPTOR_CONSTRUCTOR = {
+        properties: (_k = {},
+            _k[exports.DESCRIPTOR_TAGS] = {
+                properties: (_l = {},
+                    _l[exports.TAGS_FOR_CONTENT] = {
+                        items: {
+                            type: "string",
+                        },
+                        type: "object",
+                    },
+                    _l[exports.TAGS_FOR_EXISTENCE] = {
+                        items: {
+                            type: "string",
+                        },
+                        type: "array",
+                    },
+                    _l),
+            },
+            _k[exports.DESCRIPTOR_PRIVACIES] = {
+                enum: [exports.ALL, exports.PRIVACY_PRIVATE, exports.PRIVACY_PROTECTED, exports.PRIVACY_PUBLIC],
+                type: "string",
+            },
+            _k[exports.DESCRIPTOR_OVERLOADS] = {
+                type: "boolean",
+            },
+            _k),
+        type: "object",
+    };
     Rule.ARGUMENT_DESCRIPTOR_FUNCTION = {
-        properties: tslib_1.__assign({}, Rule.ARGUMENT_DESCRIPTOR_BLOCK.properties, (_k = {}, _k[exports.DESCRIPTOR_OVERLOADS] = {
+        properties: tslib_1.__assign(tslib_1.__assign({}, Rule.ARGUMENT_DESCRIPTOR_BLOCK.properties), (_m = {}, _m[exports.DESCRIPTOR_OVERLOADS] = {
             type: "boolean",
-        }, _k)),
+        }, _m)),
         type: "object",
     };
     Rule.ARGUMENT_DESCRIPTOR_METHOD = {
-        properties: tslib_1.__assign({}, Rule.ARGUMENT_DESCRIPTOR_CLASS.properties, (_l = {}, _l[exports.DESCRIPTOR_OVERLOADS] = {
+        properties: tslib_1.__assign(tslib_1.__assign({}, Rule.ARGUMENT_DESCRIPTOR_CLASS.properties), (_o = {}, _o[exports.DESCRIPTOR_OVERLOADS] = {
             type: "boolean",
-        }, _l)),
+        }, _o)),
         type: "object",
     };
     /* tslint:disable:object-literal-sort-keys */
     Rule.metadata = {
         ruleName: "completed-docs",
         description: "Enforces JSDoc comments for important items be filled out.",
-        optionsDescription: Lint.Utils.dedent(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n            `true` to enable for `[", "]`,\n            or an array with each item in one of two formats:\n\n            * `string` to enable for that type\n            * `object` keying types to when their documentation is required:\n                * `\"", "\"` and `\"", "\"` may specify:\n                    * `\"", "\"`:\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                    * `\"", "\"`:\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                * Other types may specify `\"", "\"`:\n                    * `\"", "\"`\n                    * `\"", "\"`\n                    * `\"", "\"`\n                * `\"", "\"` `\"", "\"` may also specify `\"", "\"`\n                  to indicate that each overload should have its own documentation, which is `false` by default.\n                * All types may also provide `\"", "\"`\n                  with members specifying tags that allow the docs to not have a body.\n                    * `\"", "\"`: Object mapping tags to `RegExp` bodies content allowed to count as complete docs.\n                    * `\"", "\"`: Array of tags that must only exist to count as complete docs.\n\n            Types that may be enabled are:\n\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`"], ["\n            \\`true\\` to enable for \\`[", "]\\`,\n            or an array with each item in one of two formats:\n\n            * \\`string\\` to enable for that type\n            * \\`object\\` keying types to when their documentation is required:\n                * \\`\"", "\"\\` and \\`\"", "\"\\` may specify:\n                    * \\`\"", "\"\\`:\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`:\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                * Other types may specify \\`\"", "\"\\`:\n                    * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`\n                * \\`\"", "\"\\` \\`\"", "\"\\` may also specify \\`\"", "\"\\`\n                  to indicate that each overload should have its own documentation, which is \\`false\\` by default.\n                * All types may also provide \\`\"", "\"\\`\n                  with members specifying tags that allow the docs to not have a body.\n                    * \\`\"", "\"\\`: Object mapping tags to \\`RegExp\\` bodies content allowed to count as complete docs.\n                    * \\`\"", "\"\\`: Array of tags that must only exist to count as complete docs.\n\n            Types that may be enabled are:\n\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`"])), Object.keys(Rule.defaultArguments).join(", "), exports.ARGUMENT_METHODS, exports.ARGUMENT_PROPERTIES, exports.DESCRIPTOR_PRIVACIES, exports.ALL, exports.PRIVACY_PRIVATE, exports.PRIVACY_PROTECTED, exports.PRIVACY_PUBLIC, exports.DESCRIPTOR_LOCATIONS, exports.ALL, exports.LOCATION_INSTANCE, exports.LOCATION_STATIC, exports.DESCRIPTOR_VISIBILITIES, exports.ALL, exports.VISIBILITY_EXPORTED, exports.VISIBILITY_INTERNAL, exports.ARGUMENT_FUNCTIONS, exports.ARGUMENT_METHODS, exports.DESCRIPTOR_OVERLOADS, exports.DESCRIPTOR_TAGS, exports.TAGS_FOR_CONTENT, exports.TAGS_FOR_EXISTENCE, exports.ARGUMENT_CLASSES, exports.ARGUMENT_ENUMS, exports.ARGUMENT_ENUM_MEMBERS, exports.ARGUMENT_FUNCTIONS, exports.ARGUMENT_INTERFACES, exports.ARGUMENT_METHODS, exports.ARGUMENT_NAMESPACES, exports.ARGUMENT_PROPERTIES, exports.ARGUMENT_TYPES, exports.ARGUMENT_VARIABLES),
+        optionsDescription: Lint.Utils.dedent(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n            `true` to enable for `[", "]`,\n            or an array with each item in one of two formats:\n\n            * `string` to enable for that type\n            * `object` keying types to when their documentation is required:\n                * `\"", "\"` and `\"", "\"` may specify:\n                    * `\"", "\"`:\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                    * `\"", "\"`:\n                        * `\"", "\"`\n                        * `\"", "\"`\n                        * `\"", "\"`\n                * Other types may specify `\"", "\"`:\n                    * `\"", "\"`\n                    * `\"", "\"`\n                    * `\"", "\"`\n                * `\"", "\"` `\"", "\"` may also specify `\"", "\"`\n                  to indicate that each overload should have its own documentation, which is `false` by default.\n                * All types may also provide `\"", "\"`\n                  with members specifying tags that allow the docs to not have a body.\n                    * `\"", "\"`: Object mapping tags to `RegExp` bodies content allowed to count as complete docs.\n                    * `\"", "\"`: Array of tags that must only exist to count as complete docs.\n\n            Types that may be enabled are:\n\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`\n            * `\"", "\"`"], ["\n            \\`true\\` to enable for \\`[", "]\\`,\n            or an array with each item in one of two formats:\n\n            * \\`string\\` to enable for that type\n            * \\`object\\` keying types to when their documentation is required:\n                * \\`\"", "\"\\` and \\`\"", "\"\\` may specify:\n                    * \\`\"", "\"\\`:\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`:\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                        * \\`\"", "\"\\`\n                * Other types may specify \\`\"", "\"\\`:\n                    * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`\n                    * \\`\"", "\"\\`\n                * \\`\"", "\"\\` \\`\"", "\"\\` may also specify \\`\"", "\"\\`\n                  to indicate that each overload should have its own documentation, which is \\`false\\` by default.\n                * All types may also provide \\`\"", "\"\\`\n                  with members specifying tags that allow the docs to not have a body.\n                    * \\`\"", "\"\\`: Object mapping tags to \\`RegExp\\` bodies content allowed to count as complete docs.\n                    * \\`\"", "\"\\`: Array of tags that must only exist to count as complete docs.\n\n            Types that may be enabled are:\n\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`\n            * \\`\"", "\"\\`"])), Object.keys(Rule.defaultArguments).join(", "), exports.ARGUMENT_METHODS, exports.ARGUMENT_PROPERTIES, exports.DESCRIPTOR_PRIVACIES, exports.ALL, exports.PRIVACY_PRIVATE, exports.PRIVACY_PROTECTED, exports.PRIVACY_PUBLIC, exports.DESCRIPTOR_LOCATIONS, exports.ALL, exports.LOCATION_INSTANCE, exports.LOCATION_STATIC, exports.DESCRIPTOR_VISIBILITIES, exports.ALL, exports.VISIBILITY_EXPORTED, exports.VISIBILITY_INTERNAL, exports.ARGUMENT_FUNCTIONS, exports.ARGUMENT_METHODS, exports.DESCRIPTOR_OVERLOADS, exports.DESCRIPTOR_TAGS, exports.TAGS_FOR_CONTENT, exports.TAGS_FOR_EXISTENCE, exports.ARGUMENT_CLASSES, exports.ARGUMENT_CONSTRUCTORS, exports.ARGUMENT_ENUMS, exports.ARGUMENT_ENUM_MEMBERS, exports.ARGUMENT_FUNCTIONS, exports.ARGUMENT_INTERFACES, exports.ARGUMENT_METHODS, exports.ARGUMENT_NAMESPACES, exports.ARGUMENT_PROPERTIES, exports.ARGUMENT_TYPES, exports.ARGUMENT_VARIABLES),
         options: {
             type: "array",
             items: {
@@ -176,18 +205,19 @@ var Rule = /** @class */ (function (_super) {
                     },
                     {
                         type: "object",
-                        properties: (_m = {},
-                            _m[exports.ARGUMENT_CLASSES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_ENUMS] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_ENUM_MEMBERS] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_FUNCTIONS] = Rule.ARGUMENT_DESCRIPTOR_FUNCTION,
-                            _m[exports.ARGUMENT_INTERFACES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_METHODS] = Rule.ARGUMENT_DESCRIPTOR_METHOD,
-                            _m[exports.ARGUMENT_NAMESPACES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_PROPERTIES] = Rule.ARGUMENT_DESCRIPTOR_CLASS,
-                            _m[exports.ARGUMENT_TYPES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m[exports.ARGUMENT_VARIABLES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
-                            _m),
+                        properties: (_p = {},
+                            _p[exports.ARGUMENT_CLASSES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_CONSTRUCTORS] = Rule.ARGUMENT_DESCRIPTOR_CONSTRUCTOR,
+                            _p[exports.ARGUMENT_ENUMS] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_ENUM_MEMBERS] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_FUNCTIONS] = Rule.ARGUMENT_DESCRIPTOR_FUNCTION,
+                            _p[exports.ARGUMENT_INTERFACES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_METHODS] = Rule.ARGUMENT_DESCRIPTOR_METHOD,
+                            _p[exports.ARGUMENT_NAMESPACES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_PROPERTIES] = Rule.ARGUMENT_DESCRIPTOR_CLASS,
+                            _p[exports.ARGUMENT_TYPES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p[exports.ARGUMENT_VARIABLES] = Rule.ARGUMENT_DESCRIPTOR_BLOCK,
+                            _p),
                     },
                 ],
             },
@@ -197,24 +227,24 @@ var Rule = /** @class */ (function (_super) {
             [true, exports.ARGUMENT_ENUMS, exports.ARGUMENT_FUNCTIONS, exports.ARGUMENT_METHODS],
             [
                 true,
-                (_o = {},
-                    _o[exports.ARGUMENT_ENUMS] = true,
-                    _o[exports.ARGUMENT_FUNCTIONS] = (_p = {},
-                        _p[exports.DESCRIPTOR_VISIBILITIES] = [exports.VISIBILITY_EXPORTED],
-                        _p),
-                    _o[exports.ARGUMENT_METHODS] = (_q = {},
-                        _q[exports.DESCRIPTOR_LOCATIONS] = exports.LOCATION_INSTANCE,
-                        _q[exports.DESCRIPTOR_PRIVACIES] = [exports.PRIVACY_PUBLIC, exports.PRIVACY_PROTECTED],
-                        _q),
-                    _o[exports.ARGUMENT_PROPERTIES] = (_r = {},
-                        _r[exports.DESCRIPTOR_TAGS] = (_s = {},
-                            _s[exports.TAGS_FOR_CONTENT] = {
+                (_q = {},
+                    _q[exports.ARGUMENT_ENUMS] = true,
+                    _q[exports.ARGUMENT_FUNCTIONS] = (_r = {},
+                        _r[exports.DESCRIPTOR_VISIBILITIES] = [exports.VISIBILITY_EXPORTED],
+                        _r),
+                    _q[exports.ARGUMENT_METHODS] = (_s = {},
+                        _s[exports.DESCRIPTOR_LOCATIONS] = exports.LOCATION_INSTANCE,
+                        _s[exports.DESCRIPTOR_PRIVACIES] = [exports.PRIVACY_PUBLIC, exports.PRIVACY_PROTECTED],
+                        _s),
+                    _q[exports.ARGUMENT_PROPERTIES] = (_t = {},
+                        _t[exports.DESCRIPTOR_TAGS] = (_u = {},
+                            _u[exports.TAGS_FOR_CONTENT] = {
                                 see: ["#.*"],
                             },
-                            _s[exports.TAGS_FOR_EXISTENCE] = ["inheritdoc"],
-                            _s),
-                        _r),
-                    _o),
+                            _u[exports.TAGS_FOR_EXISTENCE] = ["inheritdoc"],
+                            _u),
+                        _t),
+                    _q),
             ],
         ],
         rationale: Lint.Utils.dedent(templateObject_2 || (templateObject_2 = tslib_1.__makeTemplateObject(["\n            Helps ensure important components are documented.\n\n            Note: use this rule sparingly. It's better to have self-documenting names on components with single, concise responsibilities.\n            Comments that only restate the names of variables add nothing to code, and can easily become outdated.\n        "], ["\n            Helps ensure important components are documented.\n\n            Note: use this rule sparingly. It's better to have self-documenting names on components with single, concise responsibilities.\n            Comments that only restate the names of variables add nothing to code, and can easily become outdated.\n        "]))),
@@ -233,6 +263,9 @@ function walk(context) {
         switch (node.kind) {
             case ts.SyntaxKind.ClassDeclaration:
                 checkNode(node, exports.ARGUMENT_CLASSES);
+                break;
+            case ts.SyntaxKind.Constructor:
+                checkNode(node, exports.ARGUMENT_CONSTRUCTORS);
                 break;
             case ts.SyntaxKind.EnumDeclaration:
                 checkNode(node, exports.ARGUMENT_ENUMS);
@@ -306,9 +339,11 @@ function walk(context) {
         }
     }
     function nodeIsExcluded(node, docType, requirementNode) {
-        var name = node.name;
-        if (name === undefined) {
-            return true;
+        if (docType !== exports.ARGUMENT_CONSTRUCTORS) {
+            var name = node.name;
+            if (name === undefined) {
+                return true;
+            }
         }
         var exclusions = context.options.get(docType);
         if (exclusions === undefined) {
@@ -349,7 +384,7 @@ function walk(context) {
         return equivalentNodesForDocs
             .map(function (docsNode) { return tsutils.getJsDoc(docsNode, sourceFile); })
             .filter(function (nodeDocs) { return nodeDocs !== undefined; })
-            .reduce(function (docs, moreDocs) { return docs.concat(moreDocs); }, []);
+            .reduce(function (docs, moreDocs) { return tslib_1.__spreadArrays(docs, moreDocs); }, []);
     }
     /**
      * @see https://github.com/palantir/tslint/issues/4416
@@ -366,6 +401,10 @@ function walk(context) {
                     child.name !== undefined &&
                     child.name.text === functionName_1;
             });
+        }
+        if (tsutils.isConstructorDeclaration(node)) {
+            var members = node.parent.members;
+            return members.filter(function (child) { return tsutils.isConstructorDeclaration(child); });
         }
         if (tsutils.isMethodDeclaration(node) &&
             tsutils.isIdentifier(node.name) &&
@@ -432,7 +471,7 @@ function getSiblings(node) {
     var parent = node.parent;
     // Source files nest their statements within a node for getChildren()
     if (ts.isSourceFile(parent)) {
-        return parent.statements.slice();
+        return tslib_1.__spreadArrays(parent.statements);
     }
     return parent.getChildren();
 }

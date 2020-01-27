@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var _a, _b;
 var utils = require("tsutils");
 var ts = require("typescript");
 var Lint = require("../index");
@@ -76,6 +76,10 @@ function walk(ctx) {
 function check(node, sourceFile, minCases) {
     var switchVariable;
     var casesSeen = 0;
+    var elseStatement = node.elseStatement;
+    if (elseStatement === undefined) {
+        return false;
+    }
     var couldBeSwitch = everyCase(node, function (expr) {
         casesSeen++;
         if (switchVariable !== undefined) {

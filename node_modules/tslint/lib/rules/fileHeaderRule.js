@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var _a, _b;
 var ts = require("typescript");
 var Lint = require("../index");
 var OPTION_MATCH = "match";
@@ -88,9 +88,9 @@ var Rule = /** @class */ (function (_super) {
         if (trailingNewlines === void 0) { trailingNewlines = 1; }
         var lineEnding = this.generateLineEnding(sourceFile);
         return (lineEnding.repeat(leadingNewlines) +
-            [
+            tslib_1.__spreadArrays([
                 "/*!"
-            ].concat(commentText.split(/\r?\n/g).map(function (line) { return (" * " + line).replace(/\s+$/, ""); }), [
+            ], commentText.split(/\r?\n/g).map(function (line) { return (" * " + line).replace(/\s+$/, ""); }), [
                 " */",
             ]).join(lineEnding) +
             lineEnding.repeat(trailingNewlines));
@@ -104,7 +104,7 @@ var Rule = /** @class */ (function (_super) {
             return text.substring(pos, end + 2);
         });
         var NEW_LINE_FOLLOWING_HEADER = /^.*((\r)?\n){2,}$/gm;
-        return (entireComment !== undefined && NEW_LINE_FOLLOWING_HEADER.test(entireComment) !== null);
+        return entireComment !== undefined && !NEW_LINE_FOLLOWING_HEADER.test(entireComment);
     };
     Rule.prototype.getFileHeaderText = function (text, offset, allowSingleLineComments) {
         var ranges = ts.getLeadingCommentRanges(text, offset);

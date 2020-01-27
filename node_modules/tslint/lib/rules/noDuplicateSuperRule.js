@@ -61,7 +61,7 @@ function walk(ctx) {
             if (!bodySuper.break) {
                 ctx.addFailureAtNode(bodySuper.node, Rule.FAILURE_STRING_LOOP);
             }
-            return tslib_1.__assign({}, bodySuper, { break: false });
+            return tslib_1.__assign(tslib_1.__assign({}, bodySuper), { break: false });
         }
         switch (node.kind) {
             case ts.SyntaxKind.ReturnStatement:
@@ -138,7 +138,7 @@ function walk(ctx) {
                     return undefined;
                 case 2 /* Break */:
                     if (seenSingle !== undefined) {
-                        return tslib_1.__assign({}, seenSingle, { break: true });
+                        return tslib_1.__assign(tslib_1.__assign({}, seenSingle), { break: true });
                     }
                     return childSuper;
                 case 1 /* Return */:

@@ -161,7 +161,7 @@ var RuleFailure = /** @class */ (function () {
                     : this.fix.toJson(),
             name: this.fileName,
             ruleName: this.ruleName,
-            ruleSeverity: this.ruleSeverity.toUpperCase(),
+            ruleSeverity: this.ruleSeverity,
             startPosition: this.startPosition.toJson(),
         };
     };

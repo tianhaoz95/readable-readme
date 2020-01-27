@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-var _a;
 var tsutils_1 = require("tsutils");
 var ts = require("typescript");
 var Lint = require("../index");

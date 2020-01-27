@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
 var semver = require("semver");
 var ts = require("typescript");
 var util_1 = require("util");
@@ -178,7 +179,7 @@ function formatMessage(templates, message) {
         if (template !== undefined) {
             var formatArgs = parseFormatArguments(formatMatch[2]);
             if (formatArgs !== undefined) {
-                message = util_1.format.apply(void 0, [template].concat(formatArgs));
+                message = util_1.format.apply(void 0, tslib_1.__spreadArrays([template], formatArgs));
             }
         }
     }
@@ -239,9 +240,9 @@ function createMarkupFromErrors(fileName, code, lintErrors) {
             errorLinesForCodeText[endPos.line].push(new lines_1.EndErrorLine(0, endPos.col, message));
         }
     }
-    return utils_1.flatMap(codeText, function (line, i) { return [
+    return utils_1.flatMap(codeText, function (line, i) { return tslib_1.__spreadArrays([
         line
-    ].concat(utils_1.mapDefined(errorLinesForCodeText[i], function (err) { return lines_1.printLine(fileName, err, line); })); }).join("\n");
+    ], utils_1.mapDefined(errorLinesForCodeText[i], function (err) { return lines_1.printLine(fileName, err, line); })); }).join("\n");
 }
 exports.createMarkupFromErrors = createMarkupFromErrors;
 /* tslint:enable:object-literal-sort-keys */

@@ -26,7 +26,7 @@ var Rule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Rule.prototype.applyWithProgram = function (sourceFile, program) {
-        return this.applyWithFunction(sourceFile, walk, ["Promise"].concat(this.ruleArguments), program.getTypeChecker());
+        return this.applyWithFunction(sourceFile, walk, tslib_1.__spreadArrays(["Promise"], this.ruleArguments), program.getTypeChecker());
     };
     /* tslint:disable:object-literal-sort-keys */
     Rule.metadata = {

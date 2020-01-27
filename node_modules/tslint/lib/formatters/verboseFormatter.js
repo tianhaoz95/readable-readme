@@ -45,7 +45,7 @@ var Formatter = /** @class */ (function (_super) {
     Formatter.metadata = {
         formatterName: "verbose",
         description: "The human-readable formatter which includes the rule name in messages.",
-        descriptionDetails: "The output is the same as the prose formatter with the rule name included",
+        descriptionDetails: "Basic formatter which outputs simple human-readable messages",
         sample: "ERROR: (semicolon) myFile.ts[1, 14]: Missing semicolon",
         consumer: "human",
     };

@@ -73,6 +73,8 @@ var Rule = /** @class */ (function (_super) {
         optionExamples: [
             true,
             [true, "rxjs", "lodash"],
+            [true, [".*\\.temp$", ".*\\.tmp$"]],
+            [true, { lodash: ["pull", "pullAll"] }],
             [true, "lodash", { lodash: ["pull", "pullAll"] }],
             [true, "rxjs", { lodash: ["pull", "pullAll"] }, [".*\\.temp$", ".*\\.tmp$"]],
         ],
@@ -184,7 +186,7 @@ function walk(ctx) {
                 var exportClause = reExportsSpecificNamedExports
                     ? parentNode.exportClause
                     : undefined;
-                var namedImportsOrReExports = (importsDefaultExport ? ["default"] : []).concat((importsSpecificNamedExports
+                var namedImportsOrReExports = tslib_1.__spreadArrays((importsDefaultExport ? ["default"] : []), (importsSpecificNamedExports
                     ? importClause.namedBindings.elements.map(toExportName)
                     : []), (exportClause !== undefined ? exportClause.elements.map(toExportName) : []));
                 for (var _e = 0, namedImportsOrReExports_1 = namedImportsOrReExports; _e < namedImportsOrReExports_1.length; _e++) {
