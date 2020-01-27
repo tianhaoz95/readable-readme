@@ -8,11 +8,22 @@ on:
       - master
 jobs:
   end_to_end:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Run current implementation
+      - uses: actions/checkout@v1
+      - name: run current implementation with old dependencies
+        uses: ./
+        env:
+          RRLOG: "true"
+        with:
+          token: ${{ secrets.TEST_GITHUB_TOKEN }}
+      - name: remove outdated packages
+        run: |
+          rm -rf ./node_modules
+      - name: install updated packages
+        run: |
+          npm install
+      - name: run current implementation with old dependencies
         uses: ./
         env:
           RRLOG: "true"
