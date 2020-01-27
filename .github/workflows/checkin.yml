@@ -17,5 +17,11 @@ jobs:
     - uses: actions/checkout@v1
     - name: enable ci environment
       run: npm ci
+    - name: remove outdated packages
+      run: |
+        rm -rf ./node_modules
+    - name: install updated packages
+      run: |
+        npm install
     - name: run unit tests
       run: npm run test
