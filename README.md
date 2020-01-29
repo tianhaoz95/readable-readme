@@ -19,7 +19,7 @@ Add the following code into your workflow steps:
 - name: Readable Readme
   uses: tianhaoz95/readable-readme@v1.0.4-beta
   with:
-    token: ${{ secrets.TEST_GITHUB_TOKEN }}
+    token: your_github_token_from_secrets
 ```
 
 > note: the token is used to post analyze report as GitHub issues.
