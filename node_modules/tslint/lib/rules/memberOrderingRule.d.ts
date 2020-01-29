@@ -19,5 +19,6 @@ import * as Lint from "../index";
 export declare class Rule extends Lint.Rules.AbstractRule {
     static metadata: Lint.IRuleMetadata;
     static FAILURE_STRING_ALPHABETIZE(prevName: string, curName: string): string;
+    static stringCompare(a: string, b: string): 1 | -1 | 0;
     apply(sourceFile: ts.SourceFile): Lint.RuleFailure[];
 }

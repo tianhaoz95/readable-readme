@@ -238,7 +238,7 @@ var ClassScope = /** @class */ (function () {
         this.staticVariableModifications.forEach(function (variableName) {
             _this.privateModifiableStatics.delete(variableName);
         });
-        return Array.from(this.privateModifiableMembers.values()).concat(Array.from(this.privateModifiableStatics.values()));
+        return tslib_1.__spreadArrays(Array.from(this.privateModifiableMembers.values()), Array.from(this.privateModifiableStatics.values()));
     };
     return ClassScope;
 }());

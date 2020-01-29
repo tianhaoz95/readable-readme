@@ -8,6 +8,7 @@ export function initTestingEnvironmentVariables() {
   process.env.GITHUB_ACTION = "readable-readme";
   process.env.GITHUB_SHA = "abc250abc";
   process.env.RRLOG = "false";
+  process.env.TEST_GITHUB_TOKEN = "test_token";
 }
 
 export function cleanTestingEnvironmentVariables() {
@@ -18,6 +19,7 @@ export function cleanTestingEnvironmentVariables() {
   process.env.GITHUB_ACTION = undefined;
   process.env.GITHUB_SHA = undefined;
   process.env.RRLOG = undefined;
+  process.env.TEST_GITHUB_TOKEN = undefined;
 }
 
 describe("helper tests", () => {

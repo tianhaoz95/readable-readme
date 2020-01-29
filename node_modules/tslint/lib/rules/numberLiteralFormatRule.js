@@ -87,7 +87,7 @@ function walk(ctx) {
         }
         var _a = text.split(/e/i), num = _a[0], _b = _a[1], exp = _b === void 0 ? "" : _b;
         var _c = num.split("."), integer = _c[0], _d = _c[1], float = _d === void 0 ? "" : _d;
-        var matchedNumeric = /(\.)([1-9]*)(0+)/.exec(num);
+        var matchedNumeric = /(\.)(\d*?)(0+)$/.exec(num);
         var _e = Array.isArray(matchedNumeric)
             ? matchedNumeric.slice(1)
             : [], _f = _e[0], dot = _f === void 0 ? "" : _f, _g = _e[1], numbers = _g === void 0 ? "" : _g, _h = _e[2], zeroes = _h === void 0 ? "" : _h;

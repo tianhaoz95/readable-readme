@@ -27,11 +27,11 @@ var OPTION_ALPHABETIZE = "alphabetize";
 var MemberKind;
 (function (MemberKind) {
     MemberKind[MemberKind["publicStaticField"] = 0] = "publicStaticField";
-    MemberKind[MemberKind["publicStaticMethod"] = 1] = "publicStaticMethod";
-    MemberKind[MemberKind["protectedStaticField"] = 2] = "protectedStaticField";
-    MemberKind[MemberKind["protectedStaticMethod"] = 3] = "protectedStaticMethod";
-    MemberKind[MemberKind["privateStaticField"] = 4] = "privateStaticField";
-    MemberKind[MemberKind["privateStaticMethod"] = 5] = "privateStaticMethod";
+    MemberKind[MemberKind["protectedStaticField"] = 1] = "protectedStaticField";
+    MemberKind[MemberKind["privateStaticField"] = 2] = "privateStaticField";
+    MemberKind[MemberKind["publicStaticMethod"] = 3] = "publicStaticMethod";
+    MemberKind[MemberKind["privateStaticMethod"] = 4] = "privateStaticMethod";
+    MemberKind[MemberKind["protectedStaticMethod"] = 5] = "protectedStaticMethod";
     MemberKind[MemberKind["publicInstanceField"] = 6] = "publicInstanceField";
     MemberKind[MemberKind["protectedInstanceField"] = 7] = "protectedInstanceField";
     MemberKind[MemberKind["privateInstanceField"] = 8] = "privateInstanceField";
@@ -41,6 +41,12 @@ var MemberKind;
     MemberKind[MemberKind["publicInstanceMethod"] = 12] = "publicInstanceMethod";
     MemberKind[MemberKind["protectedInstanceMethod"] = 13] = "protectedInstanceMethod";
     MemberKind[MemberKind["privateInstanceMethod"] = 14] = "privateInstanceMethod";
+    MemberKind[MemberKind["publicStaticAccessor"] = 15] = "publicStaticAccessor";
+    MemberKind[MemberKind["protectedStaticAccessor"] = 16] = "protectedStaticAccessor";
+    MemberKind[MemberKind["privateStaticAccessor"] = 17] = "privateStaticAccessor";
+    MemberKind[MemberKind["publicInstanceAccessor"] = 18] = "publicInstanceAccessor";
+    MemberKind[MemberKind["protectedInstanceAccessor"] = 19] = "protectedInstanceAccessor";
+    MemberKind[MemberKind["privateInstanceAccessor"] = 20] = "privateInstanceAccessor";
 })(MemberKind || (MemberKind = {}));
 var PRESETS = new Map([
     [
@@ -53,9 +59,15 @@ var PRESETS = new Map([
             "protected-instance-field",
             "private-instance-field",
             "constructor",
+            "public-static-accessor",
+            "protected-static-accessor",
+            "private-static-accessor",
             "public-static-method",
             "protected-static-method",
             "private-static-method",
+            "public-instance-accessor",
+            "protected-instance-accessor",
+            "private-instance-accessor",
             "public-instance-method",
             "protected-instance-method",
             "private-instance-method",
@@ -71,9 +83,15 @@ var PRESETS = new Map([
             "protected-instance-field",
             "private-instance-field",
             "constructor",
+            "public-instance-accessor",
+            "protected-instance-accessor",
+            "private-instance-accessor",
             "public-instance-method",
             "protected-instance-method",
             "private-instance-method",
+            "public-static-accessor",
+            "protected-static-accessor",
+            "private-static-accessor",
             "public-static-method",
             "protected-static-method",
             "private-static-method",
@@ -83,15 +101,21 @@ var PRESETS = new Map([
         "statics-first",
         [
             "public-static-field",
+            "public-static-accessor",
             "public-static-method",
             "protected-static-field",
+            "protected-static-accessor",
             "protected-static-method",
             "private-static-field",
+            "private-static-accessor",
             "private-static-method",
             "public-instance-field",
             "protected-instance-field",
             "private-instance-field",
             "constructor",
+            "public-instance-accessor",
+            "protected-instance-accessor",
+            "private-instance-accessor",
             "public-instance-method",
             "protected-instance-method",
             "private-instance-method",
@@ -108,7 +132,7 @@ var allMemberKindNames = utils_1.mapDefined(Object.keys(MemberKind), function (k
 function namesMarkdown(names) {
     return names.map(function (name) { return "* `" + name + "`"; }).join("\n    ");
 }
-var optionsDescription = Lint.Utils.dedent(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n    One argument, which is an object, must be provided. It should contain an `order` property.\n    The `order` property should have a value of one of the following strings:\n\n    ", "\n\n    `fields-first` puts, in order of precedence:\n\n        * fields before constructors before methods\n        * static members before instance members\n        * public members before protected members before private members\n\n    `instance-sandwich` puts, in order of precedence:\n\n        * fields before constructors before methods\n        * static fields before instance fields, but static methods *after* instance methods\n        * public members before protected members before private members\n\n    `statics-first` puts, in order of precedence:\n\n        * static members before instance members\n            * public members before protected members before private members\n            * fields before methods\n        * instance fields before constructors before instance methods\n            * fields before constructors before methods\n            * public members before protected members before private members\n\n    Note that these presets, despite looking similar, can have subtly different behavior due to the order in which these\n    rules are specified. A fully expanded ordering can be found in the PRESETS constant in\n    https://github.com/palantir/tslint/blob/master/src/rules/memberOrderingRule.ts.\n    (You may need to check the version of the file corresponding to your version of tslint.)\n\n    Alternatively, the value for `order` may be an array consisting of the following strings:\n\n    ", "\n\n    You can also omit the access modifier to refer to \"public-\", \"protected-\", and \"private-\" all at once; for example, \"static-field\".\n\n    You can also make your own categories by using an object instead of a string:\n\n        {\n            \"name\": \"static non-private\",\n            \"kinds\": [\n                \"public-static-field\",\n                \"protected-static-field\",\n                \"public-static-method\",\n                \"protected-static-method\"\n            ]\n        }\n\n    The '", "' option will enforce that members within the same category should be alphabetically sorted by name."], ["\n    One argument, which is an object, must be provided. It should contain an \\`order\\` property.\n    The \\`order\\` property should have a value of one of the following strings:\n\n    ", "\n\n    \\`fields-first\\` puts, in order of precedence:\n\n        * fields before constructors before methods\n        * static members before instance members\n        * public members before protected members before private members\n\n    \\`instance-sandwich\\` puts, in order of precedence:\n\n        * fields before constructors before methods\n        * static fields before instance fields, but static methods *after* instance methods\n        * public members before protected members before private members\n\n    \\`statics-first\\` puts, in order of precedence:\n\n        * static members before instance members\n            * public members before protected members before private members\n            * fields before methods\n        * instance fields before constructors before instance methods\n            * fields before constructors before methods\n            * public members before protected members before private members\n\n    Note that these presets, despite looking similar, can have subtly different behavior due to the order in which these\n    rules are specified. A fully expanded ordering can be found in the PRESETS constant in\n    https://github.com/palantir/tslint/blob/master/src/rules/memberOrderingRule.ts.\n    (You may need to check the version of the file corresponding to your version of tslint.)\n\n    Alternatively, the value for \\`order\\` may be an array consisting of the following strings:\n\n    ", "\n\n    You can also omit the access modifier to refer to \"public-\", \"protected-\", and \"private-\" all at once; for example, \"static-field\".\n\n    You can also make your own categories by using an object instead of a string:\n\n        {\n            \"name\": \"static non-private\",\n            \"kinds\": [\n                \"public-static-field\",\n                \"protected-static-field\",\n                \"public-static-method\",\n                \"protected-static-method\"\n            ]\n        }\n\n    The '", "' option will enforce that members within the same category should be alphabetically sorted by name."])), namesMarkdown(PRESET_NAMES), namesMarkdown(allMemberKindNames), OPTION_ALPHABETIZE);
+var optionsDescription = Lint.Utils.dedent(templateObject_1 || (templateObject_1 = tslib_1.__makeTemplateObject(["\n    One argument, which is an object, must be provided. It should contain an `order` property.\n    The `order` property should have a value of one of the following strings:\n\n    ", "\n\n    `fields-first` puts, in order of precedence:\n        * fields before constructors before methods\n        * static members before instance members\n        * public members before protected members before private members\n    `instance-sandwich` puts, in order of precedence:\n        * fields before constructors before methods\n        * static fields before instance fields, but static methods *after* instance methods\n        * public members before protected members before private members\n    `statics-first` puts, in order of precedence:\n        * static members before instance members\n            * public members before protected members before private members\n            * fields before methods\n        * instance fields before constructors before instance methods\n            * fields before constructors before methods\n            * public members before protected members before private members\n    Note that these presets, despite looking similar, can have subtly different behavior due to the order in which these\n    rules are specified. A fully expanded ordering can be found in the PRESETS constant in\n    https://github.com/palantir/tslint/blob/master/src/rules/memberOrderingRule.ts.\n    (You may need to check the version of the file corresponding to your version of tslint.)\n\n    Alternatively, the value for `order` may be an array consisting of the following strings:\n\n    ", "\n\n    You can also omit the access modifier to refer to \"public-\", \"protected-\", and \"private-\" all at once; for example, \"static-field\".\n\n    You can also make your own categories by using an object instead of a string:\n\n        {\n            \"name\": \"static non-private\",\n            \"kinds\": [\n                \"public-static-field\",\n                \"protected-static-field\",\n                \"public-static-method\",\n                \"protected-static-method\"\n            ]\n        }\n\n    The '", "' option will enforce that members within the same category should be alphabetically sorted by name.\n    Computed property names are sorted before others but not sorted amongst each other.\n    Additionally getters will be sorted before setters (after alphabetization)."], ["\n    One argument, which is an object, must be provided. It should contain an \\`order\\` property.\n    The \\`order\\` property should have a value of one of the following strings:\n\n    ", "\n\n    \\`fields-first\\` puts, in order of precedence:\n        * fields before constructors before methods\n        * static members before instance members\n        * public members before protected members before private members\n    \\`instance-sandwich\\` puts, in order of precedence:\n        * fields before constructors before methods\n        * static fields before instance fields, but static methods *after* instance methods\n        * public members before protected members before private members\n    \\`statics-first\\` puts, in order of precedence:\n        * static members before instance members\n            * public members before protected members before private members\n            * fields before methods\n        * instance fields before constructors before instance methods\n            * fields before constructors before methods\n            * public members before protected members before private members\n    Note that these presets, despite looking similar, can have subtly different behavior due to the order in which these\n    rules are specified. A fully expanded ordering can be found in the PRESETS constant in\n    https://github.com/palantir/tslint/blob/master/src/rules/memberOrderingRule.ts.\n    (You may need to check the version of the file corresponding to your version of tslint.)\n\n    Alternatively, the value for \\`order\\` may be an array consisting of the following strings:\n\n    ", "\n\n    You can also omit the access modifier to refer to \"public-\", \"protected-\", and \"private-\" all at once; for example, \"static-field\".\n\n    You can also make your own categories by using an object instead of a string:\n\n        {\n            \"name\": \"static non-private\",\n            \"kinds\": [\n                \"public-static-field\",\n                \"protected-static-field\",\n                \"public-static-method\",\n                \"protected-static-method\"\n            ]\n        }\n\n    The '", "' option will enforce that members within the same category should be alphabetically sorted by name.\n    Computed property names are sorted before others but not sorted amongst each other.\n    Additionally getters will be sorted before setters (after alphabetization)."])), namesMarkdown(PRESET_NAMES), namesMarkdown(allMemberKindNames), OPTION_ALPHABETIZE);
 var Rule = /** @class */ (function (_super) {
     tslib_1.__extends(Rule, _super);
     function Rule() {
@@ -120,7 +144,11 @@ var Rule = /** @class */ (function (_super) {
             return s === "" ? "Computed property" : "'" + s + "'";
         }
     };
-    /* tslint:enable:object-literal-sort-keys */
+    Rule.stringCompare = function (a, b) {
+        var aLower = a.toLowerCase();
+        var bLower = b.toLowerCase();
+        return aLower < bLower ? -1 : aLower > bLower ? 1 : 0;
+    };
     Rule.prototype.apply = function (sourceFile) {
         var options;
         try {
@@ -142,6 +170,9 @@ var Rule = /** @class */ (function (_super) {
         options: {
             type: "object",
             properties: {
+                alphabetize: {
+                    type: "boolean",
+                },
                 order: {
                     oneOf: [
                         {
@@ -158,9 +189,6 @@ var Rule = /** @class */ (function (_super) {
                         },
                     ],
                 },
-                alphabetize: {
-                    type: "boolean",
-                },
             },
             additionalProperties: false,
         },
@@ -169,6 +197,7 @@ var Rule = /** @class */ (function (_super) {
             [
                 true,
                 {
+                    alphabetize: true,
                     order: [
                         "public-static-field",
                         "public-instance-field",
@@ -180,7 +209,6 @@ var Rule = /** @class */ (function (_super) {
                         "protected-instance-method",
                         "private-instance-method",
                     ],
-                    alphabetize: true,
                 },
             ],
             [
@@ -244,16 +272,16 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
      */
     MemberOrderingWalker.prototype.checkMembers = function (members) {
         var _this = this;
-        var prevRank = -1;
-        var prevName;
+        var prevMember = members[0];
         var failureExists = false;
-        for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
-            var member = members_1[_i];
+        for (var i = 1; i < members.length; i++) {
+            var member = members[i];
             var rank = this.memberRank(member);
             if (rank === -1) {
                 // no explicit ordering for this kind of node specified, so continue
                 continue;
             }
+            var prevRank = this.memberRank(prevMember);
             if (rank < prevRank) {
                 var nodeType = this.rankName(rank);
                 var prevNodeType = this.rankName(prevRank);
@@ -266,25 +294,30 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
                 // add empty array as fix so we can add a replacement later. (fix itself is readonly)
                 this.addFailureAtNode(member, errorLine1, []);
                 failureExists = true;
+                continue; // avoid updating prevMember at end of loop
             }
-            else {
-                if (this.options.alphabetize && member.name !== undefined) {
-                    if (rank !== prevRank) {
-                        // No alphabetical ordering between different ranks
-                        prevName = undefined;
-                    }
-                    var curName = nameString(member.name);
-                    if (prevName !== undefined && caseInsensitiveLess(curName, prevName)) {
-                        this.addFailureAtNode(member.name, Rule.FAILURE_STRING_ALPHABETIZE(this.findLowerName(members, rank, curName), curName), []);
-                        failureExists = true;
-                    }
-                    else {
-                        prevName = curName;
-                    }
+            else if (prevRank === rank &&
+                this.options.alphabetize &&
+                member.name !== undefined &&
+                prevMember.name !== undefined) {
+                var curName = nameString(member.name);
+                var prevName = nameString(prevMember.name);
+                var alphaDiff = Rule.stringCompare(prevName, curName);
+                if (alphaDiff > 0) {
+                    this.addFailureAtNode(member.name, Rule.FAILURE_STRING_ALPHABETIZE(this.findLowerName(members, rank, curName), curName), []);
+                    failureExists = true;
+                    continue;
                 }
-                // keep track of last good node
-                prevRank = rank;
+                else if (alphaDiff === 0 &&
+                    curName !== "" && // do not enforce get < set for computed properties
+                    member.kind === ts.SyntaxKind.GetAccessor &&
+                    prevMember.kind === ts.SyntaxKind.SetAccessor) {
+                    this.addFailureAtNode(member.name, "Getter for '" + curName + "' should appear before setter.", []);
+                    failureExists = true;
+                    continue;
+                }
             }
+            prevMember = member;
         }
         if (failureExists) {
             var sortedMemberIndexes = members
@@ -301,9 +334,19 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
                 if (_this.options.alphabetize && a.name !== undefined && b.name !== undefined) {
                     var aName = nameString(a.name);
                     var bName = nameString(b.name);
-                    var nameDiff = aName.localeCompare(bName);
+                    var nameDiff = Rule.stringCompare(aName, bName);
                     if (nameDiff !== 0) {
                         return nameDiff;
+                    }
+                    var getSetDiff = a.kind === ts.SyntaxKind.GetAccessor &&
+                        b.kind === ts.SyntaxKind.SetAccessor
+                        ? -1
+                        : a.kind === ts.SyntaxKind.SetAccessor &&
+                            b.kind === ts.SyntaxKind.GetAccessor
+                            ? 1
+                            : 0;
+                    if (aName !== "" && getSetDiff !== 0) {
+                        return getSetDiff;
                     }
                 }
                 // finally, sort by position in original NodeArray so the sort remains stable.
@@ -341,8 +384,8 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
     };
     /** Finds the lowest name higher than 'targetName'. */
     MemberOrderingWalker.prototype.findLowerName = function (members, targetRank, targetName) {
-        for (var _i = 0, members_2 = members; _i < members_2.length; _i++) {
-            var member = members_2[_i];
+        for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
+            var member = members_1[_i];
             if (member.name === undefined || this.memberRank(member) !== targetRank) {
                 continue;
             }
@@ -356,8 +399,8 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
     /** Finds the highest existing rank lower than `targetRank`. */
     MemberOrderingWalker.prototype.findLowerRank = function (members, targetRank) {
         var max = -1;
-        for (var _i = 0, members_3 = members; _i < members_3.length; _i++) {
-            var member = members_3[_i];
+        for (var _i = 0, members_2 = members; _i < members_2.length; _i++) {
+            var member = members_2[_i];
             var rank = this.memberRank(member);
             if (rank !== -1 && rank < targetRank) {
                 max = Math.max(max, rank);
@@ -380,12 +423,6 @@ var MemberOrderingWalker = /** @class */ (function (_super) {
 function caseInsensitiveLess(a, b) {
     return a.toLowerCase() < b.toLowerCase();
 }
-function memberKindForConstructor(access) {
-    return MemberKind[access + "Constructor"];
-}
-function memberKindForMethodOrField(access, membership, kind) {
-    return MemberKind[access + membership + kind];
-}
 var allAccess = ["public", "protected", "private"];
 function memberKindFromName(name) {
     var kind = MemberKind[Lint.Utils.camelize(name)];
@@ -404,24 +441,31 @@ function getMemberKind(member) {
         : tsutils_1.hasModifier(member.modifiers, ts.SyntaxKind.ProtectedKeyword)
             ? "protected"
             : "public";
+    var membership = tsutils_1.hasModifier(member.modifiers, ts.SyntaxKind.StaticKeyword)
+        ? "Static"
+        : "Instance";
     switch (member.kind) {
         case ts.SyntaxKind.Constructor:
         case ts.SyntaxKind.ConstructSignature:
-            return memberKindForConstructor(accessLevel);
+            // tslint:disable-next-line:prefer-template
+            return MemberKind[accessLevel + "Constructor"];
+        case ts.SyntaxKind.GetAccessor:
+        case ts.SyntaxKind.SetAccessor:
+            // tslint:disable-next-line:prefer-template
+            return MemberKind[accessLevel + membership + "Accessor"];
         case ts.SyntaxKind.PropertyDeclaration:
         case ts.SyntaxKind.PropertySignature:
-            return methodOrField(isFunctionLiteral(member.initializer));
+            var type = isFunctionLiteral(member.initializer)
+                ? "Method"
+                : "Field";
+            // tslint:disable-next-line:prefer-template
+            return MemberKind[accessLevel + membership + type];
         case ts.SyntaxKind.MethodDeclaration:
         case ts.SyntaxKind.MethodSignature:
-            return methodOrField(true);
+            // tslint:disable-next-line:prefer-template
+            return MemberKind[accessLevel + membership + "Method"];
         default:
             return undefined;
-    }
-    function methodOrField(isMethod) {
-        var membership = tsutils_1.hasModifier(member.modifiers, ts.SyntaxKind.StaticKeyword)
-            ? "Static"
-            : "Instance";
-        return memberKindForMethodOrField(accessLevel, membership, isMethod ? "Method" : "Field");
     }
 }
 var MemberCategory = /** @class */ (function () {
@@ -450,11 +494,14 @@ function getOptionsJson(allOptions) {
     var firstOption = allOptions[0];
     if (typeof firstOption !== "object") {
         // Undocumented direct string option. Deprecate eventually.
-        return { order: convertFromOldStyleOptions(allOptions), alphabetize: false }; // presume allOptions to be string[]
+        var order = convertFromOldStyleOptions(allOptions);
+        error_1.showWarningOnce(utils_1.dedent(templateObject_3 || (templateObject_3 = tslib_1.__makeTemplateObject(["\n            Warning: member-ordering - Direct string option is deprecated and does not support accessors.\n            See also https://palantir.github.io/tslint/rules/member-ordering/\n            You should replace ", "\n            with the following equivalent options and add -accessor categories as appropriate:\n"], ["\n            Warning: member-ordering - Direct string option is deprecated and does not support accessors.\n            See also https://palantir.github.io/tslint/rules/member-ordering/\n            You should replace ", "\n            with the following equivalent options and add -accessor categories as appropriate:\\n"])), allOptions.map(function (o) { return JSON.stringify(o); }).join()) +
+            JSON.stringify(order, undefined, "  "));
+        return { order: order, alphabetize: false }; // presume allOptions to be string[]
     }
     return {
-        alphabetize: firstOption[OPTION_ALPHABETIZE] === true,
         order: categoryFromOption(firstOption[OPTION_ORDER]),
+        alphabetize: firstOption[OPTION_ALPHABETIZE] === true,
     };
 }
 function categoryFromOption(orderOption) {
@@ -647,4 +694,4 @@ function getNextSplitIndex(text, pos) {
     }
     return pos;
 }
-var templateObject_1, templateObject_2;
+var templateObject_1, templateObject_2, templateObject_3;

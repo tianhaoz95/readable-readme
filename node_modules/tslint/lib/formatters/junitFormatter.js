@@ -27,7 +27,7 @@ var Formatter = /** @class */ (function (_super) {
     /* tslint:enable:object-literal-sort-keys */
     Formatter.prototype.format = function (failures, _fixes, fileNames) {
         var output = '<?xml version="1.0" encoding="utf-8"?><testsuites package="tslint">';
-        var failureFileNames = new Set(failures.map(function (f) { return f.getFileName(); }).slice());
+        var failureFileNames = new Set(tslib_1.__spreadArrays(failures.map(function (f) { return f.getFileName(); })));
         if (failures.length !== 0) {
             var failuresSorted = failures.sort(function (a, b) {
                 return a.getFileName().localeCompare(b.getFileName());

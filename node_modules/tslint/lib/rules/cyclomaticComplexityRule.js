@@ -31,14 +31,6 @@ var Rule = /** @class */ (function (_super) {
         return ("The function" + (name === undefined ? "" : " " + name) + " has a cyclomatic complexity of " +
             (actual + " which is higher than the threshold of " + expected));
     };
-    Rule.prototype.apply = function (sourceFile) {
-        return this.applyWithFunction(sourceFile, walk, { threshold: this.threshold });
-    };
-    Rule.prototype.isEnabled = function () {
-        // Disable the rule if the option is provided but non-numeric or less than the minimum.
-        var isThresholdValid = typeof this.threshold === "number" && this.threshold >= Rule.MINIMUM_THRESHOLD;
-        return _super.prototype.isEnabled.call(this) && isThresholdValid;
-    };
     Object.defineProperty(Rule.prototype, "threshold", {
         get: function () {
             if (this.ruleArguments[0] !== undefined) {
@@ -49,6 +41,14 @@ var Rule = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Rule.prototype.apply = function (sourceFile) {
+        return this.applyWithFunction(sourceFile, walk, { threshold: this.threshold });
+    };
+    Rule.prototype.isEnabled = function () {
+        // Disable the rule if the option is provided but non-numeric or less than the minimum.
+        var isThresholdValid = typeof this.threshold === "number" && this.threshold >= Rule.MINIMUM_THRESHOLD;
+        return _super.prototype.isEnabled.call(this) && isThresholdValid;
+    };
     Rule.DEFAULT_THRESHOLD = 20;
     Rule.MINIMUM_THRESHOLD = 2;
     /* tslint:disable:object-literal-sort-keys */

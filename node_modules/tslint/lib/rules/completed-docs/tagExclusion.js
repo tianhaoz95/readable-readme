@@ -37,6 +37,9 @@ var TagExclusion = /** @class */ (function (_super) {
             if (this.existenceTags.has(tagWithContent[0])) {
                 return true;
             }
+            if (this.contentTags === undefined) {
+                return false;
+            }
             var matcherBody = this.contentTags[tagWithContent[0]];
             if (matcherBody === undefined) {
                 continue;

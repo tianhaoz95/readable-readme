@@ -29,12 +29,13 @@ var Formatter = /** @class */ (function (_super) {
         var outputLines = failures.map(function (failure) {
             var fileName = failure.getFileName();
             var failureString = failure.getFailure();
+            var failureSeverity = failure.getRuleSeverity();
             var lineAndCharacter = failure.getStartPosition().getLineAndCharacter();
             var line = lineAndCharacter.line + 1;
             var character = lineAndCharacter.character + 1;
             var code = failure.getRuleName();
             var properties = "sourcepath=" + fileName + ";linenumber=" + line + ";columnnumber=" + character + ";code=" + code + ";";
-            return "##vso[task.logissue type=warning;" + properties + "]" + failureString;
+            return "##vso[task.logissue type=" + failureSeverity + ";" + properties + "]" + failureString;
         });
         return outputLines.join("\n") + "\n";
     };
