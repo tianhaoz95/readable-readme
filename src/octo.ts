@@ -11,13 +11,12 @@ function getOctokit() {
   return kit;
 }
 
-export const octokit = getOctokit();
-
 export async function matchIssueTitle(
   title: string,
   repo: string,
   owner: string,
 ) {
+  const octokit = getOctokit();
   const allIssues = await octokit.issues.listForRepo({
     owner,
     repo,
@@ -60,6 +59,7 @@ export async function postResultToGitHub(title: string, body: string) {
 export async function postGitHubPullRequestComment(content: string) {
   const repoOwner = util.getGitHubRepoOwner();
   const repoId = util.getGitHubRepoId();
+  const octokit = getOctokit();
   const pullRequestNumber = util.parsePullRequestNumber(util.getGitHubRef());
   await octokit.issues.createComment({
     body: content,
@@ -80,6 +80,7 @@ export async function postGitHubIssue(title: string, body: string) {
   );
   if (issueMatch.found) {
     util.rrlog("issue exist, updating existing issue...");
+    const octokit = getOctokit();
     await octokit.issues.update({
       body,
       issue_number: issueMatch.issueNumber,
@@ -89,6 +90,7 @@ export async function postGitHubIssue(title: string, body: string) {
     });
   } else {
     util.rrlog("issue not exist, creating new issue...");
+    const octokit = getOctokit();
     await octokit.issues.create({
       body,
       owner: repoOwner,
