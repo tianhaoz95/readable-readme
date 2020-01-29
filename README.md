@@ -30,5 +30,5 @@ Add the following code into your workflow steps:
 
 ## Contribute
 
-Any contribution is greatly appreciated. Please check out [the guide](./CONTRIBUTING.md) for more details.
+Any contribution is greatly appreciated. Please check out [the guide](https://github.com/tianhaoz95/readable-readme/blob/master/CONTRIBUTING.md) for more details.
 
