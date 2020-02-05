@@ -454,24 +454,16 @@ export function gatherToxicSentences(
 export function toxicityClassification2paragraph(classification) {
   let content: string = "";
   let title: string = "";
-  switch (classification.label) {
-    case "identity_attack":
-      title = "Check for identity attack: ";
-    case "insult":
-      title = "Check for insult: ";
-    case "obscene":
-      title = "Check for obscene content: ";
-    case "severe_toxicity":
-      title = "Check for severe toxic content: ";
-    case "sexual_explicit":
-      title = "Check for sexual explicit content: ";
-    case "threat":
-      title = "Check for threating content: ";
-    case "toxicity":
-      title = "Check for toxic content: ";
-    default:
-      title = "";
-  }
+  const translateDict = {
+    identity_attack: "Check for identity attack: ",
+    insult: "Check for insult: ",
+    obscene: "Check for obscene content: ",
+    severe_toxicity: "Check for severe toxic content: ",
+    sexual_explicit: "Check for sexual explicit content: ",
+    threat: "Check for threating content: ",
+    toxicity: "Check for toxic content: "
+  };
+  title = translateDict[classification.label];
   if (classification.isToxic) {
     content += title;
     content += "issue found in ";

@@ -32,6 +32,12 @@ describe("English lang test suite", () => {
     ).toEqual(2);
   });
 
+  it("toxicity linter should output labels", async () => {
+    const report = await en.generateToxicityReport("Thanks!");
+    expect(report).toContain("Check for identity attack");
+    expect(report).toContain("Check for threating content");
+  });
+
   it("toxicity linter should pass on good word", async () => {
     const report = await en.generateToxicityReport("Thanks!");
     expect(report).toContain(":ok_hand:");
