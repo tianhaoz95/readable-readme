@@ -471,9 +471,9 @@ export function toxicityClassification2paragraph(classification) {
     content += " sentences. :worried:";
     content += "\n\n";
     for (const toxicSentence of classification.toxicSentences) {
-      content += "  * ";
+      content += "  * `";
       content += toxicSentence;
-      content += "\n";
+      content += "`\n";
     }
   } else {
     content = title + "no issue found :ok_hand:\n\n";
