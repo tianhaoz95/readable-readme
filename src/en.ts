@@ -5,7 +5,7 @@ import * as util from "./util";
 let model: toxicity.ToxicityClassifier | undefined;
 
 async function fetchToxcityClassifier() {
-  const threshold: number = 0.9;
+  const threshold: number = 0.75;
   if (model === undefined) {
     model = await toxicity.load(threshold, [
       "identity_attack",
@@ -37,12 +37,12 @@ export function generateEnglishLangReport(content: string) {
 
 export async function generateToxicityReport(content: string): Promise<string> {
   await fetchToxcityClassifier();
-  const sentences = content.split(/[.|?|!]/);
+  const sentences = content.split(/[.|?|!|,]/);
   if (model === undefined) {
     return "";
   }
   const predictions = await model.classify(sentences);
-  let report = "Sentiment Analysis: \n\n";
+  let report = "**Sentiment Analysis**: \n\n";
   for (const prediction of predictions) {
     const gatherResult = util.gatherToxicSentences(
       prediction.label,

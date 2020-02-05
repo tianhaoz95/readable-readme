@@ -28,6 +28,8 @@ Add the following code into your workflow steps:
 
 ![strcture diagram](./asset/structure_diagram.png)
 
+Also, check out the [documentation](https://tianhaoz.com/readable-readme/docs/api/index.html).
+
 ## Contribute
 
 Any contribution is greatly appreciated. Please check out [the guide](https://github.com/tianhaoz95/readable-readme/blob/master/CONTRIBUTING.md) for more details.
