@@ -418,7 +418,18 @@ export function markdown2text(markdown: string): string {
   return text;
 }
 
-export function gatherToxicSentences(results: any[], sentences: string[]) {
+/**
+ * Analyze the classification results from the sentences and
+ * gather the ones where issues were detected.
+ *
+ * @param results entries output by the classifier per sentence
+ * @param sentences the original sentences
+ */
+export function gatherToxicSentences(
+  label: string,
+  results: any[],
+  sentences: string[]
+) {
   let isToxic: boolean = false;
   const toxicSentences: string[] = [];
   for (let i = 0; i < results.length; ++i) {
@@ -429,7 +440,43 @@ export function gatherToxicSentences(results: any[], sentences: string[]) {
     }
   }
   return {
+    label,
     isToxic,
     toxicSentences
   };
+}
+
+/**
+ * Composes a single classification result entry to words.
+ *
+ * @param classification the structured classification result
+ */
+export function toxicityClassification2paragraph(classification) {
+  let content: string = "";
+  let title: string = "";
+  const translateDict = {
+    identity_attack: "Check for identity attack: ",
+    insult: "Check for insult: ",
+    obscene: "Check for obscene content: ",
+    severe_toxicity: "Check for severe toxic content: ",
+    sexual_explicit: "Check for sexual explicit content: ",
+    threat: "Check for threating content: ",
+    toxicity: "Check for toxic content: "
+  };
+  title = translateDict[classification.label];
+  if (classification.isToxic) {
+    content += title;
+    content += "issue found in ";
+    content += classification.toxicSentences.length.toString();
+    content += " sentences. :worried:";
+    content += "\n\n";
+    for (const toxicSentence of classification.toxicSentences) {
+      content += "* ";
+      content += toxicSentence;
+      content += "\n";
+    }
+  } else {
+    content = title + "no issue found :ok_hand:\n\n";
+  }
+  return content;
 }
