@@ -2,6 +2,7 @@ import * as core from "@actions/core";
 import fs from "fs";
 import micromatch from "micromatch";
 import path from "path";
+import marked from "marked";
 
 /**
  * This function get the GitHub workspace directory
@@ -387,5 +388,12 @@ export function traverseDir(rootDir: string): string[] {
 }
 
 export function markdown2text(markdown: string): string {
-  return "";
+  const tokens = marked.lexer(markdown);
+  let text: string = "";
+  for (const token of tokens) {
+    if (token.type === "paragraph") {
+      text += token.text;
+    }
+  }
+  return text;
 }

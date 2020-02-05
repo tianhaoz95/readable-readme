@@ -1,0 +1,1 @@
+{"version":3,"file":"diag_gpu.js","sourceRoot":"","sources":["../../../src/backends/webgl/diag_gpu.ts"],"names":[],"mappings":";AAAA;;;;;;;;;;;;;;;GAeG;;AAIH;IAKE,qBAAY,IAAY;QAJxB,kBAAa,GAAG,CAAC,GAAG,CAAC,CAAC;QAKpB,IAAI,CAAC,WAAW,GAAG,CAAC,IAAI,EAAE,IAAI,CAAC,CAAC;QAChC,IAAI,CAAC,QAAQ,GAAG,qLAMf,CAAC;IACJ,CAAC;IACH,kBAAC;AAAD,CAAC,AAfD,IAeC;AAfY,kCAAW"}

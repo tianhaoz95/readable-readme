@@ -1,7 +1,8 @@
 import writeGood from "write-good";
+import * as toxicity from '@tensorflow-models/toxicity';
 import * as util from "./util";
 
-function generateEnglishLangReport(content: string) {
+export function generateEnglishLangReport(content: string) {
   const suggestions = writeGood(content);
   for (const suggestion of suggestions) {
     const fromLineNumber = util.index2lineNumber(content, suggestion.index);
@@ -14,4 +15,16 @@ function generateEnglishLangReport(content: string) {
   return suggestions;
 }
 
-export default generateEnglishLangReport;
+export async function generateToxicityReport(content: string): Promise<string> {
+  const threshold: number = 0.9;
+  const model = await toxicity.load(threshold, [
+    "identity_attack",
+    "insult",
+    "obscene",
+    "severe_toxicity",
+    "sexual_explicit",
+    "threat",
+    "toxicity"
+  ]);
+  return "";
+}

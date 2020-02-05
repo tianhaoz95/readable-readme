@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import mustache from "mustache";
 import * as path from "path";
-import en from "./en";
+import * as en from "./en";
 import * as octo from "./octo";
 import * as report from "./report";
 import * as util from "./util";
@@ -25,7 +25,7 @@ export async function lintWorkspace() {
           filename: workspaceFile,
           relativePath,
         };
-        reportEntry.en = en(readmeFileContent);
+        reportEntry.en = en.generateEnglishLangReport(readmeFileContent);
         util.rrlog(`report entry is: ${reportEntry}`);
         reportsMetadata.push(reportEntry);
       }

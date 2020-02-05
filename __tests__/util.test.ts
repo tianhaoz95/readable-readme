@@ -321,4 +321,14 @@ describe("Utility test suite", () => {
       "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
     );
   });
+
+  it("markdown to text should not crash", () => {
+    expect(() => {
+      util.markdown2text("This is a plain text");
+    }).not.toThrow();
+  });
+
+  it("markdown to text should filter tags", () => {
+    expect(util.markdown2text("# title\n\nplain text")).toBe("plain text");
+  });
 });
