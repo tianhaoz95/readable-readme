@@ -42,26 +42,14 @@ export async function generateToxicityReport(content: string): Promise<string> {
     return "";
   }
   const predictions = await model.classify(sentences);
-  let report = "";
+  let report = "Sentiment Analysis: \n\n";
   for (const prediction of predictions) {
     const gatherResult = util.gatherToxicSentences(
+      prediction.label,
       prediction.results,
       sentences
     );
-    if (gatherResult.isToxic) {
-      report += prediction.label;
-      report += " detected in sentences: \n";
-      for (const toxicSentence of gatherResult.toxicSentences) {
-        report += "* ";
-        report += toxicSentence;
-        report += "\n";
-      }
-      report += "\n";
-    } else {
-      report += prediction.label;
-      report += ": not detected";
-      report += "\n";
-    }
+    report += util.toxicityClassification2paragraph(gatherResult);
   }
   return report;
 }

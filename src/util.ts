@@ -418,7 +418,18 @@ export function markdown2text(markdown: string): string {
   return text;
 }
 
-export function gatherToxicSentences(results: any[], sentences: string[]) {
+/**
+ * Analyze the classification results from the sentences and
+ * gather the ones where issues were detected.
+ *
+ * @param results entries output by the classifier per sentence
+ * @param sentences the original sentences
+ */
+export function gatherToxicSentences(
+  label: string,
+  results: any[],
+  sentences: string[]
+) {
   let isToxic: boolean = false;
   const toxicSentences: string[] = [];
   for (let i = 0; i < results.length; ++i) {
@@ -432,4 +443,47 @@ export function gatherToxicSentences(results: any[], sentences: string[]) {
     isToxic,
     toxicSentences
   };
+}
+
+/**
+ * Composes a single classification result entry to words.
+ *
+ * @param classification the structured classification result
+ */
+export function toxicityClassification2paragraph(classification) {
+  let content: string = "";
+  let title: string = "";
+  switch (classification.label) {
+    case "identity_attack":
+      title = "Check for identity attack: ";
+    case "insult":
+      title = "Check for insult: ";
+    case "obscene":
+      title = "Check for obscene content: ";
+    case "severe_toxicity":
+      title = "Check for severe toxic content: ";
+    case "sexual_explicit":
+      title = "Check for sexual explicit content: ";
+    case "threat":
+      title = "Check for threating content: ";
+    case "toxicity":
+      title = "Check for toxic content: ";
+    default:
+      title = "";
+  }
+  if (classification.isToxic) {
+    content += title;
+    content += "issue found in ";
+    content += classification.toxicSentences.length.toString();
+    content += " sentences. :worried:";
+    content += "\n\n";
+    for (const toxicSentence of classification.toxicSentences) {
+      content += "* ";
+      content += toxicSentence;
+      content += "\n";
+    }
+  } else {
+    content = title + "no issue found :ok_hand:";
+  }
+  return content;
 }

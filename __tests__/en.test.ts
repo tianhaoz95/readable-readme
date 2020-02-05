@@ -34,12 +34,12 @@ describe("English lang test suite", () => {
 
   it("toxicity linter should pass on good word", async () => {
     const report = await en.generateToxicityReport("Thanks!");
-    expect(report).toContain("not detected");
-    expect(report).not.toContain("probability");
+    expect(report).toContain(":ok_hand:");
+    expect(report).not.toContain(":worried:");
   });
 
   it("toxicity linter should stop on bad word", async () => {
     const report = await en.generateToxicityReport("you suck! fuck this!");
-    expect(report).toContain("toxicity detected");
+    expect(report).toContain(":worried:");
   });
 });

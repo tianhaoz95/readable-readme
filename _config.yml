@@ -2,6 +2,7 @@ theme: jekyll-theme-minimal
 include:
   - "_*_.html"
   - "_*_.*.html"
+  - "docs/api/index.html"
 title: Readable Readme
 description: A CI pipeline to keep READMEs readable for developers.
 show_downloads: true
