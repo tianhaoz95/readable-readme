@@ -46,7 +46,9 @@ describe("Utility test suite", () => {
   it("test workspace file getter deep", () => {
     const workspaceDir = util.getGitHubWorkspace();
     const workspaceFiles = util.listFiles(workspaceDir);
-    expect(workspaceFiles).toContain(path.join(workspaceDir + "/src/README.md"));
+    expect(workspaceFiles).toContain(
+      path.join(workspaceDir + "/src/README.md")
+    );
   });
 
   it("test file reading", () => {
@@ -105,7 +107,9 @@ describe("Utility test suite", () => {
   it("test repo validator basic", () => {
     expect(util.validateGitHubRepo("tianhaoz95/readable-readme")).toBe(true);
     expect(util.validateGitHubRepo("tianhaoz95-readable-readme")).toBe(false);
-    expect(util.validateGitHubRepo("tianhaoz95/readable-readme/README.md")).toBe(false);
+    expect(
+      util.validateGitHubRepo("tianhaoz95/readable-readme/README.md")
+    ).toBe(false);
     expect(util.validateGitHubRepo("/readable-readme")).toBe(false);
     expect(util.validateGitHubRepo("readable-readme/")).toBe(false);
   });
@@ -117,8 +121,12 @@ describe("Utility test suite", () => {
   });
 
   it("test owner parser functional basic", () => {
-    expect(util.parseGitHubRepoOwner("tianhaoz95/readable-readme")).toBe("tianhaoz95");
-    expect(util.parseGitHubRepoOwner("jacksonz/readable-readme")).toBe("jacksonz");
+    expect(util.parseGitHubRepoOwner("tianhaoz95/readable-readme")).toBe(
+      "tianhaoz95"
+    );
+    expect(util.parseGitHubRepoOwner("jacksonz/readable-readme")).toBe(
+      "jacksonz"
+    );
   });
 
   it("test owner getter no crash", () => {
@@ -138,7 +146,9 @@ describe("Utility test suite", () => {
   });
 
   it("test parse repo id functional", () => {
-    expect(util.parseGitHubRepoId("tianhaoz95/readable-readme")).toBe("readable-readme");
+    expect(util.parseGitHubRepoId("tianhaoz95/readable-readme")).toBe(
+      "readable-readme"
+    );
   });
 
   it("test get repo id no crash", () => {
@@ -152,7 +162,8 @@ describe("Utility test suite", () => {
   });
 
   it("test sanitize raw markdown tick mark", () => {
-    const wrongMarkdown = "This **is** a &#x60;test&#x60; and hope it works lol!";
+    const wrongMarkdown =
+      "This **is** a &#x60;test&#x60; and hope it works lol!";
     const correctMarkdown = "This **is** a `test` and hope it works lol!";
     expect(util.sanitizeMarkdown(wrongMarkdown)).toBe(correctMarkdown);
   });
@@ -251,7 +262,9 @@ describe("Utility test suite", () => {
   });
 
   it("test reason sanitizer replaces newline", () => {
-    expect(util.sanitizeReason("this test\nhas newline")).toBe("this test has newline");
+    expect(util.sanitizeReason("this test\nhas newline")).toBe(
+      "this test has newline"
+    );
   });
 
   it("test rrlog no crash", () => {
@@ -262,7 +275,10 @@ describe("Utility test suite", () => {
 
   it("test get readme ignore no crash", () => {
     const worksapceDir = util.getGitHubWorkspace();
-    const readmeIgnoreFilename = path.join(worksapceDir, "/horrible/.readmeignore");
+    const readmeIgnoreFilename = path.join(
+      worksapceDir,
+      "/horrible/.readmeignore"
+    );
     expect(() => {
       util.getReadmeIgnoreList(readmeIgnoreFilename);
     }).not.toThrow();
@@ -270,8 +286,13 @@ describe("Utility test suite", () => {
 
   it("test get readme ignore has correct content", () => {
     const worksapceDir = util.getGitHubWorkspace();
-    const readmeIgnoreFilename = path.join(worksapceDir, "/horrible/.readmeignore");
-    expect(util.getReadmeIgnoreList(readmeIgnoreFilename)).toContain("**/ignore/**/*.md");
+    const readmeIgnoreFilename = path.join(
+      worksapceDir,
+      "/horrible/.readmeignore"
+    );
+    expect(util.getReadmeIgnoreList(readmeIgnoreFilename)).toContain(
+      "**/ignore/**/*.md"
+    );
   });
 
   it("test file list getter no crash", () => {
@@ -281,7 +302,7 @@ describe("Utility test suite", () => {
     }).not.toThrow();
   });
 
-  it ("test index 2 line number no crash", () => {
+  it("test index 2 line number no crash", () => {
     expect(() => {
       util.index2lineNumber("abcde", 5);
     }).not.toThrow();
@@ -303,22 +324,34 @@ describe("Utility test suite", () => {
     const rawList: string[] = [
       "node_modules/README.md",
       "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
-      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md"
     ];
     const ignoreList: string[] = [
       "!node_modules/*",
       "!node_modules/**/*",
       "!dot_file/**/*",
-      "!dot_file/*",
+      "!dot_file/*"
     ];
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
-      "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+      "node_modules/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md"
     );
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
-      "node_modules/README.md",
+      "node_modules/README.md"
     );
     expect(util.ignoreFiles(rawList, ignoreList)).not.toContain(
-      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md",
+      "dot_file/@octokit/types/.github/ISSUE_TEMPLATE/04_thanks.md"
+    );
+  });
+
+  it("markdown to text should not crash", () => {
+    expect(() => {
+      util.markdown2text("This is a plain text");
+    }).not.toThrow();
+  });
+
+  it("markdown to text should filter tags", () => {
+    expect(util.markdown2text("# title\n\nplain text\n\nplain text")).toBe(
+      "plain text.plain text."
     );
   });
 });

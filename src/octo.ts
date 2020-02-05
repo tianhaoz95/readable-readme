@@ -14,25 +14,25 @@ function getOctokit() {
 export async function matchIssueTitle(
   title: string,
   repo: string,
-  owner: string,
+  owner: string
 ) {
   const octokit = getOctokit();
   const allIssues = await octokit.issues.listForRepo({
     owner,
-    repo,
+    repo
   });
   for (const issue of allIssues.data) {
     const issueTitle = issue.title;
     if (title === issueTitle && issue.state === "open") {
       return {
         found: true,
-        issueNumber: issue.number,
+        issueNumber: issue.number
       };
     }
   }
   return {
     found: false,
-    issueNumber: -1,
+    issueNumber: -1
   };
 }
 
@@ -65,7 +65,7 @@ export async function postGitHubPullRequestComment(content: string) {
     body: content,
     issue_number: pullRequestNumber,
     owner: repoOwner,
-    repo: repoId,
+    repo: repoId
   });
   return "OK";
 }
@@ -73,11 +73,7 @@ export async function postGitHubPullRequestComment(content: string) {
 export async function postGitHubIssue(title: string, body: string) {
   const repoOwner = util.getGitHubRepoOwner();
   const repoId = util.getGitHubRepoId();
-  const issueMatch = await matchIssueTitle(
-    title,
-    repoId,
-    repoOwner,
-  );
+  const issueMatch = await matchIssueTitle(title, repoId, repoOwner);
   if (issueMatch.found) {
     util.rrlog("issue exist, updating existing issue...");
     const octokit = getOctokit();
@@ -86,7 +82,7 @@ export async function postGitHubIssue(title: string, body: string) {
       issue_number: issueMatch.issueNumber,
       owner: repoOwner,
       repo: repoId,
-      title,
+      title
     });
   } else {
     util.rrlog("issue not exist, creating new issue...");
@@ -95,7 +91,7 @@ export async function postGitHubIssue(title: string, body: string) {
       body,
       owner: repoOwner,
       repo: repoId,
-      title,
+      title
     });
   }
   return "OK";

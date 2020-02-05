@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest && tslint 'src/**/*.ts' '__tests__/**/*.ts'",
-    "lint": "tslint 'src/**/*.ts' '__tests__/**/*.ts' --fix",
+    "format": "tslint 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts' --fix && prettier --write 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts'",
     "docs": "typedoc --readme ./src/README.md --out ./docs/api ./src",
     "start": "LOCAL_TESTING=true ts-node ./src/main.ts"
   },
@@ -25,9 +25,15 @@
   "dependencies": {
     "@actions/core": "^1.2.2",
     "@actions/github": "^2.1.0",
+    "@tensorflow-models/toxicity": "^1.2.2",
+    "@tensorflow/tfjs": "^1.5.2",
+    "bufferutil": "^4.0.1",
+    "canvas": "^2.6.1",
+    "marked": "^0.8.0",
     "micromatch": "^4.0.2",
     "mustache": "^4.0.0",
     "nock": "^11.7.2",
+    "utf-8-validate": "^5.0.2",
     "write-good": "^1.0.2"
   },
   "devDependencies": {
@@ -35,6 +41,7 @@
     "@types/node": "^13.7.0",
     "jest": "^25.1.0",
     "jest-circus": "^25.1.0",
+    "prettier": "1.19.1",
     "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
     "tslint": "^6.0.0",

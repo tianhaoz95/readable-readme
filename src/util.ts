@@ -2,6 +2,7 @@ import * as core from "@actions/core";
 import fs from "fs";
 import micromatch from "micromatch";
 import path from "path";
+import marked from "marked";
 
 /**
  * This function get the GitHub workspace directory
@@ -224,7 +225,7 @@ export function readFileContent(filename: string): string {
  * @param filename the filename that needs to be checked
  */
 export function isReadmeFilename(filename: string) {
-  const matcher = new RegExp("^.*\.(md|markdown)$");
+  const matcher = new RegExp("^.*.(md|markdown)$");
   const match = matcher.test(filename);
   return match;
 }
@@ -235,7 +236,10 @@ export function isReadmeFilename(filename: string) {
  * @param template the template id name to load (without the .md extension)
  */
 export function loadTemplate(template: string) {
-  const filename = path.join(path.resolve(__dirname), "../template/" + template + ".md");
+  const filename = path.join(
+    path.resolve(__dirname),
+    "../template/" + template + ".md"
+  );
   const templateContent = fs.readFileSync(filename, "utf8");
   return templateContent;
 }
@@ -255,7 +259,7 @@ export function sanitizeMarkdown(rawText) {
  */
 export function sanitizeReason(rawReason: string): string {
   let sanitizedReason = rawReason;
-  sanitizedReason = sanitizedReason.replace(/\n/ig, " ");
+  sanitizedReason = sanitizedReason.replace(/\n/gi, " ");
   return sanitizedReason;
 }
 
@@ -321,8 +325,13 @@ export function getLintFileList(workspaceDir: string): string[] {
   return workspaceFiles;
 }
 
-export function ignoreFiles(rawFiles: string[], ignoreList: string[]): string[] {
-  const filteredFiles: string[] = micromatch(rawFiles, ignoreList, {dot: true});
+export function ignoreFiles(
+  rawFiles: string[],
+  ignoreList: string[]
+): string[] {
+  const filteredFiles: string[] = micromatch(rawFiles, ignoreList, {
+    dot: true
+  });
   const finalFiles: string[] = [];
   for (const filteredFile of filteredFiles) {
     if (filteredFile.indexOf("node_modules") === -1) {
@@ -351,7 +360,11 @@ export function index2lineNumber(content: string, index: number): number {
   return sentenceCnt;
 }
 
-export function generatePermaLink(startLine: number, endLine: number, relativePath: string): string {
+export function generatePermaLink(
+  startLine: number,
+  endLine: number,
+  relativePath: string
+): string {
   let permaLink = "";
   const baseUrl = "https://github.com/";
   permaLink += baseUrl;
@@ -369,14 +382,19 @@ export function generatePermaLink(startLine: number, endLine: number, relativePa
 }
 
 export function getFilePathsRecursiveHelper(rootDir: string): string[] {
-  const entryPaths = fs.readdirSync(rootDir).map((entry) => {
+  const entryPaths = fs.readdirSync(rootDir).map(entry => {
     return path.join(rootDir, entry);
   });
-  const filePaths = entryPaths.filter((entryPath) => {
+  const filePaths = entryPaths.filter(entryPath => {
     return fs.statSync(entryPath).isFile();
   });
-  const dirPaths = entryPaths.filter((entryPath) => !filePaths.includes(entryPath));
-  const dirFiles = dirPaths.reduce((prev, curr) => prev.concat(getFilePathsRecursiveHelper(curr)), [] as string[]);
+  const dirPaths = entryPaths.filter(
+    entryPath => !filePaths.includes(entryPath)
+  );
+  const dirFiles = dirPaths.reduce(
+    (prev, curr) => prev.concat(getFilePathsRecursiveHelper(curr)),
+    [] as string[]
+  );
   const combinedEntries = [...filePaths, ...dirFiles];
   return combinedEntries;
 }
@@ -384,4 +402,34 @@ export function getFilePathsRecursiveHelper(rootDir: string): string[] {
 export function traverseDir(rootDir: string): string[] {
   const files = getFilePathsRecursiveHelper(rootDir);
   return files;
+}
+
+export function markdown2text(markdown: string): string {
+  const tokens = marked.lexer(markdown);
+  let text: string = "";
+  for (const token of tokens) {
+    if (token.type === "paragraph") {
+      text += token.text;
+      if (token.text.charAt(token.text.length - 1) !== ".") {
+        text += ".";
+      }
+    }
+  }
+  return text;
+}
+
+export function gatherToxicSentences(results: any[], sentences: string[]) {
+  let isToxic: boolean = false;
+  const toxicSentences: string[] = [];
+  for (let i = 0; i < results.length; ++i) {
+    if (results[i].match) {
+      isToxic = true;
+      const toxicSentence: string = sentences[i];
+      toxicSentences.push(toxicSentence);
+    }
+  }
+  return {
+    isToxic,
+    toxicSentences
+  };
 }
