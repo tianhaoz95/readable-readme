@@ -7,4 +7,15 @@
 
 {{{content}}}
 
+<details>
+  <summary>
+    Sentiment Analysis
+  </summary>
+
+<br/>
+
+{{{sentiment_analysisi}}}
+
+</details>
+
 </details>

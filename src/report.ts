@@ -38,10 +38,6 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     reportContent += suggestionEntryContent;
     reportContent += "\n\n";
   }
-  if (reportMetadata.toxicity.length > 0) {
-    reportContent += reportMetadata.toxicity;
-    reportContent += "\n\n";
-  }
   const link = mustache.render(fileLinkTemplate, {
     owner,
     path: relativePath,
@@ -51,7 +47,8 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
   const finalReport = mustache.render(reportTemplate, {
     content: reportContent,
     filename: relativePath,
-    link
+    link,
+    sentiment_analysis: reportMetadata.toxicity
   });
   return finalReport;
 }

@@ -2,8 +2,21 @@ import writeGood from "write-good";
 import * as toxicity from "@tensorflow-models/toxicity";
 import * as util from "./util";
 
+/**
+ * The neural net model for sentiment analysisi
+ *
+ * It classifies the doc again multiple potential ways
+ * of not being respectful.
+ */
 let model: toxicity.ToxicityClassifier | undefined;
 
+/**
+ * This function fetches the model for performing
+ * sentiment analysis.
+ *
+ * It's a long-running loading, so only run it once
+ * per execution to save time.
+ */
 async function fetchToxcityClassifier() {
   const threshold: number = 0.9;
   if (model === undefined) {
@@ -19,6 +32,12 @@ async function fetchToxcityClassifier() {
   }
 }
 
+/**
+ * This function generate a report of language issues based on
+ * hard coded rules.
+ *
+ * @param content the content of a single markdown file
+ */
 export function generateEnglishLangReport(content: string) {
   const suggestions = writeGood(content);
   for (const suggestion of suggestions) {
@@ -35,6 +54,12 @@ export function generateEnglishLangReport(content: string) {
   return suggestions;
 }
 
+/**
+ * This function generates a report of respectfulness and fairness
+ * of a markdown with neural nets.
+ *
+ * @param content the content of a single markdown file
+ */
 export async function generateToxicityReport(content: string): Promise<string> {
   await fetchToxcityClassifier();
   const sentences = content.split(/[.|?|!]/);
