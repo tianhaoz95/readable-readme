@@ -455,13 +455,13 @@ export function toxicityClassification2paragraph(classification) {
   let content: string = "";
   let title: string = "";
   const translateDict = {
-    identity_attack: "Check for identity attack: ",
-    insult: "Check for insult: ",
-    obscene: "Check for obscene content: ",
-    severe_toxicity: "Check for severe toxic content: ",
-    sexual_explicit: "Check for sexual explicit content: ",
-    threat: "Check for threating content: ",
-    toxicity: "Check for toxic content: "
+    identity_attack: "* Check for identity attack: ",
+    insult: "* Check for insult: ",
+    obscene: "* Check for obscene content: ",
+    severe_toxicity: "* Check for severe toxic content: ",
+    sexual_explicit: "* Check for sexual explicit content: ",
+    threat: "* Check for threating content: ",
+    toxicity: "* Check for toxic content: "
   };
   title = translateDict[classification.label];
   if (classification.isToxic) {
@@ -471,9 +471,9 @@ export function toxicityClassification2paragraph(classification) {
     content += " sentences. :worried:";
     content += "\n\n";
     for (const toxicSentence of classification.toxicSentences) {
-      content += "* ";
-      content += toxicSentence;
-      content += "\n";
+      content += "  * `";
+      content += toxicSentence.split("\n").join("");
+      content += "`\n";
     }
   } else {
     content = title + "no issue found :ok_hand:\n\n";
