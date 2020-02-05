@@ -385,3 +385,7 @@ export function traverseDir(rootDir: string): string[] {
   const files = getFilePathsRecursiveHelper(rootDir);
   return files;
 }
+
+export function markdown2text(markdown: string): string {
+  return "";
+}
