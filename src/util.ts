@@ -472,7 +472,7 @@ export function toxicityClassification2paragraph(classification) {
     content += "\n\n";
     for (const toxicSentence of classification.toxicSentences) {
       content += "  * `";
-      content += toxicSentence.replace(/[\n|.|#|^]/, "");
+      content += toxicSentence.split("\n").join("");
       content += "`\n";
     }
   } else {
