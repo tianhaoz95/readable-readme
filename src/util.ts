@@ -483,7 +483,7 @@ export function toxicityClassification2paragraph(classification) {
       content += "\n";
     }
   } else {
-    content = title + "no issue found :ok_hand:";
+    content = title + "no issue found :ok_hand:\n\n";
   }
   return content;
 }
