@@ -11,6 +11,10 @@ export function initTestingEnvironmentVariables() {
   process.env.TEST_GITHUB_TOKEN = "test_token";
 }
 
+export function overrideWorkspaceToHorrible() {
+  process.env.GITHUB_WORKSPACE = path.join(__dirname, "../../horrible/");
+}
+
 export function cleanTestingEnvironmentVariables() {
   process.env.GITHUB_WORKSPACE = undefined;
   process.env.GITHUB_REPOSITORY = undefined;

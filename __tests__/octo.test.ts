@@ -27,13 +27,14 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, []);
+      .get(IssueScope)
+      .reply(200, []);
     nock(GitHubEndpoint)
-      .post(IssueScope).reply(200);
-    return expect(octo.postGitHubIssue(
-      "test title",
-      "test body",
-    )).resolves.toBeDefined();
+      .post(IssueScope)
+      .reply(200);
+    return expect(
+      octo.postGitHubIssue("test title", "test body")
+    ).resolves.toBeDefined();
   });
 
   test("octo issue poster basic", async () => {
@@ -41,15 +42,17 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, []);
+      .get(IssueScope)
+      .reply(200, []);
     nock(GitHubEndpoint)
       .post(IssueScope, (body: any): boolean => {
         expect(body).toMatchObject({
           body: "test body",
-          title: "test title",
+          title: "test title"
         });
         return true;
-      }).reply(200);
+      })
+      .reply(200);
     await octo.postGitHubIssue("test title", "test body");
   });
 
@@ -58,21 +61,23 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, [
+      .get(IssueScope)
+      .reply(200, [
         {
           number: 1,
           state: "open",
-          title: "test title",
-        },
+          title: "test title"
+        }
       ]);
     nock(GitHubEndpoint)
       .patch(FirstIssueScope, (body: any): boolean => {
         expect(body).toMatchObject({
           body: "test body",
-          title: "test title",
+          title: "test title"
         });
         return true;
-      }).reply(200);
+      })
+      .reply(200);
     await octo.postGitHubIssue("test title", "test body");
   });
 
@@ -81,15 +86,14 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, [
+      .get(IssueScope)
+      .reply(200, [
         { title: "test title 1", number: 0, state: "open" },
-        { title: "test title 2", number: 1, state: "open" },
+        { title: "test title 2", number: 1, state: "open" }
       ]);
-    return expect(octo.matchIssueTitle(
-      "test title 1",
-      "readable-readme",
-      "tianhaoz95",
-    )).resolves.toBeDefined();
+    return expect(
+      octo.matchIssueTitle("test title 1", "readable-readme", "tianhaoz95")
+    ).resolves.toBeDefined();
   });
 
   test("octo issue matcher helper match", () => {
@@ -97,17 +101,16 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, [
+      .get(IssueScope)
+      .reply(200, [
         { title: "test title 1", number: 0, state: "open" },
-        { title: "test title 2", number: 1, state: "open" },
+        { title: "test title 2", number: 1, state: "open" }
       ]);
-    return expect(octo.matchIssueTitle(
-      "test title 1",
-      "readable-readme",
-      "tianhaoz95",
-    )).resolves.toEqual({
+    return expect(
+      octo.matchIssueTitle("test title 1", "readable-readme", "tianhaoz95")
+    ).resolves.toEqual({
       found: true,
-      issueNumber: 0,
+      issueNumber: 0
     });
   });
 
@@ -116,17 +119,20 @@ describe("octo test suite", () => {
       .post(AuthScope)
       .reply(200, { token: "test" });
     nock(GitHubEndpoint)
-      .get(IssueScope).reply(200, [
+      .get(IssueScope)
+      .reply(200, [
         { title: "test title 1", number: 0, state: "open" },
-        { title: "test title 2", number: 1, state: "open" },
+        { title: "test title 2", number: 1, state: "open" }
       ]);
-    return expect(octo.matchIssueTitle(
-      "test title no match",
-      "readable-readme",
-      "tianhaoz95",
-    )).resolves.toEqual({
+    return expect(
+      octo.matchIssueTitle(
+        "test title no match",
+        "readable-readme",
+        "tianhaoz95"
+      )
+    ).resolves.toEqual({
       found: false,
-      issueNumber: -1,
+      issueNumber: -1
     });
   });
 

@@ -18,19 +18,20 @@ describe("Report test suite", () => {
             index: 10,
             offset: 5,
             reason: "test rocks!",
-            toLine: 1,
+            toLine: 1
           },
           {
             fromLine: 1,
             index: 20,
             offset: 3,
             reason: "ahhh I am hungry...",
-            toLine: 1,
-          },
+            toLine: 1
+          }
         ],
         fileContent: "test full context",
         filename: "test filename",
         relativePath: "test relative path",
+        toxicity: "na"
       });
     }).not.toThrow();
   });
@@ -41,6 +42,7 @@ describe("Report test suite", () => {
       fileContent: "test full context",
       filename: "test filename",
       relativePath: "test relative path",
+      toxicity: "na"
     });
     expect(reportContent).toContain("test relative path");
     expect(reportContent).toContain("Report for");
@@ -54,18 +56,19 @@ describe("Report test suite", () => {
           index: 10,
           offset: 5,
           reason: "test rocks!",
-          toLine: 1,
+          toLine: 1
         },
         {
           fromLine: 1,
           index: 20,
           offset: 3,
           reason: "ahhh I am hungry...",
-          toLine: 1,
-        },
+          toLine: 1
+        }
       ],
       fileContent: "test full context",
       filename: "test filename",
+      toxicity: "na"
     });
     expect(reportContent).toContain("test rocks!");
     expect(reportContent).toContain("ahhh I am hungry...");
@@ -79,18 +82,19 @@ describe("Report test suite", () => {
           index: 10,
           offset: 5,
           reason: "test rocks!",
-          toLine: 1,
+          toLine: 1
         },
         {
           fromLine: 1,
           index: 20,
           offset: 3,
           reason: "ahhh I am hungry...",
-          toLine: 1,
-        },
+          toLine: 1
+        }
       ],
       fileContent: "test full context",
       filename: "test filename",
+      toxicity: "na"
     });
     expect(reportContent).toContain("<details>");
     expect(reportContent).toContain("</details>");
@@ -106,14 +110,17 @@ describe("Report test suite", () => {
           index: 10,
           offset: 5,
           reason: "test rocks! test rocks!",
-          toLine: 1,
-        },
+          toLine: 1
+        }
       ],
       fileContent: "test full context",
       filename: "test filename",
       relativePath: "src/test.md",
+      toxicity: "na"
     });
-    expect(reportContent).toContain("https://github.com/tianhaoz95/readable-readme/blob/abc250abc/src/test.md#L1-L1");
+    expect(reportContent).toContain(
+      "https://github.com/tianhaoz95/readable-readme/blob/abc250abc/src/test.md#L1-L1"
+    );
   });
 
   it("get report issue title no crash", () => {
@@ -137,25 +144,21 @@ describe("Report test suite", () => {
 
   it("snippet getter basic", () => {
     const testText = "This is a test and hope it works lol!";
-    expect(
-      report.getSnippet(10, 4, 4, testText),
-    ).toEqual({
+    expect(report.getSnippet(10, 4, 4, testText)).toEqual({
       fullSnippet: "s a test and",
       highlight: "test",
       leftContext: "s a ",
-      rightContext: " and",
+      rightContext: " and"
     });
   });
 
   it("snippet getter out of bound", () => {
     const testText = "This is a test and hope it works lol!";
-    expect(
-      report.getSnippet(10, 4, 100, testText),
-    ).toEqual({
+    expect(report.getSnippet(10, 4, 100, testText)).toEqual({
       fullSnippet: "This is a test and hope it works lol!",
       highlight: "test",
       leftContext: "This is a ",
-      rightContext: " and hope it works lol!",
+      rightContext: " and hope it works lol!"
     });
   });
 
@@ -165,7 +168,7 @@ describe("Report test suite", () => {
         "left context",
         "right context",
         "highlight",
-        "plainTextSnippet",
+        "plainTextSnippet"
       );
     }).not.toThrow();
   });
@@ -176,8 +179,9 @@ describe("Report test suite", () => {
         "left context",
         "right context",
         "highlight",
-        "plainTextSnippet",
-      )).toBe("left context**highlight**right context");
+        "plainTextSnippet"
+      )
+    ).toBe("left context**highlight**right context");
   });
 
   it("snippet compiler tick mark", () => {
@@ -186,8 +190,9 @@ describe("Report test suite", () => {
         "left `context`",
         "right `context`",
         "highlight",
-        "plainTextSnippet",
-      )).toBe("left `context`**highlight**right `context`");
+        "plainTextSnippet"
+      )
+    ).toBe("left `context`**highlight**right `context`");
   });
 
   it("snippet compiler less than", () => {
@@ -196,8 +201,9 @@ describe("Report test suite", () => {
         "left <context",
         "right <context",
         "highlight",
-        "plainTextSnippet",
-      )).toBe("left <context**highlight**right <context");
+        "plainTextSnippet"
+      )
+    ).toBe("left <context**highlight**right <context");
   });
 
   it("snippet renderer no crash", () => {
@@ -209,15 +215,15 @@ describe("Report test suite", () => {
 
   it("snippet renderer basic", () => {
     const testText = "This is a test and hope it works lol!";
-    expect(
-      report.renderSnippet(5, 2, 100, testText, "plainTextSnippet"),
-    ).toBe("This **is** a test and hope it works lol!");
+    expect(report.renderSnippet(5, 2, 100, testText, "plainTextSnippet")).toBe(
+      "This **is** a test and hope it works lol!"
+    );
   });
 
   it("snippet renderer tick marks", () => {
     const testText = "This is a `test` and hope it works lol!";
-    expect(
-      report.renderSnippet(5, 2, 100, testText, "plainTextSnippet"),
-    ).toBe("This **is** a `test` and hope it works lol!");
+    expect(report.renderSnippet(5, 2, 100, testText, "plainTextSnippet")).toBe(
+      "This **is** a `test` and hope it works lol!"
+    );
   });
 });

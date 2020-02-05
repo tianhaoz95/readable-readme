@@ -20,27 +20,38 @@ export function composeReportMetadataToParagraph(reportMetadata): string {
     const suggestionContent = util.sanitizeReason(suggestion.reason);
     const suggestionIndex = suggestion.index;
     const suggestionOffset = suggestion.offset;
-    const permaLink = util.generatePermaLink(suggestion.fromLine, suggestion.toLine, relativePath);
+    const permaLink = util.generatePermaLink(
+      suggestion.fromLine,
+      suggestion.toLine,
+      relativePath
+    );
     const suggestionRenderContent = {
       index: suggestionIndex,
       offset: suggestionOffset,
       snippet: permaLink,
-      suggestion: suggestionContent,
+      suggestion: suggestionContent
     };
-    const suggestionEntryContent = mustache.render(suggestionTemplate, suggestionRenderContent);
+    const suggestionEntryContent = mustache.render(
+      suggestionTemplate,
+      suggestionRenderContent
+    );
     reportContent += suggestionEntryContent;
+    reportContent += "\n\n";
+  }
+  if (reportMetadata.toxicity.length > 0) {
+    reportContent += reportMetadata.toxicity;
     reportContent += "\n\n";
   }
   const link = mustache.render(fileLinkTemplate, {
     owner,
     path: relativePath,
-    ref: "master", /** TODO(tianhao95): get this programmatically */
-    repo,
+    ref: "master" /** TODO(tianhao95): get this programmatically */,
+    repo
   });
   const finalReport = mustache.render(reportTemplate, {
     content: reportContent,
     filename: relativePath,
-    link,
+    link
   });
   return finalReport;
 }
@@ -69,7 +80,7 @@ export function getSnippet(
   index: number,
   offset: number,
   range: number,
-  fullText: string,
+  fullText: string
 ) {
   const textSize = fullText.length;
   const startIndex = Math.max(0, index - range);
@@ -86,7 +97,7 @@ export function getSnippet(
     /** The context text to the left of the hightlight */
     leftContext,
     /** The context text to the right of the hightlight */
-    rightContext,
+    rightContext
   };
 }
 
@@ -101,18 +112,15 @@ export function compileSnippet(
   leftContext: string,
   rightContext: string,
   highlight: string,
-  template: string,
+  template: string
 ): string {
   const templateContent = util.loadTemplate(template);
   const compiledSnippet = util.sanitizeMarkdown(
-    mustache.render(
-      templateContent,
-      {
-        highlight,
-        leftContext,
-        rightContext,
-      },
-    ),
+    mustache.render(templateContent, {
+      highlight,
+      leftContext,
+      rightContext
+    })
   );
   return compiledSnippet;
 }
@@ -132,14 +140,14 @@ export function renderSnippet(
   offset: number,
   range: number,
   fullText: string,
-  template: string,
+  template: string
 ): string {
   const snippetMetadata = getSnippet(index, offset, range, fullText);
   const snippetText = compileSnippet(
     snippetMetadata.leftContext,
     snippetMetadata.rightContext,
     snippetMetadata.highlight,
-    template,
+    template
   );
   return snippetText;
 }

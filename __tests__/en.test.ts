@@ -1,5 +1,7 @@
 import * as en from "../src/en";
 
+jest.setTimeout(100000);
+
 describe("English lang test suite", () => {
   it("test no crash", () => {
     expect(() => {
@@ -12,8 +14,14 @@ describe("English lang test suite", () => {
   });
 
   it("test line number exist", () => {
-    expect(en.generateEnglishLangReport("Thank you!\nI just want to drink\n")[0].fromLine).toEqual(2);
-    expect(en.generateEnglishLangReport("Thank you!\nI just want to drink\n")[0].toLine).toEqual(2);
+    expect(
+      en.generateEnglishLangReport("Thank you!\nI just want to drink\n")[0]
+        .fromLine
+    ).toEqual(2);
+    expect(
+      en.generateEnglishLangReport("Thank you!\nI just want to drink\n")[0]
+        .toLine
+    ).toEqual(2);
   });
 
   it("toxicity linter should pass on good word", async () => {
@@ -23,9 +31,7 @@ describe("English lang test suite", () => {
   });
 
   it("toxicity linter should stop on bad word", async () => {
-    const report = await en.generateToxicityReport("You suck!");
-    expect(report).toBe("wtf");
-    expect(report).toContain("not detected");
-    expect(report).not.toContain("probability");
+    const report = await en.generateToxicityReport("you suck! fuck this!");
+    expect(report).toContain("toxicity detected");
   });
 });
