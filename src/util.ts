@@ -440,6 +440,7 @@ export function gatherToxicSentences(
     }
   }
   return {
+    label,
     isToxic,
     toxicSentences
   };
