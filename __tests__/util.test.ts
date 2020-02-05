@@ -329,6 +329,6 @@ describe("Utility test suite", () => {
   });
 
   it("markdown to text should filter tags", () => {
-    expect(util.markdown2text("# title\n\nplain text")).toBe("plain text");
+    expect(util.markdown2text("# title\n\nplain text\n\nplain text")).toBe("plain text.plain text.");
   });
 });

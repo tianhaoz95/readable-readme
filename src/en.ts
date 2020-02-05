@@ -26,5 +26,14 @@ export async function generateToxicityReport(content: string): Promise<string> {
     "threat",
     "toxicity"
   ]);
-  return "";
+  const sentences = content.split(/[\s,]+/);
+  const predictions = await model.classify(sentences);
+  let report = "";
+  for (const prediction of predictions) {
+    report += "label: ";
+    report += prediction.label;
+    report += ", probability: ";
+    report += prediction.results.toString();
+  }
+  return report;
 }

@@ -393,6 +393,9 @@ export function markdown2text(markdown: string): string {
   for (const token of tokens) {
     if (token.type === "paragraph") {
       text += token.text;
+      if (token.text.charAt(token.text.length-1) !== ".") {
+        text += ".";
+      }
     }
   }
   return text;
