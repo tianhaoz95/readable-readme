@@ -30,10 +30,16 @@ export async function generateToxicityReport(content: string): Promise<string> {
   const predictions = await model.classify(sentences);
   let report = "";
   for (const prediction of predictions) {
-    report += "label: ";
-    report += prediction.label;
-    report += ", probability: ";
-    report += prediction.results.toString();
+    if (prediction.results[0].match) {
+      report += prediction.label;
+      report += " detected with probability: ";
+      report += Math.max(prediction.results[0].probabilities[0], prediction.results[0].probabilities[1]).toString();
+      report += '\n';
+    } else {
+      report += prediction.label;
+      report += " not detected";
+      report += '\n'
+    }
   }
   return report;
 }
