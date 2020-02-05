@@ -7,8 +7,6 @@ const AuthScope: string = "/app/installations/2/access_tokens";
 const IssueScope: string = "/repos/tianhaoz95/readable-readme/issues";
 const FirstIssueScope: string = "/repos/tianhaoz95/readable-readme/issues/1";
 
-nock.disableNetConnect();
-
 describe("octo test suite", () => {
   beforeAll(() => {
     testUtil.initTestingEnvironmentVariables();
@@ -18,8 +16,13 @@ describe("octo test suite", () => {
     testUtil.cleanTestingEnvironmentVariables();
   });
 
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
   afterEach(() => {
     nock.cleanAll();
+    nock.enableNetConnect();
   });
 
   test("octo issue poster no crash", async () => {

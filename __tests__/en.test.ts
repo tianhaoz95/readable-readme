@@ -1,8 +1,16 @@
 import * as en from "../src/en";
+import nock from "nock";
 
 jest.setTimeout(100000);
 
 describe("English lang test suite", () => {
+  beforeEach(() => {
+    nock.enableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+  });
   it("test no crash", () => {
     expect(() => {
       en.generateEnglishLangReport("Thank you!");

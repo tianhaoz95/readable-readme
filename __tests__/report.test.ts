@@ -1,5 +1,6 @@
 import * as report from "../src/report";
 import * as testUtil from "./utilities/init_env.test";
+import nock from "nock";
 
 describe("Report test suite", () => {
   beforeAll(() => {
@@ -9,6 +10,16 @@ describe("Report test suite", () => {
   afterAll(() => {
     testUtil.cleanTestingEnvironmentVariables();
   });
+
+  beforeEach(() => {
+    nock.disableNetConnect();
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+    nock.enableNetConnect();
+  });
+
   it("generate report no crash", () => {
     expect(() => {
       report.composeReportMetadataToParagraph({

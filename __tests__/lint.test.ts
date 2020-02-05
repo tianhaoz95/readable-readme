@@ -32,6 +32,12 @@ describe("Lint test suite", () => {
   afterAll(() => {
     testUtil.cleanTestingEnvironmentVariables();
   });
+  beforeEach(() => {
+    nock.enableNetConnect();
+  });
+  afterEach(() => {
+    nock.cleanAll();
+  });
   it("test lint execute without crashing", () => {
     return expect(lint.lintWorkspace()).resolves.toBe("OK");
   });
