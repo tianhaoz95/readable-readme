@@ -22,7 +22,7 @@ jobs:
         env:
           RRLOG: "true"
         with:
-          token: ${{ secrets.TEST_GITHUB_TOKEN }}:
+          token: ${{ secrets.TEST_GITHUB_TOKEN }}
   end_to_end_old_deps:
     runs-on: ubuntu-latest
     steps:
