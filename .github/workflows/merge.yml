@@ -7,22 +7,26 @@ on:
     branches: 
       - master
 jobs:
-  end_to_end:
+  end_to_end_updated_deps:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: run current implementation with old dependencies
-        uses: ./
-        env:
-          RRLOG: "true"
-        with:
-          token: ${{ secrets.TEST_GITHUB_TOKEN }}
       - name: remove outdated packages
         run: |
           rm -rf ./node_modules
       - name: install updated packages
         run: |
           npm install
+      - name: run current implementation with new dependencies
+        uses: ./
+        env:
+          RRLOG: "true"
+        with:
+          token: ${{ secrets.TEST_GITHUB_TOKEN }}:
+  end_to_end_old_deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
       - name: run current implementation with old dependencies
         uses: ./
         env:
