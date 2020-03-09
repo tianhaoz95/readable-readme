@@ -1,0 +1,24 @@
+name: Odin
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/health.yml"
+      - "package.json"
+      - "package-lock.json"
+  schedule:
+    - cron: 0 2 * * *
+jobs:
+  test:
+    name: run JS dependency update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: JS Actions Dependency Updater
+        uses: tianhaoz95/js-actions-dependency-updater@v0.0.1
+        with:
+          workspace: './'
+          git-email: 'tianhaoz@umich.edu'
+          git-name: 'Tianhao Zhou'
+          token: ${{ secrets.TEST_GITHUB_TOKEN }}
