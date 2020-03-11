@@ -44,7 +44,7 @@
     "prettier": "1.19.1",
     "ts-jest": "^25.2.1",
     "ts-node": "^8.6.2",
-    "tslint": "^6.0.0",
+    "tslint": "^6.1.0",
     "typedoc": "^0.16.11",
     "typescript": "^3.8.3",
     "vscode-ripgrep": "^1.5.8"
