@@ -364,38 +364,38 @@ declare class Buffer extends Uint8Array {
     readUIntBE(offset: number, byteLength: number): number;
     readIntLE(offset: number, byteLength: number): number;
     readIntBE(offset: number, byteLength: number): number;
-    readUInt8(offset: number): number;
-    readUInt16LE(offset: number): number;
-    readUInt16BE(offset: number): number;
-    readUInt32LE(offset: number): number;
-    readUInt32BE(offset: number): number;
-    readInt8(offset: number): number;
-    readInt16LE(offset: number): number;
-    readInt16BE(offset: number): number;
-    readInt32LE(offset: number): number;
-    readInt32BE(offset: number): number;
-    readFloatLE(offset: number): number;
-    readFloatBE(offset: number): number;
-    readDoubleLE(offset: number): number;
-    readDoubleBE(offset: number): number;
+    readUInt8(offset?: number): number;
+    readUInt16LE(offset?: number): number;
+    readUInt16BE(offset?: number): number;
+    readUInt32LE(offset?: number): number;
+    readUInt32BE(offset?: number): number;
+    readInt8(offset?: number): number;
+    readInt16LE(offset?: number): number;
+    readInt16BE(offset?: number): number;
+    readInt32LE(offset?: number): number;
+    readInt32BE(offset?: number): number;
+    readFloatLE(offset?: number): number;
+    readFloatBE(offset?: number): number;
+    readDoubleLE(offset?: number): number;
+    readDoubleBE(offset?: number): number;
     reverse(): this;
     swap16(): Buffer;
     swap32(): Buffer;
     swap64(): Buffer;
-    writeUInt8(value: number, offset: number): number;
-    writeUInt16LE(value: number, offset: number): number;
-    writeUInt16BE(value: number, offset: number): number;
-    writeUInt32LE(value: number, offset: number): number;
-    writeUInt32BE(value: number, offset: number): number;
-    writeInt8(value: number, offset: number): number;
-    writeInt16LE(value: number, offset: number): number;
-    writeInt16BE(value: number, offset: number): number;
-    writeInt32LE(value: number, offset: number): number;
-    writeInt32BE(value: number, offset: number): number;
-    writeFloatLE(value: number, offset: number): number;
-    writeFloatBE(value: number, offset: number): number;
-    writeDoubleLE(value: number, offset: number): number;
-    writeDoubleBE(value: number, offset: number): number;
+    writeUInt8(value: number, offset?: number): number;
+    writeUInt16LE(value: number, offset?: number): number;
+    writeUInt16BE(value: number, offset?: number): number;
+    writeUInt32LE(value: number, offset?: number): number;
+    writeUInt32BE(value: number, offset?: number): number;
+    writeInt8(value: number, offset?: number): number;
+    writeInt16LE(value: number, offset?: number): number;
+    writeInt16BE(value: number, offset?: number): number;
+    writeInt32LE(value: number, offset?: number): number;
+    writeInt32BE(value: number, offset?: number): number;
+    writeFloatLE(value: number, offset?: number): number;
+    writeFloatBE(value: number, offset?: number): number;
+    writeDoubleLE(value: number, offset?: number): number;
+    writeDoubleBE(value: number, offset?: number): number;
 
     fill(value: string | Uint8Array | number, offset?: number, end?: number, encoding?: BufferEncoding): this;
 
@@ -432,6 +432,13 @@ declare namespace NodeJS {
         customInspect?: boolean;
         showProxy?: boolean;
         maxArrayLength?: number | null;
+        /**
+         * Specifies the maximum number of characters to
+         * include when formatting. Set to `null` or `Infinity` to show all elements.
+         * Set to `0` or negative to show no characters.
+         * @default Infinity
+         */
+        maxStringLength?: number | null;
         breakLength?: number;
         /**
          * Setting this to `false` causes each object key
@@ -669,9 +676,8 @@ declare namespace NodeJS {
         isTTY?: true;
     }
 
-    interface ProcessEnv {
-        [key: string]: string | undefined;
-    }
+    // Alias for compatibility
+    interface ProcessEnv extends Dict<string> {}
 
     interface HRTime {
         (time?: [number, number]): [number, number];
@@ -1066,15 +1072,11 @@ declare namespace NodeJS {
     type TypedArray = Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | Float32Array | Float64Array;
     type ArrayBufferView = TypedArray | DataView;
 
-    interface NodeRequireCache {
-        [path: string]: NodeModule;
-    }
-
     interface Require {
         /* tslint:disable-next-line:callable-types */
         (id: string): any;
         resolve: RequireResolve;
-        cache: NodeRequireCache;
+        cache: Dict<NodeModule>;
         /**
          * @deprecated
          */
@@ -1087,11 +1089,10 @@ declare namespace NodeJS {
         paths(request: string): string[] | null;
     }
 
-    interface RequireExtensions {
+    interface RequireExtensions extends Dict<(m: Module, filename: string) => any> {
         '.js': (m: Module, filename: string) => any;
         '.json': (m: Module, filename: string) => any;
         '.node': (m: Module, filename: string) => any;
-        [ext: string]: (m: Module, filename: string) => any;
     }
     interface Module {
         exports: any;
@@ -1102,5 +1103,13 @@ declare namespace NodeJS {
         parent: Module | null;
         children: Module[];
         paths: string[];
+    }
+
+    interface Dict<T> {
+        [key: string]: T | undefined;
+    }
+
+    interface ReadOnlyDict<T> {
+        readonly [key: string]: T | undefined;
     }
 }
