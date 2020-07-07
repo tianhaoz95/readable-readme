@@ -47,7 +47,7 @@
     "tslint": "^6.1.2",
     "typedoc": "^0.17.8",
     "typescript": "^3.9.6",
-    "vscode-ripgrep": "^1.7.0"
+    "vscode-ripgrep": "^1.8.0"
   },
   "jest": {
     "verbose": true
