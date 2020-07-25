@@ -9,7 +9,8 @@
     "test": "jest && tslint 'src/**/*.ts' '__tests__/**/*.ts'",
     "format": "tslint 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts' --fix && prettier --write 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts'",
     "docs": "typedoc --readme ./src/README.md --out ./docs/api ./src",
-    "start": "LOCAL_TESTING=true ts-node ./src/main.ts"
+    "start": "LOCAL_TESTING=true ts-node ./src/main.ts",
+    "end2end": "ts-node ./src/main.ts"
   },
   "repository": {
     "type": "git",
