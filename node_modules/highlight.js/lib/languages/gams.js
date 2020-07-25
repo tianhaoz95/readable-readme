@@ -1,13 +1,22 @@
-module.exports = function (hljs) {
+/*
+ Language: GAMS
+ Author: Stefan Bechert <stefan.bechert@gmx.net>
+ Contributors: Oleg Efimov <efimovov@gmail.com>, Mikko Kouhia <mikko.kouhia@iki.fi>
+ Description: The General Algebraic Modeling System language
+ Website: https://www.gams.com
+ Category: scientific
+ */
+
+function gams (hljs) {
   var KEYWORDS = {
-    'keyword':
+    keyword:
       'abort acronym acronyms alias all and assign binary card diag display ' +
       'else eq file files for free ge gt if integer le loop lt maximizing ' +
       'minimizing model models ne negative no not option options or ord ' +
       'positive prod put putpage puttl repeat sameas semicont semiint smax ' +
       'smin solve sos1 sos2 sum system table then until using while xor yes',
-    'literal': 'eps inf na',
-    'built-in':
+    literal: 'eps inf na',
+    built_in:
       'abs arccos arcsin arctan arctan2 Beta betaReg binomial ceil centropy ' +
       'cos cosh cvPower div div0 eDist entropy errorf execSeed exp fact ' +
       'floor frac gamma gammaReg log logBeta logGamma log10 log2 mapVal max ' +
@@ -75,6 +84,7 @@ module.exports = function (hljs) {
   };
 
   return {
+    name: 'GAMS',
     aliases: ['gms'],
     case_insensitive: true,
     keywords: KEYWORDS,
@@ -150,4 +160,6 @@ module.exports = function (hljs) {
       SYMBOLS,
     ]
   };
-};
+}
+
+module.exports = gams;

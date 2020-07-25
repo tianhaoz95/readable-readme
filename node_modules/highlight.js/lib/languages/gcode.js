@@ -1,9 +1,18 @@
-module.exports = function(hljs) {
+/*
+ Language: G-code (ISO 6983)
+ Contributors: Adam Joseph Cook <adam.joseph.cook@gmail.com>
+ Description: G-code syntax highlighter for Fanuc and other common CNC machine tool controls.
+ Website: https://www.sis.se/api/document/preview/911952/
+ */
+
+function gcode(hljs) {
     var GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
     var GCODE_CLOSE_RE = '\\%';
-    var GCODE_KEYWORDS =
-      'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT ' +
-      'EQ LT GT NE GE LE OR XOR';
+    var GCODE_KEYWORDS = {
+      $pattern: GCODE_IDENT_RE,
+      keyword: 'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT ' +
+      'EQ LT GT NE GE LE OR XOR'
+    };
     var GCODE_START = {
         className: 'meta',
         begin: '([O])([0-9]+)'
@@ -49,11 +58,11 @@ module.exports = function(hljs) {
     ];
 
     return {
+        name: 'G-code (ISO 6983)',
         aliases: ['nc'],
         // Some implementations (CNC controls) of G-code are interoperable with uppercase and lowercase letters seamlessly.
         // However, most prefer all uppercase and uppercase is customary.
         case_insensitive: true,
-        lexemes: GCODE_IDENT_RE,
         keywords: GCODE_KEYWORDS,
         contains: [
             {
@@ -63,4 +72,6 @@ module.exports = function(hljs) {
             GCODE_START
         ].concat(GCODE_CODE)
     };
-};
+}
+
+module.exports = gcode;

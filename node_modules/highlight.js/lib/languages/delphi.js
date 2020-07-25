@@ -1,4 +1,10 @@
-module.exports = function(hljs) {
+/*
+Language: Delphi
+Website: https://www.embarcadero.com/products/delphi
+*/
+
+/** @type LanguageFn */
+function delphi(hljs) {
   var KEYWORDS =
     'exports register file shl array record property for mod while set ally label uses raise not ' +
     'stored class safecall var interface or private static exit index inherited to else stdcall ' +
@@ -28,6 +34,25 @@ module.exports = function(hljs) {
     begin: /'/, end: /'/,
     contains: [{begin: /''/}]
   };
+  var NUMBER = {
+    className: 'number',
+    relevance: 0,
+    // Source: https://www.freepascal.org/docs-html/ref/refse6.html
+    variants: [
+      {
+        // Hexadecimal notation, e.g., $7F.
+        begin: '\\$[0-9A-Fa-f]+',
+      },
+      {
+        // Octal notation, e.g., &42.
+        begin: '&[0-7]+',
+      },
+      {
+        // Binary notation, e.g., %1010.
+        begin: '%[01]+',
+      }
+    ]
+  };
   var CHAR_STRING = {
     className: 'string', begin: /(#\d+)+/
   };
@@ -53,6 +78,7 @@ module.exports = function(hljs) {
     ].concat(COMMENT_MODES)
   };
   return {
+    name: 'Delphi',
     aliases: ['dpr', 'dfm', 'pas', 'pascal', 'freepascal', 'lazarus', 'lpr', 'lfm'],
     case_insensitive: true,
     keywords: KEYWORDS,
@@ -60,9 +86,12 @@ module.exports = function(hljs) {
     contains: [
       STRING, CHAR_STRING,
       hljs.NUMBER_MODE,
+      NUMBER,
       CLASS,
       FUNCTION,
       DIRECTIVE
     ].concat(COMMENT_MODES)
   };
-};
+}
+
+module.exports = delphi;

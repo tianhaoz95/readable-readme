@@ -1,7 +1,16 @@
-module.exports = function(hljs) {
+/*
+Language: Vim Script
+Author: Jun Yang <yangjvn@126.com>
+Description: full keyword and built-in from http://vimdoc.sourceforge.net/htmldoc/
+Website: https://www.vim.org
+Category: scripting
+*/
+
+function vim(hljs) {
   return {
-    lexemes: /[!#@\w]+/,
+    name: 'Vim Script',
     keywords: {
+      $pattern: /[!#@\w]+/,
       keyword:
         // express version except: ! & * < = > !! # @ @@
         'N|0 P|0 X|0 a|0 ab abc abo al am an|0 ar arga argd arge argdo argg argl argu as au aug aun b|0 bN ba bad bd be bel bf bl bm bn bo bp br brea breaka breakd breakl bro bufdo buffers bun bw c|0 cN cNf ca cabc caddb cad caddf cal cat cb cc ccl cd ce cex cf cfir cgetb cgete cg changes chd che checkt cl cla clo cm cmapc cme cn cnew cnf cno cnorea cnoreme co col colo com comc comp con conf cope '+
@@ -106,4 +115,6 @@ module.exports = function(hljs) {
       }
     ]
   };
-};
+}
+
+module.exports = vim;

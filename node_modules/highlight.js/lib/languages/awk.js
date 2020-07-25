@@ -1,4 +1,12 @@
-module.exports = function(hljs) {
+/*
+Language: Awk
+Author: Matthew Daly <matthewbdaly@gmail.com>
+Website: https://www.gnu.org/software/gawk/manual/gawk.html
+Description: language definition for Awk scripts
+*/
+
+/** @type LanguageFn */
+function awk(hljs) {
   var VARIABLE = {
     className: 'variable',
     variants: [
@@ -38,8 +46,9 @@ module.exports = function(hljs) {
     ]
   };
   return {
-	 keywords: {
-	   keyword: KEYWORDS
+    name: 'Awk',
+    keywords: {
+      keyword: KEYWORDS
     },
     contains: [
       VARIABLE,
@@ -49,4 +58,6 @@ module.exports = function(hljs) {
       hljs.NUMBER_MODE
     ]
   }
-};
+}
+
+module.exports = awk;

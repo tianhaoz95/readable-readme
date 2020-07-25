@@ -1,5 +1,14 @@
-module.exports = function(hljs) {
+/*
+Language: DNS Zone
+Author: Tim Schumacher <tim@datenknoten.me>
+Category: config
+Website: https://en.wikipedia.org/wiki/Zone_file
+*/
+
+/** @type LanguageFn */
+function dns(hljs) {
   return {
+    name: 'DNS Zone',
     aliases: ['bind', 'zone'],
     keywords: {
       keyword:
@@ -25,4 +34,6 @@ module.exports = function(hljs) {
       hljs.inherit(hljs.NUMBER_MODE, {begin: /\b\d+[dhwm]?/})
     ]
   };
-};
+}
+
+module.exports = dns;
