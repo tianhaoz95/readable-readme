@@ -7,7 +7,7 @@ function getOctokit() {
   if (process.env.TEST_GITHUB_TOKEN) {
     token = process.env.TEST_GITHUB_TOKEN;
   }
-  const kit = new github.getOctokit(token);
+  const kit = github.getOctokit(token);
   return kit;
 }
 
