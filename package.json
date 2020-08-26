@@ -9,7 +9,8 @@
     "test": "jest && tslint 'src/**/*.ts' '__tests__/**/*.ts'",
     "format": "tslint 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts' --fix && prettier --write 'src/*.ts' 'src/**/*.ts' '__tests__/**/*.ts' '__tests__/*.ts'",
     "docs": "typedoc --readme ./src/README.md --out ./docs/api ./src",
-    "start": "LOCAL_TESTING=true ts-node ./src/main.ts"
+    "start": "LOCAL_TESTING=true ts-node ./src/main.ts",
+    "end2end": "ts-node ./src/main.ts"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^2.2.0",
+    "@actions/github": "^4.0.0",
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^1.7.4",
     "bufferutil": "^4.0.1",

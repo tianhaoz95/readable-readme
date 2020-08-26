@@ -1,4 +1,12 @@
-module.exports = function(hljs) {
+/*
+Language: Erlang
+Description: Erlang is a general-purpose functional language, with strict evaluation, single assignment, and dynamic typing.
+Author: Nikolay Zakharov <nikolay.desh@gmail.com>, Dmitry Kovega <arhibot@gmail.com>
+Website: https://www.erlang.org
+Category: functional
+*/
+
+function erlang(hljs) {
   var BASIC_ATOM_RE = '[a-z\'][a-zA-Z0-9_\']*';
   var FUNCTION_NAME_RE = '(' + BASIC_ATOM_RE + ':' + BASIC_ATOM_RE + '|' + BASIC_ATOM_RE + ')';
   var ERLANG_RESERVED = {
@@ -12,7 +20,7 @@ module.exports = function(hljs) {
   var COMMENT = hljs.COMMENT('%', '$');
   var NUMBER = {
     className: 'number',
-    begin: '\\b(\\d+#[a-fA-F0-9]+|\\d+(\\.\\d+)?([eE][-+]?\\d+)?)',
+    begin: '\\b(\\d+(_\\d+)*#[a-fA-F0-9]+(_[a-fA-F0-9]+)*|\\d+(_\\d+)*(\\.\\d+(_\\d+)*)?([eE][-+]?\\d+)?)',
     relevance: 0
   };
   var NAMED_FUN = {
@@ -102,6 +110,7 @@ module.exports = function(hljs) {
     contains: BASIC_MODES
   };
   return {
+    name: 'Erlang',
     aliases: ['erl'],
     keywords: ERLANG_RESERVED,
     illegal: '(</|\\*=|\\+=|-=|/\\*|\\*/|\\(\\*|\\*\\))',
@@ -127,11 +136,12 @@ module.exports = function(hljs) {
         relevance: 0,
         excludeEnd: true,
         returnBegin: true,
-        lexemes: '-' + hljs.IDENT_RE,
-        keywords:
-          '-module -record -undef -export -ifdef -ifndef -author -copyright -doc -vsn ' +
+        keywords: {
+          $pattern: '-' + hljs.IDENT_RE,
+          keyword: '-module -record -undef -export -ifdef -ifndef -author -copyright -doc -vsn ' +
           '-import -include -include_lib -compile -define -else -endif -file -behaviour ' +
-          '-behavior -spec',
+          '-behavior -spec'
+        },
         contains: [PARAMS]
       },
       NUMBER,
@@ -142,4 +152,6 @@ module.exports = function(hljs) {
       {begin: /\.$/} // relevance booster
     ]
   };
-};
+}
+
+module.exports = erlang;

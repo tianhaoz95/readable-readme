@@ -1,5 +1,13 @@
-module.exports = function(hljs) {
+/*
+Language: Q
+Description: Q is a vector-based functional paradigm programming language built into the kdb+ database.
+             (K/Q/Kdb+ from Kx Systems)
+Author: Sergey Vidyuk <svidyuk@gmail.com>
+Website: https://kx.com/connect-with-us/developers/
+*/
+function q(hljs) {
   var Q_KEYWORDS = {
+  $pattern: /(`?)[A-Za-z0-9_]+\b/,
   keyword:
     'do while select delete by update from',
   literal:
@@ -10,13 +18,15 @@ module.exports = function(hljs) {
     '`float `double int `timestamp `timespan `datetime `time `boolean `symbol `char `byte `short `long `real `month `date `minute `second `guid'
   };
   return {
+  name: 'Q',
   aliases:['k', 'kdb'],
   keywords: Q_KEYWORDS,
-  lexemes: /(`?)[A-Za-z0-9_]+\b/,
   contains: [
   hljs.C_LINE_COMMENT_MODE,
     hljs.QUOTE_STRING_MODE,
     hljs.C_NUMBER_MODE
      ]
   };
-};
+}
+
+module.exports = q;

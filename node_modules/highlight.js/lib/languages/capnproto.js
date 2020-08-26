@@ -1,5 +1,15 @@
-module.exports = function(hljs) {
+/*
+Language: Cap’n Proto
+Author: Oleg Efimov <efimovov@gmail.com>
+Description: Cap’n Proto message definition format
+Website: https://capnproto.org/capnp-tool.html
+Category: protocols
+*/
+
+/** @type LanguageFn */
+function capnproto(hljs) {
   return {
+    name: 'Cap’n Proto',
     aliases: ['capnp'],
     keywords: {
       keyword:
@@ -45,4 +55,6 @@ module.exports = function(hljs) {
       }
     ]
   };
-};
+}
+
+module.exports = capnproto;

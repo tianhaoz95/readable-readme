@@ -1,9 +1,17 @@
-module.exports = function(hljs) {
+/*
+Language: XL
+Author: Christophe de Dinechin <christophe@taodyne.com>
+Description: An extensible programming language, based on parse tree rewriting
+Website: http://xlr.sf.net
+*/
+
+function xl(hljs) {
   var BUILTIN_MODULES =
     'ObjectLoader Animate MovieCredits Slides Filters Shading Materials LensFlare Mapping VLCAudioVideo ' +
     'StereoDecoder PointCloud NetworkAccess RemoteControl RegExp ChromaKey Snowfall NodeJS Speech Charts';
 
   var XL_KEYWORDS = {
+    $pattern: /[a-zA-Z][a-zA-Z0-9_?]*/,
     keyword:
       'if then else do while until for loop import with is as where when by data constant ' +
       'integer real text name boolean symbol infix prefix postfix block tree',
@@ -54,8 +62,8 @@ module.exports = function(hljs) {
     ]
   };
   return {
+    name: 'XL',
     aliases: ['tao'],
-    lexemes: /[a-zA-Z][a-zA-Z0-9_?]*/,
     keywords: XL_KEYWORDS,
     contains: [
     hljs.C_LINE_COMMENT_MODE,
@@ -69,4 +77,6 @@ module.exports = function(hljs) {
     hljs.NUMBER_MODE
     ]
   };
-};
+}
+
+module.exports = xl;

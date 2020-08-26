@@ -1,7 +1,17 @@
-module.exports = function(hljs) {
+/*
+Language: SML (Standard ML)
+Author: Edwin Dalorzo <edwin@dalorzo.org>
+Description: SML language definition.
+Website: https://www.smlnj.org
+Origin: ocaml.js
+Category: functional
+*/
+function sml(hljs) {
   return {
+    name: 'SML (Standard ML)',
     aliases: ['ml'],
     keywords: {
+      $pattern: '[a-z_]\\w*!?',
       keyword:
         /* according to Definition of Standard ML 97  */
         'abstype and andalso as case datatype do else end eqtype ' +
@@ -15,7 +25,6 @@ module.exports = function(hljs) {
         'true false NONE SOME LESS EQUAL GREATER nil'
     },
     illegal: /\/\/|>>/,
-    lexemes: '[a-z_]\\w*!?',
     contains: [
       {
         className: 'literal',
@@ -62,4 +71,6 @@ module.exports = function(hljs) {
       }
     ]
   };
-};
+}
+
+module.exports = sml;
