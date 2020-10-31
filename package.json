@@ -27,7 +27,7 @@
     "@actions/github": "^2.2.0",
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^1.7.4",
-    "bufferutil": "^4.0.1",
+    "bufferutil": "^4.0.2",
     "canvas": "^2.6.1",
     "marked": "^1.2.2",
     "micromatch": "^4.0.2",
