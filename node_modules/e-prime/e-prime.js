@@ -12,6 +12,7 @@ var toBe = [
     'i\'m',
     'is',
     'isn\'t',
+    'it\'s',
     'she\'s',
     'that\'s',
     'there\'s',
