@@ -34,7 +34,7 @@
     "mustache": "^4.1.0",
     "nock": "^13.0.7",
     "utf-8-validate": "^5.0.4",
-    "write-good": "^1.0.4"
+    "write-good": "^1.0.5"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
