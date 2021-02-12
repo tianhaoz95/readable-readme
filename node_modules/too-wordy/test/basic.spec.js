@@ -51,7 +51,7 @@ describe('too-wordy', () => {
     const results = complexity(badPhrasesInSentenceWithFormatting);
     expect(results).toEqual([{ index: 0, offset: 14 }, { index: 38, offset: 12 }]);
   });
-  
+
   it('should match just one word sentence', () => {
     expect(complexity('pertaining to')).toEqual([{ index: 0, offset: 13 }]);
   });
