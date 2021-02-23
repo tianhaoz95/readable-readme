@@ -6,4 +6,3 @@ Object.defineProperty(exports, "Component", { enumerable: true, get: function ()
 class ConverterComponent extends component_1.AbstractComponent {
 }
 exports.ConverterComponent = ConverterComponent;
-//# sourceMappingURL=components.js.map

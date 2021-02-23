@@ -12,4 +12,3 @@ exports.ConverterEvents = {
     RESOLVE: "resolveReflection",
     RESOLVE_END: "resolveEnd",
 };
-//# sourceMappingURL=converter-events.js.map
