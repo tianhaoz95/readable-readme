@@ -29,7 +29,7 @@
     "@tensorflow/tfjs": "^1.7.4",
     "bufferutil": "^4.0.3",
     "canvas": "^2.6.1",
-    "marked": "^2.0.0",
+    "marked": "^2.0.1",
     "micromatch": "^4.0.2",
     "mustache": "^4.1.0",
     "nock": "^13.0.9",
