@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include "backend/ImageBackend.h"
-#include <cairo/cairo-pdf.h>
+#include <cairo-pdf.h>
 #include "Canvas.h"
 #include "CanvasGradient.h"
 #include "CanvasPattern.h"
@@ -519,6 +519,16 @@ Context2d::shadow(void (fn)(cairo_t *cr)) {
     // transform path to the right place
     cairo_translate(shadow_context, pad-x1, pad-y1);
     cairo_transform(shadow_context, &path_matrix);
+
+    // set lineCap lineJoin lineDash
+    cairo_set_line_cap(shadow_context, cairo_get_line_cap(_context));
+    cairo_set_line_join(shadow_context, cairo_get_line_join(_context));
+
+    double offset;
+    int dashes = cairo_get_dash_count(_context);
+    std::vector<double> a(dashes);
+    cairo_get_dash(_context, a.data(), &offset);
+    cairo_set_dash(shadow_context, a.data(), dashes, offset);
 
     // draw the path and blur
     cairo_set_line_width(shadow_context, cairo_get_line_width(_context));
@@ -1818,24 +1828,23 @@ NAN_GETTER(Context2d::GetFillStyle) {
 NAN_SETTER(Context2d::SetFillStyle) {
   Context2d *context = Nan::ObjectWrap::Unwrap<Context2d>(info.This());
 
-  if (Nan::New(Gradient::constructor)->HasInstance(value) ||
-      Nan::New(Pattern::constructor)->HasInstance(value)) {
-    context->_fillStyle.Reset(value);
-
-    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
-    if (Nan::New(Gradient::constructor)->HasInstance(obj)){
-      Gradient *grad = Nan::ObjectWrap::Unwrap<Gradient>(obj);
-      context->state->fillGradient = grad->pattern();
-    } else if(Nan::New(Pattern::constructor)->HasInstance(obj)){
-      Pattern *pattern = Nan::ObjectWrap::Unwrap<Pattern>(obj);
-      context->state->fillPattern = pattern->pattern();
-    }
-  } else {
+  if (value->IsString()) {
     MaybeLocal<String> mstr = Nan::To<String>(value);
     if (mstr.IsEmpty()) return;
     Local<String> str = mstr.ToLocalChecked();
     context->_fillStyle.Reset();
     context->_setFillColor(str);
+  } else if (value->IsObject()) {
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+    if (Nan::New(Gradient::constructor)->HasInstance(obj)) {
+      context->_fillStyle.Reset(value);
+      Gradient *grad = Nan::ObjectWrap::Unwrap<Gradient>(obj);
+      context->state->fillGradient = grad->pattern();
+    } else if (Nan::New(Pattern::constructor)->HasInstance(obj)) {
+      context->_fillStyle.Reset(value);
+      Pattern *pattern = Nan::ObjectWrap::Unwrap<Pattern>(obj);
+      context->state->fillPattern = pattern->pattern();
+    }
   }
 }
 
@@ -1862,26 +1871,23 @@ NAN_GETTER(Context2d::GetStrokeStyle) {
 NAN_SETTER(Context2d::SetStrokeStyle) {
   Context2d *context = Nan::ObjectWrap::Unwrap<Context2d>(info.This());
 
-  if (Nan::New(Gradient::constructor)->HasInstance(value) ||
-      Nan::New(Pattern::constructor)->HasInstance(value)) {
-    context->_strokeStyle.Reset(value);
-
-    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
-    if (Nan::New(Gradient::constructor)->HasInstance(obj)){
-      Gradient *grad = Nan::ObjectWrap::Unwrap<Gradient>(obj);
-      context->state->strokeGradient = grad->pattern();
-    } else if(Nan::New(Pattern::constructor)->HasInstance(obj)){
-      Pattern *pattern = Nan::ObjectWrap::Unwrap<Pattern>(obj);
-      context->state->strokePattern = pattern->pattern();
-    } else {
-      return Nan::ThrowTypeError("Gradient or Pattern expected");
-    }
-  } else {
+  if (value->IsString()) {
     MaybeLocal<String> mstr = Nan::To<String>(value);
     if (mstr.IsEmpty()) return;
     Local<String> str = mstr.ToLocalChecked();
     context->_strokeStyle.Reset();
     context->_setStrokeColor(str);
+  } else if (value->IsObject()) {
+    Local<Object> obj = Nan::To<Object>(value).ToLocalChecked();
+    if (Nan::New(Gradient::constructor)->HasInstance(obj)) {
+      context->_strokeStyle.Reset(value);
+      Gradient *grad = Nan::ObjectWrap::Unwrap<Gradient>(obj);
+      context->state->strokeGradient = grad->pattern();
+    } else if (Nan::New(Pattern::constructor)->HasInstance(obj)) {
+      context->_strokeStyle.Reset(value);
+      Pattern *pattern = Nan::ObjectWrap::Unwrap<Pattern>(obj);
+      context->state->strokePattern = pattern->pattern();
+    }
   }
 }
 
