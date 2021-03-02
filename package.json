@@ -32,7 +32,7 @@
     "marked": "^2.0.1",
     "micromatch": "^4.0.2",
     "mustache": "^4.1.0",
-    "nock": "^13.0.9",
+    "nock": "^13.0.10",
     "utf-8-validate": "^5.0.4",
     "write-good": "^1.0.8"
   },
