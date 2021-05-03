@@ -33,7 +33,7 @@
     "micromatch": "^4.0.4",
     "mustache": "^4.2.0",
     "nock": "^13.0.11",
-    "utf-8-validate": "^5.0.4",
+    "utf-8-validate": "^5.0.5",
     "write-good": "^1.0.8"
   },
   "devDependencies": {
