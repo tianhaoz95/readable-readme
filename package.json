@@ -28,7 +28,7 @@
     "@tensorflow-models/toxicity": "^1.2.2",
     "@tensorflow/tfjs": "^1.7.4",
     "bufferutil": "^4.0.3",
-    "canvas": "^2.7.0",
+    "canvas": "^2.8.0",
     "marked": "^2.0.3",
     "micromatch": "^4.0.4",
     "mustache": "^4.2.0",
